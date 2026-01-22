@@ -23,7 +23,9 @@ $tickets = TicketController::getTickets();
 </head>
 <body>
 
-<table class="user-table">
+<div class="container">
+      <h1>Liste des tickets</h1>
+    <table class="user-table">
     <thead>
         <tr>
             <th>#</th>
@@ -48,6 +50,8 @@ $tickets = TicketController::getTickets();
         <?php endforeach; ?>
     </tbody>
 </table>
+</div>
 
+<?php include("footer.php"); ?>
 
 </body>

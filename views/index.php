@@ -22,9 +22,6 @@ $users = UserController::getUsers();
 </head>
 <body>
 
-   <!-- <?php
-   var_dump($users);
-   ?> -->
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>
