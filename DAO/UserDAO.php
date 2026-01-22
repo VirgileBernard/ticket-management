@@ -47,10 +47,10 @@ public static function getUser($email){
         
         $stmt->bindValue(":fname",$user->getFname(),PDO::PARAM_STR);
         $stmt->bindValue(":lname",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":email",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":phone_number",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":password",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":role_id",$user->getLname(),PDO::PARAM_INT);
+        $stmt->bindValue(":email",$user->getEmail(),PDO::PARAM_STR);
+        $stmt->bindValue(":phone_number",$user->getPhone(),PDO::PARAM_STR);
+        $stmt->bindValue(":password",$user->getPassword(),PDO::PARAM_STR);
+        $stmt->bindValue(":role_id",$user->getRoleId(),PDO::PARAM_INT);
  
     
         $stmt->execute();
@@ -73,10 +73,10 @@ public static function getUser($email){
         $stmt->bindValue(":Id",$user->getId(),PDO::PARAM_INT);
         $stmt->bindValue(":fname",$user->getFname(),PDO::PARAM_STR);
         $stmt->bindValue(":lname",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":email",$user->getFname(),PDO::PARAM_STR);
-        $stmt->bindValue(":phone",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":role_id",$user->getLname(),PDO::PARAM_INT);
-    
+        $stmt->bindValue(":email",$user->getEmail(),PDO::PARAM_STR);
+        $stmt->bindValue(":phone",$user->getPhone(),PDO::PARAM_STR);
+        $stmt->bindValue(":role_id",$user->getRoleId(),PDO::PARAM_INT);
+
         $stmt->execute();
     }
     
