@@ -1,0 +1,55 @@
+ <?php include("navbar.php");
+
+ 
+var_dump($_SESSION);
+ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../views/login.php');
+    exit();
+}
+
+require_once ("../Controllers/userController.php");
+require_once("../models/User.php");
+$users = UserController::getUsers();
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Gestion des Utilisateurs</title>
+</head>
+<body>
+
+   
+
+    <div class="container">
+        <h1>Liste des Utilisateurs</h1>
+        
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user->getLname()); ?></td>
+                        <td><?= htmlspecialchars($user->getFname()); ?></td>
+                        <td><?= htmlspecialchars($user->getEmail()); ?></td>
+                        <td><?= htmlspecialchars($user->getPhone()); ?></td>
+                        <td><span class="badge"><?= htmlspecialchars($user->getRoleId()); ?></span></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php include("footer.php"); ?>
+</body>
+</html>
