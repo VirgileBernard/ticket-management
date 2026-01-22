@@ -1,7 +1,7 @@
  <?php include("navbar.php");
 
- 
-var_dump($_SESSION);
+
+// var_dump($_SESSION);
  if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../views/login.php');
     exit();
@@ -22,7 +22,9 @@ $users = UserController::getUsers();
 </head>
 <body>
 
-   
+   <!-- <?php
+   var_dump($users);
+   ?> -->
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>

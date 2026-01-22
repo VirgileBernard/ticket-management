@@ -1,8 +1,10 @@
 <?php 
-require_once(__DIR__ . "/Controllers/UserController.php");
-echo __DIR__ . "/Controllers/UserController.php";
+
+$hash1 = password_hash("123", PASSWORD_BCRYPT);
 
 
 
-$user = UserController::getUser("alice.martin@example.com");
-echo $user;
+
+
+echo ($hash1);
+

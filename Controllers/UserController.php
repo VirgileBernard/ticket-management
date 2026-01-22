@@ -16,7 +16,7 @@ class UserController {
                 $user["email"],
                 $user["phone_number"],
                 null,
-                $user["role_id"]
+                $user["role"]
             );
         }
         return $usersObjet;
