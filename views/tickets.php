@@ -1,4 +1,6 @@
- <?php include("navbar.php");
+ <?php
+
+ session_start();
 
 
 // var_dump($_SESSION);
@@ -14,7 +16,7 @@ $tickets = TicketController::getTickets();
 
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +24,8 @@ $tickets = TicketController::getTickets();
     <title>Gestion des Tickets</title>
 </head>
 <body>
-
+<div class="main">
+     <?php include("navbar.php"); ?>
 <div class="container">
       <h1>Liste des tickets</h1>
     <table class="user-table">
@@ -50,6 +53,7 @@ $tickets = TicketController::getTickets();
         <?php endforeach; ?>
     </tbody>
 </table>
+</div>
 </div>
 
 <?php include("footer.php"); ?>

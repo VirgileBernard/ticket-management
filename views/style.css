@@ -1,8 +1,42 @@
-body, .container, .navbar{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
+
+:root {
+  --text-font: "Montserrat", sans-serif;
+  --bg-dark: hsl(0 0% 0%);
+  --bg: hsl(0 0% 5%);
+  --bg-light: hsl(0 0% 10%);
+
+  --actionYellow: hsl(59, 90%, 60%);
+  --actionPink: hsl(323, 90%, 60%);
+
+  --text: hsl(0 0% 95%);
+  --text-secondary: hsl(0 0% 85%);
+  --text-muted: hsl(0 0% 70%);
+
+  /* //colors light mode */
+  --LM-bg-dark: hsl(0 0% 85%);
+  --LMbg: hsl(0 0% 90%);
+  --LMbg-light: hsl(0 0% 95%);
+
+  --actionBrown: hsl(30, 90%, 60%);
+
+    --LM-text: hsl(0 0% 5%);
+    --LM-text-secondary: hsl(0 0% 15%);
+    --LM-border:hsl(0 0% 45%);
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--text-font), sans-serif;
+}
+
+
+.main{
+    display: flex;
 }
 
 /* 1. Centrage du contenu sous la navbar */

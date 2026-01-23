@@ -1,4 +1,5 @@
- <?php include("navbar.php");
+<?php
+session_start();
 
 
 // var_dump($_SESSION);
@@ -22,6 +23,11 @@ $users = UserController::getUsers();
 </head>
 <body>
 
+<div class="main">
+
+    <?php
+ include("navbar.php");
+ ?>
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>
@@ -48,6 +54,8 @@ $users = UserController::getUsers();
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+
     </div>
     <?php include("footer.php"); ?>
 </body>

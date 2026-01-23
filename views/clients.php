@@ -1,4 +1,5 @@
- <?php include("navbar.php");
+ <?php
+session_start();
 
 
 // var_dump($_SESSION);
@@ -23,6 +24,10 @@ $clients = ClientController::getClients();
 
 
 <body>
+    <div class="main">
+    <?php
+     include("navbar.php");
+    ?>
     <div class="container">
     <h1>Liste des clients</h1>
     <table class="user-table">
@@ -48,9 +53,9 @@ $clients = ClientController::getClients();
         </tbody>
     </table>
     </div>
+    </div>
 
 
     <?php include("footer.php"); ?>
 
 </body>
-</html>

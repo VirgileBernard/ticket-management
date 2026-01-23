@@ -1,6 +1,6 @@
 <?php
 
-include ("navbar.php");
+session_start();
 
  if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../views/login.php');
@@ -23,7 +23,8 @@ include ("navbar.php");
 </head>
 <body>
     
-</body>
+    <div class="main">
+    <?php include("navbar.php"); ?>
     <div class="container">
     <h1>Liste du matériel</h1>
     <table class="user-table">
@@ -53,6 +54,8 @@ include ("navbar.php");
         </tbody>
     </table>
     </div>
+    </div>
 
     <?php include("footer.php"); ?>
+    </body>
 </html>
