@@ -11,7 +11,8 @@
 
 require_once("../Controllers/TicketController.php");
 require_once("../models/Ticket.php");
-// $users = UserController::getUsers();
+
+
 $tickets = TicketController::getTickets();
 
 ?>

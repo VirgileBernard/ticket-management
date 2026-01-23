@@ -35,8 +35,8 @@ session_start();
                 <th>Modèle</th>
                 <th>Numéro de série</th>
                 <th>Type</th>
-                <th>Date de soumission</th>
-                <th>Date de récupération</th>
+                <!-- <th>Date de soumission</th>
+                <th>Date de récupération</th> -->
             </tr>
         </thead>
         <tbody>
@@ -47,8 +47,8 @@ session_start();
                 <td><?= $device->getModel() ?></td>
                 <td><?= $device->getSerialNumber() ?></td>
                 <td><?= $device->getTypeId() ?></td>
-                <td><?= $device->getSubmissionDate() ?></td>
-                <td><?= $device->getRetrieveDate() ?></td>
+                <!-- <td><?= $device->getSubmissionDate() ?></td>
+                <td><?= $device->getRetrieveDate() ?></td> -->
             </tr>
             <?php endforeach; ?>
         </tbody>

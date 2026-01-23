@@ -1,5 +1,11 @@
+<?php
+ $roles = [ 1 => 'Technicien', 2 => 'TeamLeader', 3 => 'Superviseur' ]; $roleCode = $_SESSION["user_role"]; $roleName = $roles[$roleCode] ?? 'Inconnu'; ?>
+
+
 <link rel="stylesheet" href="views/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 <style>
 .navbar {
@@ -67,7 +73,7 @@ grid-template-rows: repeat(3, auto);
 }
 
 .infoUser{
-    padding: .3rem .2rem;
+    padding: .2rem .2rem;
     display: flex;
     flex-direction: column;
 }
@@ -83,6 +89,7 @@ grid-template-rows: repeat(3, auto);
 <nav class="navbar">
 
 
+
         <div class="nav-actions">
 
             <p class="user-info appliName">BERNITICKETS</p>
@@ -95,7 +102,7 @@ grid-template-rows: repeat(3, auto);
                 <?= htmlspecialchars($_SESSION["user_fname"]) ?>
                 <?= htmlspecialchars($_SESSION["user_lname"]) ?>
             </span>
-            <span class="user-role">Rôle : <?= htmlspecialchars($_SESSION["user_role"]) ?></span>
+            <span class="user-role"><?= htmlspecialchars($roleName) ?></span>
             </div>
             </div>
 
