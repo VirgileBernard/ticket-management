@@ -16,8 +16,8 @@
 
   /* //colors light mode */
   --LM-bg-dark: hsl(0 0% 85%);
-  --LMbg: hsl(0 0% 90%);
-  --LMbg-light: hsl(0 0% 95%);
+  --LM-bg: hsl(0 0% 90%);
+  --LM-bg-light: hsl(0 0% 95%);
 
   --actionBrown: hsl(30, 90%, 60%);
 
@@ -37,6 +37,7 @@
 
 .main{
     display: flex;
+    background-color: var(--LM-bg-dark);
 }
 
 /* 1. Centrage du contenu sous la navbar */
@@ -46,7 +47,8 @@
     padding: 0 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
+    
 }
 
 /* 2. On stylise le tableau */

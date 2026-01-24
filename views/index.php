@@ -29,6 +29,39 @@ $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Gestion des Utilisateurs</title>
+    <style>
+        .counterContainer{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        .counterCard{
+        background-color: var(--LM-bg);
+        border: 1px solid var(--LM-border);
+        border-radius: 8px;
+        padding: 15px 10px;
+        height: 125px;
+        width: 125px;
+        display: grid;
+        grid-template-rows: 10% 90%;
+        transition : all 0.3s ease-out;
+        }
+
+        .counterCard:hover{
+            background-color: var(--LM-bg-light);
+            /* cursor: pointer; */
+        }
+
+        .txtCounter{}
+
+        .counterTicket{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size :  2.5rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -40,8 +73,18 @@ $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>
-        <p>Total de mes tickets : <?= $totalTickets ?></p>
-<p>Tickets urgents : <?= $urgentTickets ?></p>
+      
+<div class="counterContainer">
+<div class="counterCard">
+    <p class="txtCounter">Total tickets :</p>
+    <p class="counterTicket"><?= $totalTickets ?></p>
+</div>
+
+<div class="counterCard">
+    <p class="txtCounter">Urgent :</p>
+    <p class="counterTicket"><?= $urgentTickets ?></p>
+</div>
+</div>
 
         
         <table class="user-table">

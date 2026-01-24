@@ -48,7 +48,7 @@ grid-template-rows: repeat(3, auto);
 }
 
 .nav-links a:hover {
-    background-color: var(--LMbg-light);
+    background-color: var(--LM-bg-light);
      color: var(--LM-text-secondary);
 }
 .bottomLinks{
