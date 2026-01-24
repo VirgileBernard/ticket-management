@@ -22,4 +22,9 @@ class TicketController {
         return TicketDAO::countUrgentTicketsByUser($id);
     }
 
+    //function to count open tickets by user
+    public static function countOpenTicketsByUser($id){
+        return TicketDAO::countOpenTicketsByUser($id);
+    }
+
 }

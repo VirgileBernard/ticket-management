@@ -115,4 +115,13 @@ public static function getTickets() {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['urgent_ticket_count'];
     }
+
+    static function countOpenTicketsByUser($user_id){
+        $con=MONPDO::getPDO();
+        $stmt = $con->prepare("SELECT COUNT(*) as open_ticket_count FROM tickets WHERE created_by = :user_id AND status_id = 1");
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['open_ticket_count'];
+    }
 }

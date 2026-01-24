@@ -16,9 +16,10 @@ require_once '../Controllers/TicketController.php';
 $users = UserController::getUsers();
 $userId = $_SESSION['id_user'];
 // var_dump($_SESSION);
-
+$tickets = TicketController::getTickets();
 $totalTickets = TicketController::countTicketsByUser($userId);
 $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
+$openTickets = TicketController::countOpenTicketsByUser($userId);
 
 
 ?>
@@ -50,6 +51,7 @@ $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
 
         .counterCard:hover{
             background-color: var(--LM-bg-light);
+            box-shadow: var(--LM-box-shadow);
             /* cursor: pointer; */
         }
 
@@ -81,34 +83,43 @@ $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
 </div>
 
 <div class="counterCard">
+    <p class="txtCounter">En cours :</p>
+    <p class="counterTicket"><?= $openTickets ?></p>
+</div>
+
+<div class="counterCard">
     <p class="txtCounter">Urgent :</p>
     <p class="counterTicket"><?= $urgentTickets ?></p>
 </div>
+
 </div>
 
         
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Rôle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($user->getLname()); ?></td>
-                        <td><?= htmlspecialchars($user->getFname()); ?></td>
-                        <td><?= htmlspecialchars($user->getEmail()); ?></td>
-                        <td><?= htmlspecialchars($user->getPhone()); ?></td>
-                        <td><span class="badge"><?= htmlspecialchars($user->getRoleId()); ?></span></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+  <table class="user-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Client</th>
+            <th>Appareil</th>
+            <th>Statut</th>
+            <th>Priorité</th>
+            <th>Créé par</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php foreach ($tickets as $ticket): ?>
+            <tr>
+                <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
+                <td><?= htmlspecialchars($ticket->getClientId()) ?></td>
+                <td><?= htmlspecialchars($ticket->getDeviceId()) ?></td>
+                <td><?= htmlspecialchars($ticket->getStatusId()) ?></td>
+                <td><?= htmlspecialchars($ticket->getPriorityId()) ?></td>
+                <td><?= htmlspecialchars($ticket->getCreatedBy()) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
     </div>
 
     </div>

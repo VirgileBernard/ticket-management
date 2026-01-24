@@ -23,14 +23,14 @@ $done = TicketController::countDoneTicketsByUser($userId);
     border-right: 1px solid var(--LM-border);
 }
 .nav-actions {
-height: 30%;
+height: 25%;
 border-bottom: 1px solid var(--LM-border);
 display: grid;
 grid-template-rows: repeat(3, auto);
 }
 
 .nav-links{
-    height: 70%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -82,8 +82,19 @@ grid-template-rows: repeat(3, auto);
 .infoUser{
     padding: .2rem .2rem;
     display: flex;
+    justify-content: center;
     flex-direction: column;
 }
+
+.compteurIntervention{
+    display: flex;
+}
+.infoCompteur{
+width: 90%;
+margin: 0 auto;
+}
+
+
 .logout-btn {
     /* background-color: #e74c3c; */
     color: var(--LM-text);
@@ -115,7 +126,7 @@ grid-template-rows: repeat(3, auto);
 
             <div class="compteurIntervention">
         
-           <p class="user-info">Nbr d'interventions cloturées <?= $done ?></p>
+           <p class="infoCompteur"><?= $done ?> tickets cloturées /15 pour devenir teamLeader</p>
          
             </div>
 

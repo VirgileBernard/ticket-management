@@ -58,6 +58,7 @@ class Ticket {
         return $this->status_id == 3; 
     }
 
+        
     public function isInProgress() {
         return $this->status_id == 2; 
     }
