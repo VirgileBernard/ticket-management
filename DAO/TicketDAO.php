@@ -8,9 +8,58 @@ require_once __DIR__ . '/../Models/Ticket.php';
 
 class TicketDAO {
  // obtenir tous les tickets
-  public static function getTickets() { 
+public static function getTickets() { 
     $con = MONPDO::getPDO();
-    $requete = " SELECT t.id_ticket,t.ticket_number, CONCAT(c.fname, ' ', c.lname) AS client_name, d.model AS device_model, s.nom AS status, p.nom AS priority, t.created_by FROM tickets t JOIN clients c ON t.client_id = c.id_client JOIN devices d ON t.device_id = d.id_device JOIN status s ON t.status_id = s.id_status JOIN priorities p ON t.priority_id = p.id_priority "; $stmt = $con->prepare($requete); $stmt->execute(); $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); $tickets = []; foreach ($rows as $row) { $tickets[] = new Ticket( $row['id_ticket'], $row['ticket_number'], $row['client_name'], $row['device_model'], $row['status'], $row['priority'], $row['created_by'] ); } return $tickets; }
+
+    $requete = "
+        SELECT 
+            t.id_ticket,
+            t.ticket_number,
+            t.client_id, 
+            t.device_id,
+            t.status_id,
+            t.priority_id,
+            t.created_by,
+            CONCAT(c.fname, ' ', c.lname) AS client_name,
+            d.model AS device_model,
+            s.nom AS status_name,
+            p.nom AS priority_name
+        FROM tickets t
+        JOIN clients c ON t.client_id = c.id_client
+        JOIN devices d ON t.device_id = d.id_device
+        JOIN status s ON t.status_id = s.id_status
+        JOIN priorities p ON t.priority_id = p.id_priority
+    ";
+
+    $stmt = $con->prepare($requete); 
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+
+    $tickets = [];
+
+    foreach ($rows as $row) {
+        $ticket = new Ticket(
+            $row['id_ticket'], 
+            $row['ticket_number'], 
+            $row['client_id'],
+            $row['device_id'],
+            $row['status_id'],
+            $row['priority_id'],
+            $row['created_by']
+        );
+
+        // OPTIONNEL : tu peux stocker les noms pour l'affichage
+        $ticket->client_name   = $row['client_name'];
+        $ticket->device_model  = $row['device_model'];
+        $ticket->status_name   = $row['status_name'];
+        $ticket->priority_name = $row['priority_name'];
+
+        $tickets[] = $ticket;
+    }
+
+    return $tickets; 
+}
+
 
 // obtenir un ticket par son numéro
     static function getTicket($ticket_number){
@@ -35,5 +84,35 @@ class TicketDAO {
         $stmt->bindValue(":created_by",$ticket->getCreatedBy(),PDO::PARAM_INT);
         
         $stmt->execute();
+    }
+
+    //counter le nombre de tickets en cours par utilisateur
+    static function countTicketsByUser($user_id){
+        $con=MONPDO::getPDO();
+        $stmt = $con->prepare("SELECT COUNT(*) as ticket_count FROM tickets WHERE created_by = :user_id");
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['ticket_count'];
+    }
+
+    //coubter ke nombre de ticket terminé par utilisateur
+    static function countDoneTicketsByUser($user_id){
+        $con=MONPDO::getPDO();
+        $stmt = $con->prepare("SELECT COUNT(*) as done_ticket_count FROM tickets WHERE created_by = :user_id AND status_id = 3");
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['done_ticket_count'];
+    }
+
+    //couter le nombre de ticket urgents par utilisateur
+    static function countUrgentTicketsByUser($user_id){
+        $con=MONPDO::getPDO();
+        $stmt = $con->prepare("SELECT COUNT(*) as urgent_ticket_count FROM tickets WHERE created_by = :user_id AND priority_id = 4");
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['urgent_ticket_count'];
     }
 }

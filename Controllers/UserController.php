@@ -10,7 +10,7 @@ class UserController {
 
         foreach($users as $user){
             $usersObjet[] = new User(
-                null,
+                $user["id_user"],
                 $user["fname"],
                 $user["lname"],
                 $user["email"],
@@ -26,7 +26,7 @@ class UserController {
         $user = UserDAO::getUser($email);
         if($user){
             return new User(
-                null,
+                $user["id_user"],
                 $user["fname"],
                 $user["lname"],
                 $user["email"],

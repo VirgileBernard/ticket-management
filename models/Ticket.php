@@ -54,4 +54,21 @@ class Ticket {
         );
     }
 
+    public function isDone() {
+        return $this->status_id == 3; 
+    }
+
+    public function isInProgress() {
+        return $this->status_id == 2; 
+    }
+    
+    // pour plus tard
+    public function isOpen() {
+        return $this->status_id == 1; 
+    }
+
+    public function isUrgent() {
+        return $this->priority_id == 4; 
+    }
+
 }

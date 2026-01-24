@@ -9,7 +9,7 @@ class User {
     private $password;
     private $role_id;
 
-    public function __construct($id=null, $fname, $lname, $email, $phone, $password=null, $role_id) {
+    public function __construct($id, $fname, $lname, $email, $phone, $password=null, $role_id) {
         $this->id = $id;
         $this->fname = $fname;   
         $this->lname = $lname;
@@ -20,6 +20,10 @@ class User {
     }
 
     // Getters
+    public function getIdUser() {
+        return $this->id;
+    }
+
     public function getFname() {
         return $this->fname;
     }
@@ -45,7 +49,7 @@ class User {
     public function __toString() {
         return sprintf(
             "User [id=%s, fname=%s, lname=%s, email=%s, phone=%s, role_id=%s]",
-            $this->id ?? 'null',
+            $this-> id,
             $this->fname,
             $this->lname,
             $this->email,

@@ -47,6 +47,8 @@ $_SESSION["user_fname"]  = $user->getFname();
 $_SESSION["Email"]       = $user->getEmail();
 $_SESSION["user_role"]   = $user->getRoleId();
 $_SESSION["logged_in"]   = true;
+$_SESSION["id_user"]     = $user->getIdUser();
+$_SESSION["user_role"]   = $user->getRoleId();
 
 echo $_SESSION["logged_in"];
 echo $_SESSION;

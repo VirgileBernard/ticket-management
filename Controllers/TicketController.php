@@ -6,4 +6,8 @@ class TicketController {
     public static function getTickets() {
         return TicketDAO::getTickets();
     }
+
+    public static function countDoneTicketsByUser($id){
+        return TicketDAO::countDoneTicketsByUser($id);
+    }
 }

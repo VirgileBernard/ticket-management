@@ -7,7 +7,7 @@ class UserDAO{
 
     public static  function getUsers(){
         $con=MONPDO::getPDO();
-        $requete = "SELECT fname, lname, email, phone_number , `nom` as `role` 
+        $requete = "SELECT id_user, fname, lname, email, phone_number , `nom` as `role` 
                     FROM users 
                     JOIN roles 
                     ON role_id=id_role";
@@ -21,6 +21,7 @@ public static function getUser($email){
     $con = MONPDO::getPDO();
 
     $requete = "SELECT 
+                    id_user,
                     fname,
                     lname,
                     email,
@@ -96,8 +97,3 @@ public static function getUser($email){
     
     
     }
-    
-    
-    
-    
-    
