@@ -31,10 +31,31 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
     <link rel="stylesheet" href="style.css">
     <title>Gestion des Utilisateurs</title>
     <style>
+
+        .topContainer{
+        display: grid;
+        grid-template-rows: 20% 80%;
+        gap: 1rem;
+        width: 100%;
+        height: 25vh;
+        /* margin-bottom: 100px; */
+        /* height: 25%; */
+    }
+    .infoView{
+        padding: 2rem 1rem;
+    }
+
+    .strong{
+        font-weight: bold;
+        font-size: .8rem;
+    }
+
         .counterContainer{
             display: flex;
             justify-content: space-evenly;
+            align-items: center;
             width: 100%;
+            height: 100%;
         }
 
         .counterCard{
@@ -42,8 +63,8 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         border: 1px solid var(--LM-border);
         border-radius: 8px;
         padding: 15px 10px;
-        height: 125px;
-        width: 125px;
+        height: 100px;
+        width: 100px;
         display: grid;
         grid-template-rows: 10% 90%;
         transition : all 0.3s ease-out;
@@ -55,13 +76,22 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
             /* cursor: pointer; */
         }
 
-        .txtCounter{}
+        .txtCounter{
+            font-size: .7rem;
+        }
 
         .counterTicket{
             display: flex;
             justify-content: center;
             align-items: center;
             font-size :  2.5rem;
+        }
+
+        .border-bottom{
+            height: 1px;
+            width: 100%;;
+            border-bottom: 1px solid var(--LM-border);
+            margin-bottom: 3rem;
         }
     </style>
 </head>
@@ -74,7 +104,12 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
  ?>
 
     <div class="container">
-        <h1>Liste des Utilisateurs</h1>
+<div class="topContainer">
+    <div class="infoView">
+        <p class="strong">Dashboard</p>
+        <p>Bienvenue <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+    </div>
+            <!-- <h1>Liste des Utilisateurs</h1> -->
       
 <div class="counterContainer">
 <div class="counterCard">
@@ -94,6 +129,9 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
 </div>
 
+</div>
+
+<span class="border-bottom"></span>
         
   <table class="user-table">
     <thead>

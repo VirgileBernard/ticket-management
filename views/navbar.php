@@ -23,7 +23,7 @@ $done = TicketController::countDoneTicketsByUser($userId);
     border-right: 1px solid var(--LM-border);
 }
 .nav-actions {
-height: 25%;
+height: 25vh;
 border-bottom: 1px solid var(--LM-border);
 display: grid;
 grid-template-rows: repeat(3, auto);
