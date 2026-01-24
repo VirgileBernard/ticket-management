@@ -38,8 +38,9 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         gap: 1rem;
         width: 100%;
         height: 25vh;
-        /* margin-bottom: 100px; */
+        margin-bottom: 10px;  /* à modif !!  */
         /* height: 25%; */
+        border-bottom: 1px solid var(--LM-border);
     }
     .infoView{
         padding: 2rem 1rem;
@@ -89,7 +90,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
         .border-bottom{
             height: 1px;
-            width: 100%;;
+            width: 100%;
             border-bottom: 1px solid var(--LM-border);
             margin-bottom: 3rem;
         }
@@ -131,7 +132,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
 </div>
 
-<span class="border-bottom"></span>
+
         
   <table class="user-table">
     <thead>
