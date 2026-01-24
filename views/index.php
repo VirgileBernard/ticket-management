@@ -10,7 +10,16 @@ session_start();
 
 require_once ("../Controllers/userController.php");
 require_once("../models/User.php");
+require_once '../Controllers/TicketController.php';
+
+
 $users = UserController::getUsers();
+$userId = $_SESSION['id_user'];
+// var_dump($_SESSION);
+
+$totalTickets = TicketController::countTicketsByUser($userId);
+$urgentTickets = TicketController::countUrgentTicketsByUser($userId);
+
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +40,9 @@ $users = UserController::getUsers();
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>
+        <p>Total de mes tickets : <?= $totalTickets ?></p>
+<p>Tickets urgents : <?= $urgentTickets ?></p>
+
         
         <table class="user-table">
             <thead>

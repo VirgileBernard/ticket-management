@@ -96,7 +96,7 @@ public static function getTickets() {
         return $result['ticket_count'];
     }
 
-    //coubter ke nombre de ticket terminé par utilisateur
+    //coubter le nombre de ticket terminé par utilisateur (COMPTEUR DANS LA NAVBAR)
     static function countDoneTicketsByUser($user_id){
         $con=MONPDO::getPDO();
         $stmt = $con->prepare("SELECT COUNT(*) as done_ticket_count FROM tickets WHERE created_by = :user_id AND status_id = 3");
