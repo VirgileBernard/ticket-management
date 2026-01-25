@@ -41,6 +41,7 @@
 .main{
     display: flex;
     background-color: var(--LM-bg-dark);
+    margin-bottom: 10vh;
 }
 
 /* 1. Centrage du contenu sous la navbar */

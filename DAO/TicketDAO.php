@@ -48,11 +48,12 @@ public static function getTickets() {
             $row['created_by']
         );
 
-        // OPTIONNEL : tu peux stocker les noms pour l'affichage
+        // OPTIONNEL : stocker les noms pour l'affichage
         $ticket->client_name   = $row['client_name'];
         $ticket->device_model  = $row['device_model'];
         $ticket->status_name   = $row['status_name'];
         $ticket->priority_name = $row['priority_name'];
+        $ticket->creator_name  = $row['creator_name'] ??  null;
 
         $tickets[] = $ticket;
     }

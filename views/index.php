@@ -150,11 +150,11 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         <?php foreach ($tickets as $ticket): ?>
             <tr>
                 <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
-                <td><?= htmlspecialchars($ticket->getClientId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getDeviceId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getStatusId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getPriorityId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getCreatedBy()) ?></td>
+                <td><?= htmlspecialchars($ticket->client_name) ?></td>
+                <td><?= htmlspecialchars($ticket->device_model) ?></td>
+                <td><?= htmlspecialchars($ticket->status_name) ?></td>
+                <td><?= htmlspecialchars($ticket->priority_name) ?></td>
+                <td><?= htmlspecialchars($ticket->getCreatedBy( )) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

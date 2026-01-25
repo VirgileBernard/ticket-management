@@ -3,8 +3,6 @@
 .main-footer {
     background-color: #2c3e50;
     color: #ecf0f1;
-    padding: 40px 0 20px 0;
-    margin-top: 50px; /* Espace avec le tableau */
     width: 100%;
 }
 
