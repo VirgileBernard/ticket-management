@@ -30,7 +30,12 @@ $users = UserController::getUsers();
  ?>
 
     <div class="container">
-        <h1>Liste des Utilisateurs</h1>
+        <div class="topContainer">
+    <div class="infoView">
+        <p class="strong">Utilisateurs</p>
+        <p>Voici l'ensemble de vos utilisateurs, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+    </div>
+</div>
         
         <table class="user-table">
             <thead>

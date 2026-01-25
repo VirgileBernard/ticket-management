@@ -42,9 +42,10 @@
 
 
 .main{
+    min-height: 100vh;
     display: flex;
     background-color: var(--LM-bg-dark);
-    margin-bottom: 10vh;
+    /* margin-bottom: 10vh; */
 }
 
 /* 1. Centrage du contenu sous la navbar */
@@ -55,13 +56,30 @@
     align-items: center;
     gap: 20px;
     
+
 }
 
+  .topContainer{
+        display: grid;
+        grid-template-rows: 20% 80%;
+        gap: 1rem;
+        width: 100%;
+        height: 5vh;
+        margin-bottom: 5vh;
+    }
+    .infoView{
+        padding: 2rem 1rem;
+    }
+
+    .strong{
+        font-weight: bold;
+        font-size: .8rem;
+    }
 
 .user-table {
     border-collapse: collapse;
-width: clamp(300px, 70vw, 1000px);
-margin: 0 auto;
+    width: clamp(300px, 70vw, 1000px);
+    margin: 0 auto;
     background-color: var(--LM-bg);
     box-shadow: var(--LM-box-shadow);
     border-radius: var(--borderRadius);

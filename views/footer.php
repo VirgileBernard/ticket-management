@@ -4,6 +4,7 @@
     background-color: #2c3e50;
     color: #ecf0f1;
     width: 100%;
+    margin-top: 10vh;
 }
 
 .footer-content {

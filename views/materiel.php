@@ -26,7 +26,12 @@ session_start();
     <div class="main">
     <?php include("navbar.php"); ?>
     <div class="container">
-    <h1>Liste du matériel</h1>
+        <div class="topContainer">
+    <div class="infoView">
+        <p class="strong">Matériel</p>
+        <p>Voici l'ensemble de votre matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+    </div>
+</div>
     <table class="user-table">
         <thead>
             <tr>

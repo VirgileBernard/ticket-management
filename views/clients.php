@@ -2,7 +2,6 @@
 session_start();
 
 
-// var_dump($_SESSION);
  if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../views/login.php');
     exit();
@@ -29,7 +28,12 @@ $clients = ClientController::getClients();
      include("navbar.php");
     ?>
     <div class="container">
-    <h1>Liste des clients</h1>
+    <div class="topContainer">
+    <div class="infoView">
+        <p class="strong">Clients</p>
+        <p>Voici l'ensemble de vos clients, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+    </div>
+</div>
     <table class="user-table">
         <thead>
             <tr>

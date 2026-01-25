@@ -28,7 +28,12 @@ $tickets = TicketController::getTickets();
 <div class="main">
      <?php include("navbar.php"); ?>
 <div class="container">
-      <h1>Liste des tickets</h1>
+     <div class="topContainer">
+    <div class="infoView">
+        <p class="strong">Tickets</p>
+        <p>Voici l'ensemble de vos tickets, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+    </div>
+</div>
     <table class="user-table">
     <thead>
         <tr>

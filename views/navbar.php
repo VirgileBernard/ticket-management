@@ -92,6 +92,7 @@ grid-template-rows: repeat(3, auto);
 .infoCompteur{
 width: 90%;
 margin: 0 auto;
+font-size:.9rem
 }
 
 

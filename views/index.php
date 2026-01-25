@@ -32,7 +32,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
     <title>Gestion des Utilisateurs</title>
     <style>
 
-        .topContainer{
+  .topContainer{
         display: grid;
         grid-template-rows: 20% 80%;
         gap: 1rem;
