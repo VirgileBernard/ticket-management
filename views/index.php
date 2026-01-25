@@ -62,7 +62,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         .counterCard{
         background-color: var(--LM-bg);
         border: 1px solid var(--LM-border);
-        border-radius: 8px;
+        border-radius: var(--borderRadius);
         padding: 15px 10px;
         height: 100px;
         width: 100px;

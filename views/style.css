@@ -14,15 +14,18 @@
   --text-secondary: hsl(0 0% 85%);
   --text-muted: hsl(0 0% 70%);
 
+  --borderRadius : 8px;
+
   /* //colors light mode */
   --LM-bg-dark: hsl(0 0% 85%);
   --LM-bg: hsl(0 0% 90%);
-  --LM-bg-light: hsl(0 0% 95%);
+  --LM-bg-light: hsl(0, 0%, 100%);
 
-  --actionBrown: hsl(30, 90%, 60%);
+  --actionBrown: hsl(30, 83%, 26%);
 
     --LM-text: hsl(0 0% 5%);
     --LM-text-secondary: hsl(0 0% 15%);
+    --LM-text-light: hsl(0, 0%, 100%);
     --LM-border:hsl(0 0% 45%);
 
     --LM-shadow: hsl(0 0% 10%);
@@ -47,46 +50,50 @@
 /* 1. Centrage du contenu sous la navbar */
 .container {
     width: 100vw;
-    /* margin: 40px auto; Centre le bloc horizontalement avec les marges auto */
-    /* padding: 0 20px; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 20px; */
+    gap: 20px;
     
 }
 
-/* 2. On stylise le tableau */
+
 .user-table {
     border-collapse: collapse;
-    width: 100%;
-    /*margin-top: 20px;*/
-    max-width: 1000px; /* Limite la largeur pour ne pas qu'il soit trop étiré */
-    background-color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+width: clamp(300px, 70vw, 1000px);
+margin: 0 auto;
+    background-color: var(--LM-bg);
+    box-shadow: var(--LM-box-shadow);
+    border-radius: var(--borderRadius);
     overflow: hidden; /* Pour que les arrondis s'appliquent aux cellules */
 }
 
 .user-table thead tr {
-    background-color: #2c3e50;
-    color: #ffffff;
+    background-color: var(--actionBrown);
+    color: var(--LM-text-light);
     text-align: left;
 }
 
-.user-table th, 
+.user-table th,
 .user-table td {
-    padding: 15px 20px;
+    padding: clamp(8px, 1.5vw, 20px) clamp(10px, 2vw, 25px);
+    border-bottom: 1px solid var(--LM-border);
 }
+
 
 .user-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: var(--LM-bg-dark);
+    transition : all 0.3s ease-in;
 }
 
+.user-table tbody tr:hover{
+    background-color: var(--LM-bg-light);
+    cursor: pointer;
+}
 /* Optionnel : Le badge pour le rôle */
 .badge {
     padding: 5px 10px;
-    border-radius: 20px;
+    border-radius: var(--borderRadius);
     background-color: #e1f5fe;
     color: #039be5;
     font-size: 0.85em;
