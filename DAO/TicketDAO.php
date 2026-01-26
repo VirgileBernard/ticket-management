@@ -7,7 +7,7 @@ require_once __DIR__ . '/../Models/Ticket.php';
 
 
 class TicketDAO {
- // obtenir tous les tickets
+ // obtenir tous les tickets (pour les tableaux)
 public static function getTickets() { 
     $con = MONPDO::getPDO();
 
@@ -86,6 +86,56 @@ public static function getTickets() {
         
         $stmt->execute();
     }
+
+    // ouvrir un ticket 
+    static function openTicket($ticket_id){
+        $con=MONPDO::getPDO();
+       $requete = "
+        SELECT 
+            t.id_ticket,
+            t.ticket_number,
+            t.client_id, 
+            t.device_id,
+            t.status_id,
+            t.priority_id,
+            t.created_by,
+            CONCAT(c.fname, ' ', c.lname) AS client_name,
+            CONCAT(u.fname, ' ', u.lname) AS creator_name,
+            d.model AS device_model,
+            s.nom AS status_name,
+            p.nom AS priority_name
+        FROM tickets t
+        JOIN clients c ON t.client_id = c.id_client
+        JOIN devices d ON t.device_id = d.id_device
+        JOIN status s ON t.status_id = s.id_status
+        JOIN priorities p ON t.priority_id = p.id_priority
+        JOIN users u ON t.created_by = u.id_user
+        WHERE t.id_ticket = :ticket_id
+    ";
+        $stmt = $con->prepare($requete);
+        $stmt->bindValue(":ticket_id", $ticket_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows=$stmt->fetch(PDO::FETCH_ASSOC);
+
+        $ticket= new Ticket(
+            $rows['id_ticket'], 
+            $rows['ticket_number'], 
+            $rows['client_id'],
+            $rows['device_id'],
+            $rows['status_id'],
+            $rows['priority_id'],
+            $rows['created_by']
+        );
+
+        $ticket->client_name   = $rows['client_name'];
+        $ticket->device_model  = $rows['device_model'];
+        $ticket->status_name   = $rows['status_name'];
+        $ticket->priority_name = $rows['priority_name'];
+        $ticket->creator_name  = $rows['creator_name'] ??  null;
+
+        return $ticket;
+    }
+    
 
     //counter le nombre de tickets en cours par utilisateur
     static function countTicketsByUser($user_id){

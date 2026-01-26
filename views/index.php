@@ -17,6 +17,8 @@ $users = UserController::getUsers();
 $userId = $_SESSION['id_user'];
 // var_dump($_SESSION);
 $tickets = TicketController::getTickets();
+
+
 $totalTickets = TicketController::countTicketsByUser($userId);
 $urgentTickets = TicketController::countUrgentTicketsByUser($userId);
 $openTickets = TicketController::countOpenTicketsByUser($userId);
@@ -148,7 +150,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
     <tbody>
         <?php foreach ($tickets as $ticket): ?>
-            <tr>
+           <tr onclick="window.location='openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
                 <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
                 <td><?= htmlspecialchars($ticket->client_name) ?></td>
                 <td><?= htmlspecialchars($ticket->device_model) ?></td>

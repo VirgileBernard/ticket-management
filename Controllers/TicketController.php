@@ -27,4 +27,8 @@ class TicketController {
         return TicketDAO::countOpenTicketsByUser($id);
     }
 
+    public static function openTicket($ticket_id){
+        return TicketDAO::openTicket($ticket_id);
+    }
+
 }
