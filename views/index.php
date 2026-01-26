@@ -150,7 +150,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
     <tbody>
         <?php foreach ($tickets as $ticket): ?>
-           <tr onclick="window.location='openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
+           <tr onclick="window.location='openView/openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
                 <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
                 <td><?= htmlspecialchars($ticket->client_name) ?></td>
                 <td><?= htmlspecialchars($ticket->device_model) ?></td>

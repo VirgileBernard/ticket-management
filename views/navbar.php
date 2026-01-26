@@ -1,6 +1,9 @@
 <?php
+require_once __DIR__ . '/../DAO/config/Baseurl.php';
 
-require_once '../Controllers/TicketController.php';
+
+require_once __DIR__ . '/../Controllers/TicketController.php';
+
 
  $roles = [ 1 => 'Technicien', 2 => 'TeamLeader', 3 => 'Superviseur' ]; $roleCode = $_SESSION["user_role"]; $roleName = $roles[$roleCode] ?? 'Inconnu'; 
 
@@ -136,11 +139,12 @@ font-size:.9rem
 
         <div class="nav-links">
             <div class="topLinks">
-        <a href="index.php">Accueil</a>
-        <a href="tickets.php">Tickets</a>
-        <a href="clients.php">Clients</a>
-        <a href="materiel.php">Matériel</a>
-        <a href="team.php">Team</a>
+        <a href="<?= BASE_URL ?>index.php">Accueil</a>
+       <a href="<?= BASE_URL ?>tickets.php">Tickets</a>
+<a href="<?= BASE_URL ?>clients.php">Clients</a>
+<a href="<?= BASE_URL ?>materiel.php">Matériel</a>
+<a href="<?= BASE_URL ?>team.php">Team</a>
+
         </div>
         <div class="bottomLinks">
 

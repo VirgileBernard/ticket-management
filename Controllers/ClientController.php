@@ -7,4 +7,8 @@ class ClientController {
     public static function getClients() {
         return ClientDAO::getClients();
     }
+
+    public static function openClient($client_id){
+        return ClientDAO::openClient($client_id);
+    }
 }

@@ -11,6 +11,7 @@ require_once("../Controllers/ClientController.php");
 require_once("../models/Client.php");
 
 $clients = ClientController::getClients();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@ $clients = ClientController::getClients();
         </thead>
         <tbody>
             <?php foreach ($clients as $client): ?>
-            <tr>
+            <tr onclick="window.location='openView/openClient.php?id=<?= $client->getId() ?>'">
                 <td><?= $client->getId() ?></td>
                 <td><?= $client->getFname() ?></td>
                 <td><?= $client->getLname() ?></td>

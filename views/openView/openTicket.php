@@ -1,5 +1,5 @@
 <?php
-require_once '../Controllers/TicketController.php';
+require_once __DIR__ . '/../../Controllers/TicketController.php';
 session_start();
 
 // Vérifier que l'ID est présent dans l'URL
@@ -21,10 +21,15 @@ if (!$ticket) {
 <head>
     <meta charset="UTF-8">
     <title>Ticket <?= htmlspecialchars($ticket->getTicketNumber()) ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+<div class="main">
 
+    <?php
+ include __DIR__ . '/../navbar.php';
+ ?>
+ <div class="container">
 <h1>Ticket <?= htmlspecialchars($ticket->getTicketNumber()) ?></h1>
 
 <div class="ticket-details">
@@ -49,6 +54,8 @@ if (!$ticket) {
         <?= htmlspecialchars($ticket->creator_name) ?>
     </p>
 
+</div>
+</div>
 </div>
 
 <a href="index.php">⬅ Retour à la liste des tickets</a>

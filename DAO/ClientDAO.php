@@ -48,4 +48,34 @@ class ClientDAO{
         $stmt->execute();
     }
 
+    //ouvrir un client
+    static function openClient($client_id){
+        $con=MONPDO::getPDO();
+       $requete = "
+       SELECT 
+           c.id_client,
+           c.fname,
+           c.lname,
+           c.email,
+           c.phone_number
+         FROM clients c
+            WHERE c.id_client = :client_id
+         ";
+           
+         $stmt = $con->prepare($requete);
+         $stmt->bindValue(":client_id", $client_id, PDO::PARAM_INT);
+         $stmt->execute();
+            $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $client = new Client(
+            $rows['id_client'],
+            $rows['fname'],
+            $rows['lname'],
+            $rows['email'],
+            $rows['phone_number']
+        );
+
+        return $client;
+    }
+
 }
