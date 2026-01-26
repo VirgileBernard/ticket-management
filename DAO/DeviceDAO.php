@@ -54,4 +54,42 @@ class DeviceDAO{
         
         $stmt->execute();
     }
+
+
+    //ouvrir un device
+    public static function openDevice($id_device){
+        $con = MONPDO::getPDO();
+        $requete = "
+        SELECT 
+            d.id_device,
+            d.model,
+            d.serial_number,
+            d.client_id,
+            d.brand,
+            d.type_id,
+            d.submission_date,
+            d.retrieve_date
+          FROM devices d
+             WHERE d.id_device = :id_device
+          ";
+
+          $stmt = $con->prepare($requete);
+          $stmt->bindValue(":id_device", $id_device, PDO::PARAM_INT);
+            $stmt->execute();
+                 $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $device = new Device(
+            $rows['id_device'],
+            $rows['model'],
+            $rows['serial_number'],
+            $rows['client_id'],
+            $rows['brand'],
+            $rows['type_id'],
+            $rows['submission_date'],
+            $rows['retrieve_date']
+        );
+
+        return $device;
+}
+
 }

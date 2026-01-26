@@ -46,7 +46,7 @@ session_start();
         </thead>
         <tbody>
             <?php foreach ($devices as $device): ?>
-            <tr>
+            <tr onclick="window.location='openView/openDevice.php?id=<?= $device->getIdDevice() ?>'">
                 <td><?= $device->getIdDevice() ?></td>
                 <td><?= $device->getBrand() ?></td>
                 <td><?= $device->getModel() ?></td>
