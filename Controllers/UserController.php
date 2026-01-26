@@ -3,6 +3,11 @@ require_once(__DIR__ . "/../DAO/UserDAO.php");
 require_once(__DIR__ . "/../models/User.php");
 
 class UserController {
+    // méthode pour ouvrir un user
+    public static function openUser($id_user){
+        return UserDAO::openUser($id_user);
+    }
+
 
     static function getUsers(){
         $usersObjet = [];

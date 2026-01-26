@@ -95,5 +95,41 @@ public static function getUser($email){
     
     }
     
+
+    //ouvrir un user
+    public static function openUser($id_user){
+    $con = MONPDO::getPDO();
+    $requete = "
+    SELECT 
+        u.id_user,
+        u.fname,
+        u.lname,
+        u.email,
+        u.phone_number,
+        u.password,
+        u.role_id,
+        r.nom AS role_name
+         FROM users u
+        JOIN roles r ON u.role_id = r.id_role
+        WHERE u.id_user = :id_user
+        ";
+        $stmt = $con->prepare($requete);
+        $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $user = new User(
+        $rows['id_user'],
+        $rows['fname'],
+        $rows['lname'],
+        $rows['email'],
+        $rows['phone_number'],
+        $rows['password'],
+        $rows['role_id']
+    ); 
+
+    return $user;
     
     }
+
+}

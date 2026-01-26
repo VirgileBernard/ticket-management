@@ -12,6 +12,8 @@ require_once ("../Controllers/userController.php");
 require_once("../models/User.php");
 $users = UserController::getUsers();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -49,7 +51,7 @@ $users = UserController::getUsers();
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
-                    <tr>
+                    <tr onclick="window.location='openView/openUser.php?id=<?= $user->getIdUser() ?>'">
                         <td><?= htmlspecialchars($user->getLname()); ?></td>
                         <td><?= htmlspecialchars($user->getFname()); ?></td>
                         <td><?= htmlspecialchars($user->getEmail()); ?></td>
