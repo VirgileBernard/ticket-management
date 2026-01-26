@@ -24,11 +24,11 @@
   --actionBrown: hsl(30, 83%, 26%);
 
     --LM-text: hsl(0 0% 5%);
-    --LM-text-secondary: hsl(0 0% 15%);
+    --LM-text-secondary: hsl(0 0% 25%);
     --LM-text-light: hsl(0, 0%, 100%);
     --LM-border:hsl(0 0% 45%);
 
-    --LM-shadow: hsl(0 0% 10%);
+    --LM-shadow: hsl(0 0% 50%);
     --LM-box-shadow : 0 2px 4px var(--LM-shadow);
 
 }
@@ -116,4 +116,49 @@
     color: #039be5;
     font-size: 0.85em;
     font-weight: bold;
+}
+
+.ticketInfo{
+    border: 1px solid var(--LM-border);
+    border-radius: var(--borderRadius);
+    background-color: var(--LM-bg);
+    box-shadow: var(--LM-box-shadow);
+    width: clamp(300px, 70vw, 1000px);
+    height: 80%;
+    margin: 10vh auto;
+}
+
+.topTicket{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--LM-border);
+    padding: 1rem 1rem;
+}
+
+.leftTopTicket{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.midTicket{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 1rem 0;
+    margin: 0 auto;
+}
+
+.topColonne{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.txt-secondary{
+    color: var(--LM-text-secondary);
+}
+
+.midTicket div{
+margin-bottom: 1rem;
 }

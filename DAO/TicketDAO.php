@@ -105,13 +105,15 @@ public static function getTickets() {
             CONCAT(u.fname, ' ', u.lname) AS creator_name,
             d.model AS device_model,
             s.nom AS status_name,
-            p.nom AS priority_name
+            p.nom AS priority_name,
+            MIN(i.start_at) AS intervention_start
         FROM tickets t
         JOIN clients c ON t.client_id = c.id_client
         JOIN devices d ON t.device_id = d.id_device
         JOIN status s ON t.status_id = s.id_status
         JOIN priorities p ON t.priority_id = p.id_priority
         JOIN users u ON t.created_by = u.id_user
+        LEFT JOIN intervention i ON i.ticket_id = t.id_ticket
         WHERE t.id_ticket = :ticket_id
     ";
         $stmt = $con->prepare($requete);
@@ -134,6 +136,8 @@ public static function getTickets() {
         $ticket->status_name   = $rows['status_name'];
         $ticket->priority_name = $rows['priority_name'];
         $ticket->creator_name  = $rows['creator_name'];
+        $ticket->intervention_start = $rows['intervention_start'];
+        
 
         return $ticket;
     }

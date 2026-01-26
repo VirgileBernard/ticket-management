@@ -28,84 +28,80 @@ if (!$ticket) {
 
     <?php include __DIR__ . '/../navbar.php'; ?>
 
-    <div class="container">
+   
 
-        <h1>
-            Ticket <?= htmlspecialchars($ticket->getTicketNumber()) ?>
-        </h1>
+    <div class="ticketInfo">
+        <!-- <a href="index.php">⬅ Retour à la liste des tickets</a> -->
+<!-- <?php var_dump($ticket); ?> -->
 
-        <!-- Formulaire d’édition inline -->
-        <form id="editForm" action="../process/updateTicket.php" method="POST">
-            <input type="hidden" name="id_ticket" value="<?= $ticket->getIdTicket() ?>">
+    <div class="topTicket">
 
-            <p>
-                <strong>Client :</strong>
-                <!-- lecture seule pour l’instant -->
-                <span><?= htmlspecialchars($ticket->client_name) ?></span>
-            </p>
+     <div class="leftTopTicket">
 
-            <p>
-                <strong>Appareil :</strong>
-                <!-- lecture seule pour l’instant -->
-                <span><?= htmlspecialchars($ticket->device_model) ?></span>
-            </p>
+           <div class="ticketNumber">
+    
+        <?= htmlspecialchars($ticket->getTicketNumber()) ?>
+        </div>
+        <div class="ticketStatus <?= strtolower($ticket->status_name) ?>">
+            <?= htmlspecialchars($ticket->status_name) ?>
+        </div>
+     </div>
 
-    <p>
-    <strong>Statut :</strong>
+     <div class="rightTopTicket">
 
-    <!-- Mode lecture -->
-    <span 
-        class="field-view"
-        data-field="status_id"
-    >
-        <?= htmlspecialchars($ticket->status_name) ?>
-    </span>
-
-    <!-- Mode édition -->
-    <select 
-        class="field-edit"
-        name="status_id"
-        data-field="status_id"
-        style="display:none;"
-    >
-        <option value="1" <?= $ticket->getStatusId() == 1 ? 'selected' : '' ?>>Ouvert</option>
-        <option value="2" <?= $ticket->getStatusId() == 2 ? 'selected' : '' ?>>En cours</option>
-        <option value="3" <?= $ticket->getStatusId() == 3 ? 'selected' : '' ?>>Clôturé</option>
-    </select>
-</p>
-
-
-            <p>
-                <strong>Priorité :</strong>
-                <span
-                    class="field-view"
-                    data-field="priority_id"
-                >
-                    <?= htmlspecialchars($ticket->priority_name) ?>
-                </span>
-
-                <select
-                    class="field-edit"
-                    name="priority_id"
-                    data-field="priority_id"
-                    style="display:none;"
-                >
-                    <option value="1" <?= $ticket->getPriorityId() == 1 ? 'selected' : '' ?>>Basse</option>
-                    <option value="2" <?= $ticket->getPriorityId() == 2 ? 'selected' : '' ?>>Moyenne</option>
-                    <option value="3" <?= $ticket->getPriorityId() == 3 ? 'selected' : '' ?>>Haute</option>
-                </select>
-            </p>
-
-            <p><strong>Créé par :</strong> <?= htmlspecialchars($ticket->creator_name) ?></p>
-
-            <button type="submit">Enregistrer les modifications</button>
-            <button type="button" onclick="window.location.reload()">Annuler</button>
-        </form>
+        <div class="ticketId">
+            ID: #<?= htmlspecialchars($ticket->getIdTicket()) ?>
+        </div>
+        <div class="creationDate">
+            <p><?= date('d/m/Y', strtotime($ticket->intervention_start)) ?></p>
+        </div>
+    </div>
 
     </div>
-</div>
 
-<a href="index.php">⬅ Retour à la liste des tickets</a>
+    <div class="midTicket">
+
+    <div class="leftMidTicket">
+        <div class="topColonne">
+            <p>Informations</p>
+        </div>
+        <div class="technicienInformations">
+            <p class="txt-secondary">Technicien</p>  <!-- TODO : afficher dynamiquement le role du technicien assigné -->
+            <p><?= htmlspecialchars($ticket->creator_name) ?></p>
+        </div>
+        <div class="clientInformations">
+            <p class="txt-secondary">Client</p>
+            <p><?= htmlspecialchars($ticket->client_name) ?></p>
+        </div>
+        <div class="deviceInformations">
+           <p class="txt-secondary">Appareil</p>
+            <p><?= htmlspecialchars($ticket->device_model) ?></p>
+        </div>
+      
+        <div class="descriptionTicket">
+            <p>Description</p>
+            <!-- TODO : ajouter la description du ticket -->
+        </div>
+    </div>
+
+    <div class="rightMidTicket">
+        <div class="topColonne">
+            <p>Suivi de l'intervention</p>
+        </div>
+        <div class="statutTicket">
+            <p class="txt-secondary">Statut</p>
+            <p><?= htmlspecialchars($ticket->status_name) ?></p>
+        </div>
+          <div class="priorityTicket">
+            <p>Priorité</p>
+            <p><?= htmlspecialchars($ticket->priority_name) ?></p>
+        </div>
+
+    </div>
+    </div>
+
+
+
 
 <script>
 document.querySelectorAll('.field-view').forEach(span => {

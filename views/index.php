@@ -102,9 +102,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
 
 <div class="main">
 
-    <?php
- include("navbar.php");
- ?>
+ <?php include __DIR__ . '/navbar.php'; ?>
 
     <div class="container">
 <div class="topContainer">
@@ -112,7 +110,6 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         <p class="strong">Dashboard</p>
         <p>Bienvenue <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
-            <!-- <h1>Liste des Utilisateurs</h1> -->
       
 <div class="counterContainer">
 <div class="counterCard">
