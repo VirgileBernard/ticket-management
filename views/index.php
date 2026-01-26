@@ -156,7 +156,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
                 <td><?= htmlspecialchars($ticket->device_model) ?></td>
                 <td><?= htmlspecialchars($ticket->status_name) ?></td>
                 <td><?= htmlspecialchars($ticket->priority_name) ?></td>
-                <td><?= htmlspecialchars($ticket->getCreatedBy( )) ?></td>
+                <td><?= htmlspecialchars($ticket->creator_name) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

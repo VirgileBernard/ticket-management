@@ -21,6 +21,7 @@ public static function getTickets() {
             t.priority_id,
             t.created_by,
             CONCAT(c.fname, ' ', c.lname) AS client_name,
+            CONCAT(u.fname, ' ', u.lname) AS creator_name,
             d.model AS device_model,
             s.nom AS status_name,
             p.nom AS priority_name
@@ -29,6 +30,7 @@ public static function getTickets() {
         JOIN devices d ON t.device_id = d.id_device
         JOIN status s ON t.status_id = s.id_status
         JOIN priorities p ON t.priority_id = p.id_priority
+        JOIN users u ON t.created_by = u.id_user
     ";
 
     $stmt = $con->prepare($requete); 
@@ -53,7 +55,7 @@ public static function getTickets() {
         $ticket->device_model  = $row['device_model'];
         $ticket->status_name   = $row['status_name'];
         $ticket->priority_name = $row['priority_name'];
-        $ticket->creator_name  = $row['creator_name'] ??  null;
+        $ticket->creator_name  = $row['creator_name'];
 
         $tickets[] = $ticket;
     }
@@ -131,7 +133,7 @@ public static function getTickets() {
         $ticket->device_model  = $rows['device_model'];
         $ticket->status_name   = $rows['status_name'];
         $ticket->priority_name = $rows['priority_name'];
-        $ticket->creator_name  = $rows['creator_name'] ??  null;
+        $ticket->creator_name  = $rows['creator_name'];
 
         return $ticket;
     }
