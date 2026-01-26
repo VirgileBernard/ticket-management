@@ -31,4 +31,8 @@ class TicketController {
         return TicketDAO::openTicket($ticket_id);
     }
 
+    public static function updateTicket($ticket) {
+    return TicketDAO::updateTicket($ticket);
+}
+
 }

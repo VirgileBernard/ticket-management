@@ -177,4 +177,31 @@ public static function getTickets() {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['open_ticket_count'];
     }
+
+
+    //update un ticket
+    public static function updateTicket($ticket) {
+    $con = MONPDO::getPDO();
+
+    $requete = "
+        UPDATE tickets
+        SET 
+            client_id = :client_id,
+            device_id = :device_id,
+            status_id = :status_id,
+            priority_id = :priority_id
+        WHERE id_ticket = :id_ticket
+    ";
+
+    $stmt = $con->prepare($requete);
+
+    $stmt->bindValue(":client_id", $ticket->getClientId(), PDO::PARAM_INT);
+    $stmt->bindValue(":device_id", $ticket->getDeviceId(), PDO::PARAM_INT);
+    $stmt->bindValue(":status_id", $ticket->getStatusId(), PDO::PARAM_INT);
+    $stmt->bindValue(":priority_id", $ticket->getPriorityId(), PDO::PARAM_INT);
+    $stmt->bindValue(":id_ticket", $ticket->getId(), PDO::PARAM_INT);
+
+    return $stmt->execute();
+}
+
 }
