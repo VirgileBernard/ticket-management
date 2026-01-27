@@ -8,6 +8,11 @@ class UserController {
         return UserDAO::openUser($id_user);
     }
 
+    public static function updateUser($user) {
+        return UserDAO::updateUser($user);
+    }
+    
+
 
     static function getUsers(){
         $usersObjet = [];

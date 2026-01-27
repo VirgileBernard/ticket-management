@@ -60,23 +60,23 @@ public static function getUser($email){
     }
     
     
-    public static function updateUserDAO($user){
+    public static function updateUser($user){
     
         $con=MONPDO::getPDO();
         $requete = "UPDATE users 
         SET fname=:fname ,
             lname=:lname,
             email=:email,
-            phone_number =:phone,
+            phone_number =:phone_number,
             role_id =:role_id
-             WHERE Id=:Id";
+             WHERE id_user=:id_user";
         $stmt = $con->prepare($requete);
-    
-        $stmt->bindValue(":Id",$user->getId(),PDO::PARAM_INT);
+
+        $stmt->bindValue(":id_user",$user->getIdUser(),PDO::PARAM_INT);
         $stmt->bindValue(":fname",$user->getFname(),PDO::PARAM_STR);
         $stmt->bindValue(":lname",$user->getLname(),PDO::PARAM_STR);
         $stmt->bindValue(":email",$user->getEmail(),PDO::PARAM_STR);
-        $stmt->bindValue(":phone",$user->getPhone(),PDO::PARAM_STR);
+        $stmt->bindValue(":phone_number",$user->getPhone(),PDO::PARAM_STR);
         $stmt->bindValue(":role_id",$user->getRoleId(),PDO::PARAM_INT);
 
         $stmt->execute();
@@ -86,7 +86,7 @@ public static function getUser($email){
     public static function deleteUserDAO($id){
     
         $con=MONPDO::getPDO();
-        $requete = "DELETE FROM  users WHERE Id=:Id";
+        $requete = "DELETE FROM  users WHERE id_user=:id_user";
         $stmt = $con->prepare($requete);
     
         $stmt->bindValue(":Id",$id,PDO::PARAM_INT);
