@@ -11,4 +11,8 @@ class ClientController {
     public static function openClient($client_id){
         return ClientDAO::openClient($client_id);
     }
+
+    public static function updateClient($client){
+        return ClientDAO::updateClient($client);
+    }
 }
