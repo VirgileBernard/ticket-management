@@ -78,4 +78,21 @@ class ClientDAO{
         return $client;
     }
 
+
+    //update un client
+    static function updateClient($client){
+        $con=MONPDO::getPDO();
+        $stmt = $con->prepare("UPDATE clients 
+                               SET fname = :fname, lname = :lname, email = :email, phone_number = :phone_number
+                               WHERE id_client = :id_client");
+        
+        $stmt->bindValue(":fname",$client->getFname(),PDO::PARAM_STR);
+        $stmt->bindValue(":lname",$client->getLname(),PDO::PARAM_STR);
+        $stmt->bindValue(":email",$client->getEmail(),PDO::PARAM_STR);
+        $stmt->bindValue(":phone_number",$client->getphone(),PDO::PARAM_STR);
+        $stmt->bindValue(":id_client",$client->getId(),PDO::PARAM_INT);
+        
+        $stmt->execute();
+    }
+
 }
