@@ -63,4 +63,24 @@ $clients = ClientController::getClients();
 
     <?php include("footer.php"); ?>
 
+    <?php if (isset($_SESSION['flash_success'])): ?>
+    <div id="flashMessage" class="flash-success">
+        <?= $_SESSION['flash_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_success']); ?>
+<?php endif; ?>
+
+
 </body>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const flash = document.getElementById("flashMessage");
+    if (flash) {
+        setTimeout(() => {
+            flash.remove();
+        }, 4000); // même durée que l’animation
+    }
+});
+</script>
+</html>
