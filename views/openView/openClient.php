@@ -34,36 +34,48 @@ if (!$client) {
  include __DIR__ . '/../navbar.php';
     ?>
 
-    <div class="container">
+    <div class="ticketInfo">
+    
+      <div class="topTicket">
+         <div class="leftTopTicket">
+            <p>Informations du client</p>
+         </div>
+         <div class="rightTopTicket">
+            <div class="clientId">
+                ID: #<?= htmlspecialchars($client->getId()) ?>
+            </div>
+         </div>
+      </div>
 
-        <h1>
-            Client : <?= htmlspecialchars($client->getFname() . ' ' . $client->getLname()) ?>
-        </h1>
-
-        <div class="ticket-details">
-
-            <p><strong>Prénom :</strong>
-                <?= htmlspecialchars($client->getFname()) ?>
-            </p>
-
-            <p><strong>Nom :</strong>
-                <?= htmlspecialchars($client->getLname()) ?>
-            </p>
-
-            <p><strong>Email :</strong>
-                <?= htmlspecialchars($client->getEmail()) ?>
-            </p>
-
-            <p><strong>Numéro de téléphone :</strong>
-                <?= htmlspecialchars($client->getPhone()) ?>
-            </p>
-
+      <div class="midTicket">
+        <div class="leftMidTicket">
+            <div class="clientInformations">
+                <p class="txt-secondary">Nom</p>
+                <p><?= htmlspecialchars($client->getLname()) ?></p>
+            </div>
+            <div class="clientEmail">
+                <p class="txt-secondary">Email</p>
+                <p><?= htmlspecialchars($client->getEmail()) ?></p>
+            </div>
         </div>
+        <div class="rightMidTicket">
+            <div class="clientPrenom">
+                <p class="txt-secondary">Prénom</p>
+                <p><?= htmlspecialchars($client->getFname()) ?></p>
+            </div>
+            <div class="clientPhone">
+                <p class="txt-secondary">Téléphone</p>
+                <p><?= htmlspecialchars($client->getPhone()) ?></p>
+        </div>
+      </div>
+      <div class="bottomTicket">
+        <!-- // to do : btn submit avec modif -->
+      </div>
 
-    </div>
+ 
+
 </div>
 
-<a href="index.php">⬅ Retour à la liste</a>
 
 </body>
 </html>
