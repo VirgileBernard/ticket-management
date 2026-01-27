@@ -198,14 +198,14 @@ margin-bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     background-color: #28a745;
-    color: white;
+    color: var(--LM-text-light);
     padding: 14px 22px;
     border-radius: 6px;
     font-weight: bold;
     opacity: 0;
     pointer-events: none;
     animation: flashFade 4s ease forwards;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: var(--LM-box-shadow);
 }
 
 @keyframes flashFade {

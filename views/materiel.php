@@ -62,5 +62,11 @@ session_start();
     </div>
 
     <?php include("footer.php"); ?>
+        <?php if (isset($_SESSION['flash_success'])): ?>
+    <div id="flashMessage" class="flash-success">
+        <?= $_SESSION['flash_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_success']); ?>
+<?php endif; ?>
     </body>
 </html>

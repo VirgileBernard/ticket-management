@@ -92,4 +92,31 @@ class DeviceDAO{
         return $device;
 }
 
-}
+    static function updateDevice($device){
+        $con = MONPDO::getPDO();
+        $stmt = $con->prepare("
+        UPDATE devices 
+                               
+        SET model = :model, 
+            serial_number = :serial_number, 
+            brand = :brand, 
+            type_id = :type_id, 
+            client_id = :client_id, 
+            submission_date = :submission_date, 
+            retrieve_date = :retrieve_date
+        WHERE id_device = :id_device");
+
+        $stmt->bindValue(":model",$device->getModel(),PDO::PARAM_STR);
+        $stmt->bindValue(":serial_number",$device->getSerialNumber(),PDO::PARAM_STR);
+        $stmt->bindValue(":brand",$device->getBrand(),PDO::PARAM_STR);
+        $stmt->bindValue(":type_id",$device->getTypeId(),PDO::PARAM_INT);
+        $stmt->bindValue(":client_id",$device->getClientId(),PDO::PARAM_INT);
+        $stmt->bindValue(":submission_date",$device->getSubmissionDate(),PDO::PARAM_STR);
+        $stmt->bindValue(":retrieve_date",$device->getRetrieveDate(),PDO::PARAM_STR);
+        $stmt->bindValue(":id_device",$device->getIdDevice(),PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+                               
+    }
+
