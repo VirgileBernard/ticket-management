@@ -40,6 +40,30 @@
   font-family: var(--text-font), sans-serif;
 }
 
+button{
+    padding: .5rem 1rem;
+    border : 1px solid var(--actionBrown);
+    color: var(--LM-text);
+    transition: all 0.3s ease-in-out;
+    border-radius: var(--borderRadius);
+    font-size: 1rem;
+}
+
+button:hover{
+    background-color: var(--actionBrown);
+    color: var(--LM-text-light);
+    cursor: pointer;
+}
+
+input, select, textarea{
+    padding: .3rem .5rem;
+    border : 1px solid var(--LM-border);
+    border-radius: var(--borderRadius);
+    background-color: var(--LM-bg-light);
+    color: var(--LM-text);
+    font-size: 1rem;
+    width: 100%;
+}
 
 .main{
     min-height: 100vh;
@@ -144,10 +168,8 @@
 
 .midTicket{
     display: flex;
-    width: 100%;
     justify-content: space-around;
-    padding: 1rem 0;
-    margin: 0 auto;
+    margin-top: 5vh;
 }
 
 .topColonne{
@@ -161,4 +183,11 @@
 
 .midTicket div{
 margin-bottom: 1rem;
+}
+
+.bottomTicket{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 1rem;
 }

@@ -1,6 +1,7 @@
 <?php
 require_once '../Controllers/ClientController.php';
 require_once '../Models/Client.php';
+require_once '../DAO/config/Baseurl.php';
 
 $client = new Client(
     $_POST['id_client'],
@@ -12,5 +13,6 @@ $client = new Client(
 
 ClientController::updateClient($client);
 
-header("Location: ../views/openView/openClient.php?id=" . $_POST['id_client']);
-exit;
+header("Location: " . BASE_URL . "views/clients.php");
+ exit;
+
