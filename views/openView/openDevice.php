@@ -33,19 +33,58 @@ if(!$device) {
  include __DIR__ . '/../navbar.php';
     ?>
 
-    <div class="container">
-        <h1>Materiel ID: <?= htmlspecialchars($device->getIdDevice()) ?></h1>
-
-        <div class="device-details">
-            <p><strong>Modèle :</strong> <?= htmlspecialchars($device->getModel()) ?></p>
-            <p><strong>Numéro de série :</strong> <?= htmlspecialchars($device->getSerialNumber()) ?></p>
-            <p><strong>Marque :</strong> <?= htmlspecialchars($device->getBrand()) ?></p>
-            <p><strong>ID Type :</strong> <?= htmlspecialchars($device->getTypeId()) ?></p>
-            <p><strong>ID Client :</strong> <?= htmlspecialchars($device->getClientId()) ?></p>
-            <p><strong>Date de soumission :</strong> <?= htmlspecialchars($device->getSubmissionDate()) ?></p>
-            <p><strong>Date de récupération :</strong> <?= htmlspecialchars($device->getRetrieveDate()) ?></p>
+<div class="ticketInfo">
+    <div class="topTicket">
+            <div class="leftTopTicket">
+        <p>Informations de l'appareil</p>
+          </div>
+            <div class="rightTopTicket">
+        <div class="deviceId">
+            ID: #<?= htmlspecialchars($device->getIdDevice()) ?>
         </div>
     </div>
+    </div>
+
+    <div class="midTicket">
+        <div class="leftMidTicket">
+            <div class="deviceType">
+                <p class="txt-secondary">Type d'appareil</p>
+                <p><?= htmlspecialchars($device->getTypeId()) ?></p>
+            </div>
+            <div class="deviceBrand">
+                <p class="txt-secondary">Marque</p>
+                <p><?= htmlspecialchars($device->getBrand()) ?></p>
+            </div>
+            <div class="deviceModel">
+                <p class="txt-secondary">Modèle</p>
+                <p><?= htmlspecialchars($device->getModel()) ?></p>
+            </div>
+        </div>
+
+        <div class="rightMidTicket">
+            <div class="deviceSerialNumber">
+                <p class="txt-secondary">Numéro de série</p>
+                <p><?= htmlspecialchars($device->getSerialNumber()) ?></p>
+            </div>
+            <div class="deviceClientId">
+                <p class="txt-secondary">ID Client</p>
+                <p><?= htmlspecialchars($device->getClientId()) ?></p>
+            </div>
+            <div class="submissionDate">
+                <div class="txt-secondary">Date de dépot</div>
+                <div><?= htmlspecialchars($device->getSubmissionDate()) ?></div>
+            </div>
+            <div class="retrieveDate">
+                <div class="txt-secondary">Date de récupération</div>
+                <div><?= htmlspecialchars($device->getRetrieveDate()) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottomTicket">
+        <!-- // to do : btn submit avec modif -->
+    </div>
+</div>
 
 
 </div>
