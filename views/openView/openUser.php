@@ -24,6 +24,16 @@ if(!$user) {
     <title>Equipes </title>
         <link rel="stylesheet" href="../style.css">
 </head>
+
+<style>
+    /* pour que le mdp de passe ne déborde pas */
+    .userPass{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+     width: 150px;
+    }
+</style>
 <body>
     
 <div class="main">
@@ -32,16 +42,56 @@ if(!$user) {
  include __DIR__ . '/../navbar.php';
     ?>
 
-<div class="container">
-    <h1>Utilisateur ID: <?= htmlspecialchars($user->getIdUser()) ?></h1>
+<div class="ticketInfo">
 
-    <div class="user-details">
-        <p><strong>Nom :</strong> <?= htmlspecialchars($user->getLname()) ?></p>
-        <p><strong>Prénom :</strong> <?= htmlspecialchars($user->getFname()) ?></p>
-        <p><strong>Email :</strong> <?= htmlspecialchars($user->getEmail()) ?></p>
-        <p><strong>Téléphone :</strong> <?= htmlspecialchars($user->getPhone()) ?></p>
-        <p><strong>Rôle ID :</strong> <?= htmlspecialchars($user->getRoleId()) ?></p>
+    <div class="topTicket">
+            <div class="leftTopTicket">
+        <p>Informations du membre</p>
+          </div>
+            <div class="rightTopTicket">
+        <div class="userId">
+            ID: #<?= htmlspecialchars($user->getIdUser()) ?>
+        </div>
     </div>
+    </div>
+
+
+    <div class="midTicket">
+        <div class="leftMidTicket">
+            <div class="userInformations">
+                <p class="txt-secondary">Nom</p>
+                <p><?= htmlspecialchars($user->getLname()) ?></p>
+            </div>
+            <div class="userEmail">
+                <p class="txt-secondary">Email</p>
+                <p><?= htmlspecialchars($user->getEmail()) ?></p>
+            </div>
+            <div class="userRole">
+                <p class="txt-secondary">Rôle</p>
+                <p><?= htmlspecialchars($user->getRoleId()) ?></p>
+            </div>
+        </div>
+        <div class="rightMidTicket">
+            <div class="userPrenom">
+                <p class="txt-secondary">Prénom</p>
+                <p><?= htmlspecialchars($user->getFname()) ?></p>
+            </div>
+          <div class="userPass">
+                <p class="txt-secondary">Mot de passe</p>
+                <p class="userPass"><?= htmlspecialchars($user->getPassword()) ?></p>
+          </div>
+          <div class="userTeam">
+                <p class="txt-secondary">Équipe</p>
+                <!-- <p><?= htmlspecialchars($user->getTeamId()) ?></p> -->
+          </div>
+     </div>
+
+     <div class="bottomTicket">
+        <!-- // to do : btn submit avec modif -->
+     </div>
+
+ </div>
+
 </div>
 
 </div>
