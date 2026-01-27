@@ -139,18 +139,18 @@ font-size:.9rem
 
         <div class="nav-links">
             <div class="topLinks">
-        <a href="<?= BASE_URL ?>index.php">Accueil</a>
-       <a href="<?= BASE_URL ?>tickets.php">Tickets</a>
-<a href="<?= BASE_URL ?>clients.php">Clients</a>
-<a href="<?= BASE_URL ?>materiel.php">Matériel</a>
-<a href="<?= BASE_URL ?>team.php">Team</a>
-
+        <a href="<?= BASE_URL ?>views/index.php">Accueil</a>
+       <a href="<?= BASE_URL ?>views/tickets.php">Tickets</a>
+<a href="<?= BASE_URL ?>views/clients.php">Clients</a>
+<a href="<?= BASE_URL ?>views/materiel.php">Matériel</a>
+<a href="<?= BASE_URL ?>views/team.php">Team</a>
         </div>
         <div class="bottomLinks">
 
-          <a href="../process/processLogout.php" class="logout-btn">
-                Déconnexion
-            </a>
+      <a href="<?= BASE_URL ?>process/processLogout.php" class="logout-btn">
+    Déconnexion
+</a>
+
             </div>
     </div>
 
