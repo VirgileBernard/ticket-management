@@ -30,35 +30,27 @@ if (!$ticket) {
 
    
 
-    <div class="ticketInfo">
-        <!-- <a href="index.php">⬅ Retour à la liste des tickets</a> -->
-<!-- <?php var_dump($ticket); ?> -->
-
+    <div class="ticketInfo" >
     <div class="topTicket">
 
-     <div class="leftTopTicket">
 
            <div class="ticketNumber">
-    
-        <?= htmlspecialchars($ticket->getTicketNumber()) ?>
-        </div>
-        <div class="ticketStatus <?= strtolower($ticket->status_name) ?>">
-            <?= htmlspecialchars($ticket->status_name) ?>
-        </div>
-     </div>
+                <?= htmlspecialchars($ticket->getTicketNumber()) ?>
+            </div>
+       
+   
 
-     <div class="rightTopTicket">
-
-        <div class="ticketId">
-            ID: #<?= htmlspecialchars($ticket->getIdTicket()) ?>
-        </div>
-        <div class="creationDate">
+        <div class="rightTopTicket">
+             <div class="ticketId">
+                  ID: #<?= htmlspecialchars($ticket->getIdTicket()) ?>
+              </div>
+            <div class="creationDate">
             <p><?= date('d/m/Y', strtotime($ticket->intervention_start)) ?></p>
+             </div>
         </div>
-    </div>
 
     </div>
-
+<div id="ticketView">
     <div class="midTicket">
 
     <div class="leftMidTicket">
@@ -100,38 +92,98 @@ if (!$ticket) {
     </div>
     </div>
 
+        <div class="bottomTicket">
+            <button id="editBtn" class="btn-primary">Modifier</button>
+        </div>
 
+        
 
+        </div>
 
+        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none;">
+            <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">
+            <div class="midTicket">
+
+                <div class="leftMidTicket">
+                    <div class="topColonne">
+                        <p>Informations</p>
+                    </div>
+                    <div class="technicienInformations">
+                        <label for="technician">Technicien :</label>
+                        <select type="text" id="technician" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>" readonly>
+                            <option value="<?= htmlspecialchars($ticket->creator_name) ?>" selected><?= htmlspecialchars($ticket->creator_name) ?></option>
+                        </select>
+                    </div>
+
+                    <div class="clientInformations">
+                        <label for="client">Client :</label>
+                        <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>" readonly>
+                            <option value="<?= htmlspecialchars($ticket->client_name) ?>" selected><?= htmlspecialchars($ticket->client_name) ?></option>
+                        </select>
+                    </div>
+                    <div class="deviceInformations">
+                        <label for="device">Appareil :</label>
+                        <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>" readonly>
+                            <option value="<?= htmlspecialchars($ticket->device_model) ?>" selected><?= htmlspecialchars($ticket->device_model) ?></option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="rightMidTicket">
+                    <div class="topColonne">
+                        <p>Suivi de l'intervention</p>
+                    </div>
+
+                    <div class="statutTicket">
+                        <label for="status">Statut :</label>
+                        <select name="status_id" id="status">
+                            <?php foreach ($statuses as $status): ?>
+                                <?php if ($status['id'] == $ticket->status_id): ?>
+                                    <?php $selected = 'selected'; ?>
+                                <?php else: ?>
+                                    <?php $selected = ''; ?>
+                                <?php endif; ?>
+                                <?= '<option value="' . $status['id'] . '" ' . $selected . '>' . $status['name'] . '</option>' ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="priorityTicket">
+                        <label for="priority">Priorité :</label>
+                        <select name="priority_id" id="priority">
+                            <?php foreach ($priorities as $priority): ?>
+                                <?php if ($priority['id'] == $ticket->priority_id): ?>
+                                    <?php $selected = 'selected'; ?>
+                                <?php else: ?>
+                                    <?php $selected = ''; ?>
+                                <?php endif; ?>
+                                <?= '<option value="' . $priority['id'] . '" ' . $selected . '>' . $priority['name'] . '</option>' ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        <div class="bottomTicket">
+            <button type="submit" class="btn-primary">Enregistrer</button>  
 <script>
-document.querySelectorAll('.field-view').forEach(span => {
-    span.addEventListener('click', () => {
-        const field = span.dataset.field;
-        const editInput = document.querySelector('.field-edit[data-field="' + field + '"]');
+const editBtn = document.getElementById('editBtn');
+const editForm = document.getElementById('editForm');
+const ticketView = document.getElementById('ticketView');
+const cancelBtn = document.getElementById('cancelBtn');
 
-        span.style.display = 'none';
-        editInput.style.display = 'inline-block';
-        editInput.focus();
-    });
+editBtn.addEventListener('click', () => {
+    ticketView.style.display = 'none';
+    editForm.style.display = 'block';
 });
 
-document.querySelectorAll('.field-edit').forEach(input => {
-    input.addEventListener('blur', () => {
-        const field = input.dataset.field;
-        const viewSpan = document.querySelector('.field-view[data-field="' + field + '"]');
-
-        if (input.tagName === 'SELECT') {
-            const selectedText = input.options[input.selectedIndex].textContent;
-            viewSpan.textContent = selectedText;
-        } else {
-            viewSpan.textContent = input.value;
-        }
-
-        input.style.display = 'none';
-        viewSpan.style.display = 'inline';
-    });
+cancelBtn.addEventListener('click', () => {
+    editForm.style.display = 'none';
+    ticketView.style.display = 'block';
 });
 </script>
+
 
 </body>
 </html>

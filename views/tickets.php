@@ -34,7 +34,8 @@ $tickets = TicketController::getTickets();
         <p>Voici l'ensemble de vos tickets, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
 </div>
-    <table class="user-table">
+        
+  <table class="user-table">
     <thead>
         <tr>
             <th>#</th>
@@ -48,20 +49,27 @@ $tickets = TicketController::getTickets();
 
     <tbody>
         <?php foreach ($tickets as $ticket): ?>
-            <tr>
+           <tr onclick="window.location='openView/openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
                 <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
-                <td><?= htmlspecialchars($ticket->getClientId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getDeviceId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getStatusId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getPriorityId()) ?></td>
-                <td><?= htmlspecialchars($ticket->getCreatedBy()) ?></td>
+                <td><?= htmlspecialchars($ticket->client_name) ?></td>
+                <td><?= htmlspecialchars($ticket->device_model) ?></td>
+                <td><?= htmlspecialchars($ticket->status_name) ?></td>
+                <td><?= htmlspecialchars($ticket->priority_name) ?></td>
+                <td><?= htmlspecialchars($ticket->creator_name) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-</div>
+    </div>
 </div>
 
+
 <?php include("footer.php"); ?>
+     <?php if (isset($_SESSION['flash_success'])): ?>
+    <div id="flashMessage" class="flash-success">
+        <?= $_SESSION['flash_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_success']); ?>
+<?php endif; ?>
 
 </body>
