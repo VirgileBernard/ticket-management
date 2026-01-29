@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../Controllers/TicketController.php';
 require_once __DIR__ . '/../../Controllers/UserController.php';
 require_once __DIR__ . '/../../Controllers/ClientController.php';
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
+require_once __DIR__ . '/../../Controllers/StatusController.php';
 
 session_start();
 
@@ -21,6 +22,8 @@ $users = UserController::getUsers();
 $clients = ClientController::getClients();
 
 $devices = DeviceController::getDevices();
+
+$statuss = StatusController::getStatus();
 
 // Vérifier que le ticket existe
 if (!$ticket) {
@@ -112,7 +115,7 @@ if (!$ticket) {
 
         </div>
 
-        <form id="editForm" action="../../process/updateTicket.php" method="post">
+        <form id="editForm" action="../../process/updateTicket.php" method="post" >
             <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">  
             <div class="midTicket">
 
@@ -122,7 +125,7 @@ if (!$ticket) {
                     </div>
                     <div class="technicienInformations">
                         <label for="technician">Technicien :</label>
-                        <?php var_dump ($tickets) ?>
+                      
                         <select type="text" id="user" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
                             <?php
                             foreach ($users as $user): ?>
@@ -166,14 +169,12 @@ if (!$ticket) {
                     <div class="statutTicket">
                         <label for="status">Statut :</label>
                         <select name="status_id" id="status" name="status_id">
-                            <?php foreach ($statuses as $status): ?>
-                                <?php if ($status['id'] == $ticket->status_id): ?>
-                                    <?php $selected = 'selected'; ?>
-                                <?php else: ?>
-                                    <?php $selected = ''; ?>
-                                <?php endif; ?>
-                                <?= '<option value="' . $status['id'] . '" ' . $selected . '>' . $status['name'] . '</option>' ?>
-                            <?php endforeach; ?>
+                                <?php
+                                foreach ($statuss as $status): ?>
+                                <option value="<?= $status->getIdStatus(); ?>">
+                                    <?= $status->getNom(); ?>
+                                </option>
+                                <?php endforeach; ?>
                         </select>
                     </div>
 
