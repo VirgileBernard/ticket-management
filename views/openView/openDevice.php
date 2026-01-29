@@ -57,13 +57,17 @@ if(!$device) {
         <div class="midTicket">
             <div class="leftMidTicket">
                 <div class="deviceType">
-                    <p class="txt-secondary">Marque</p>
+                    <p class="txt-secondary">Type d'appareil</p>
                     <p><?= htmlspecialchars($device->getType()) ?></p>
                 </div>
     
                 <div class="deviceModel">
                     <p class="txt-secondary">Modèle</p>
                     <p><?= htmlspecialchars($device->getModel()) ?></p>
+                </div>
+                <div class="deviceBrand">
+                    <p class="txt-secondary">Marque</p>
+                    <p><?= htmlspecialchars($device->getBrand()) ?></p>
                 </div>
                     <div class="deviceSerialNumber">
                     <p class="txt-secondary">Numéro de série</p>
@@ -112,7 +116,6 @@ if(!$device) {
                             <?php endforeach; ?>
                     </select>
                 </div>
-<?php var_dump($device); ?>
                 <div class="deviceBrand">
                     <p class="txt-secondary">Modèle</p>
                     <select type="text" name="model" id="model" value="<?= htmlspecialchars($device->getModel()) ?>">

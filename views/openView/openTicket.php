@@ -110,7 +110,7 @@ if (!$ticket) {
 
         </div>
 
-        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none">
+        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none;">
             <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">  
             <div class="midTicket">
 
@@ -120,10 +120,11 @@ if (!$ticket) {
                     </div>
                     <div class="technicienInformations">
                         <label for="technician">Technicien :</label>
-                        <select type="text" id="technician" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>" readonly>
+                        <select type="text" id="technician" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
                             <?php
                             foreach ($users as $user): ?>
-                            <option value=""><?= $user->getFname();?> <?= $user->getLname(); ?>
+                            <option value="<?php $user->getIdUser(); ?>">
+                                <?= $user->getFname();?> <?= $user->getLname(); ?>
                           </option>
                         <?php endforeach; ?>
                         </select>
@@ -131,7 +132,7 @@ if (!$ticket) {
 
                     <div class="clientInformations">
                         <label for="client">Client :</label>
-                        <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>" readonly>
+                        <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>">
                                     <?php
                                     foreach ($clients as $client): ?>
                                     <option value=""><?= $client->getFname(); ?> <?= $client->getLname(); ?>
@@ -141,7 +142,7 @@ if (!$ticket) {
                     </div>
                     <div class="deviceInformations">
                         <label for="device">Appareil :</label>
-                        <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>" readonly>
+                        <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>">
                             <?php
                             foreach ($devices as $device): ?>
                             <option value="">
