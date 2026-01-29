@@ -25,6 +25,7 @@
   --actionBrown: hsl(30, 83%, 26%);
   --greenValidation : hsl(134, 61%, 41%);
   --blueEdit : hsl(211, 80%, 45%);
+  --redDelete : hsl(0, 80%, 45%);
 
 
 
@@ -197,21 +198,32 @@ margin-bottom: 1rem;
     padding: 1rem 1rem;
 }
 
-.flash-success {
+
+.flash-message {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--blueEdit);
     color: var(--LM-text-light);
     padding: 14px 22px;
-    border-radius: 6px;
+    border-radius: var(--borderRadius);
     font-weight: bold;
     opacity: 0;
     pointer-events: none;
     animation: flashFade 4s ease forwards;
     box-shadow: var(--LM-box-shadow);
 }
+
+
+.flash-message.edit{
+    background-color: var(--blueEdit);
+}
+
+.flash-message.delete{
+    background-color: var(--redDelete);
+}
+
+
 
 @keyframes flashFade {
     0% { opacity: 0; transform: translateX(-50%) translateY(10px); }

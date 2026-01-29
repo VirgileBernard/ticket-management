@@ -5,7 +5,7 @@ require_once(__DIR__ . "/../DAO/config/Baseurl.php");
 require_once(__DIR__ . "/../Controllers/UserController.php");
 
 session_start();
-$_SESSION['flash_success'] = "Les informations du membre ont été mises à jour avec succès.";
+$_SESSION['flash-message edit'] = "Les informations du membre ont été mises à jour avec succès.";
 
 $user = new User(
     $_POST['id_user'],

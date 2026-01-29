@@ -63,11 +63,11 @@ $clients = ClientController::getClients();
 
     <?php include("footer.php"); ?>
 
-    <?php if (isset($_SESSION['flash_success'])): ?>
-    <div id="flashMessage" class="flash-success">
-        <?= $_SESSION['flash_success'] ?>
+    <?php if (isset($_SESSION['flash-message edit'])): ?>
+    <div id="flash-message edit" class="flash-message edit">
+        <?= $_SESSION['flash-message edit'] ?>
     </div>
-    <?php unset($_SESSION['flash_success']); ?>
+    <?php unset($_SESSION['flash-message edit']); ?>
 <?php endif; ?>
 
 
@@ -75,7 +75,7 @@ $clients = ClientController::getClients();
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const flash = document.getElementById("flashMessage");
+    const flash = document.getElementById("edit_succes");
     if (flash) {
         setTimeout(() => {
             flash.remove();

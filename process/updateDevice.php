@@ -9,7 +9,7 @@ require_once __DIR__ . '/../Models/Device.php';
 
 
 session_start();
-$_SESSION['flash_success'] = "Les informations de l'appareil ont été mises à jour avec succès.";
+$_SESSION['flash-message edit'] = "Les informations de l'appareil ont été mises à jour avec succès.";
 
 
 

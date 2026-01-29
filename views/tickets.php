@@ -65,11 +65,18 @@ $tickets = TicketController::getTickets();
 
 
 <?php include("footer.php"); ?>
-     <?php if (isset($_SESSION['flash_success'])): ?>
-    <div id="flashMessage" class="flash-success">
-        <?= $_SESSION['flash_success'] ?>
+     <?php if (isset($_SESSION['flash-message edit'])): ?>
+    <div id="flash-message edit" class="flash-message edit">
+        <?= $_SESSION['flash-message edit'] ?>
     </div>
-    <?php unset($_SESSION['flash_success']); ?>
+    <?php unset($_SESSION['flash-message edit']); ?>
+<?php endif; ?>
+
+    <?php if (isset($_SESSION['flash-message delete'])): ?>
+    <div id="flash-message delete" class="flash-message delete">
+        <?= $_SESSION['flash-message delete'] ?>
+    </div>
+    <?php unset($_SESSION['flash-message delete']); ?>
 <?php endif; ?>
 
 </body>

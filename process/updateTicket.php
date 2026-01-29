@@ -8,7 +8,7 @@ require_once(__DIR__ . "/../DAO/config/Baseurl.php");
 require_once(__DIR__ . "/../Controllers/TicketController.php");
 
 session_start();
-$_SESSION['flash_success'] = "Le ticket a été mis à jour avec succès.";
+$_SESSION['flash-message edit'] = "Le ticket a été mis à jour avec succès.";
 
 $ticket = new Ticket(
     $_POST['id_ticket'],

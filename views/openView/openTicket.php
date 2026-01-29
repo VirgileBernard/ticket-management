@@ -112,6 +112,18 @@ if (!$ticket) {
 
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
+            <form action="../../process/deleteTicket.php" method="POST">
+    <input type="hidden" name="id_ticket" value="<?= $ticket->getIdTicket() ?>">
+    <button
+        type="submit"
+        class="btn-danger"
+        onclick="return confirm('Supprimer définitivement ce ticket ?');"
+    >
+        Supprimer
+    </button>
+</form>
+
+            
         </div>
 
         

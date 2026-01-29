@@ -32,7 +32,11 @@ class TicketController {
     }
 
     public static function updateTicket($ticket) {
-    return TicketDAO::updateTicket($ticket);
-}
+        return TicketDAO::updateTicket($ticket);
+    }
+    
+    public static function deleteTicket($ticket_id){
+        return TicketDAO::deleteTicket($ticket_id);
+    }
 
 }

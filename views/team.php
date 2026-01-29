@@ -65,11 +65,11 @@ $users = UserController::getUsers();
 
     </div>
     <?php include("footer.php"); ?>
-         <?php if (isset($_SESSION['flash_success'])): ?>
-    <div id="flashMessage" class="flash-success">
-        <?= $_SESSION['flash_success'] ?>
+         <?php if (isset($_SESSION['flash-message edit'])): ?>
+    <div id="flash-message edit" class="flash-message edit">
+        <?= $_SESSION['flash-message edit'] ?>
     </div>
-    <?php unset($_SESSION['flash_success']); ?>
+    <?php unset($_SESSION['flash-message edit']); ?>
 <?php endif; ?>
 </body>
 </html>
