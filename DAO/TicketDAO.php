@@ -186,16 +186,14 @@ public static function getTickets() {
     //update un ticket
     public static function updateTicket($ticket) {
     $con = MONPDO::getPDO();
-
-    $requete = " UPDATE tickets
+    $stmt = $con->prepare("
+     UPDATE tickets
         SET 
             client_id = :client_id,
             device_id = :device_id,
             status_id = :status_id,
             priority_id = :priority_id
-        WHERE id_ticket = :id_ticket";
-
-    $stmt = $con->prepare($requete);
+        WHERE id_ticket = :id_ticket");
 
     $stmt->bindValue(":client_id", $ticket->getClientId(), PDO::PARAM_INT);
     $stmt->bindValue(":device_id", $ticket->getDeviceId(), PDO::PARAM_INT);
