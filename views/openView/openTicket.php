@@ -12,7 +12,9 @@ if (!isset($_GET['id'])) {
 }
 
 $ticket_id = intval($_GET['id']);
+
 $ticket = TicketController::openTicket($ticket_id);
+$tickets = TicketController::getTickets();
 
 $users = UserController::getUsers();
 
@@ -110,7 +112,7 @@ if (!$ticket) {
 
         </div>
 
-        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none;">
+        <form id="editForm" action="../../process/updateTicket.php" method="post">
             <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">  
             <div class="midTicket">
 
@@ -120,10 +122,11 @@ if (!$ticket) {
                     </div>
                     <div class="technicienInformations">
                         <label for="technician">Technicien :</label>
-                        <select type="text" id="technician" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
+                        <?php var_dump ($tickets) ?>
+                        <select type="text" id="user" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
                             <?php
                             foreach ($users as $user): ?>
-                            <option value="<?php $user->getIdUser(); ?>">
+                            <option value="<?= $ticket->getCreatedBy(); ?>">
                                 <?= $user->getFname();?> <?= $user->getLname(); ?>
                           </option>
                         <?php endforeach; ?>
@@ -135,7 +138,8 @@ if (!$ticket) {
                         <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>">
                                     <?php
                                     foreach ($clients as $client): ?>
-                                    <option value=""><?= $client->getFname(); ?> <?= $client->getLname(); ?>
+                                    <option value="<?= $client->getId(); ?>">
+                                        <?= $client->getFname(); ?> <?= $client->getLname(); ?>
                                     </option>
                                     <?php endforeach; ?>
                         </select>
@@ -145,7 +149,7 @@ if (!$ticket) {
                         <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>">
                             <?php
                             foreach ($devices as $device): ?>
-                            <option value="">
+                            <option value="<?= $device->getIdDevice(); ?>">
                                 <?= $device->getModel(); ?>
                             </option>
                             <?php endforeach; ?>
@@ -161,7 +165,7 @@ if (!$ticket) {
 
                     <div class="statutTicket">
                         <label for="status">Statut :</label>
-                        <select name="status_id" id="status">
+                        <select name="status_id" id="status" name="status_id">
                             <?php foreach ($statuses as $status): ?>
                                 <?php if ($status['id'] == $ticket->status_id): ?>
                                     <?php $selected = 'selected'; ?>
