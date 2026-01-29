@@ -34,7 +34,7 @@ $tickets = TicketController::getTickets();
         <p>Voici l'ensemble de vos tickets, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
 </div>
-        
+        <!-- <?php var_dump($tickets) ?> -->
   <table class="user-table">
     <thead>
         <tr>

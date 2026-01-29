@@ -32,6 +32,7 @@ session_start();
         <p>Voici l'ensemble de votre matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
 </div>
+
     <table class="user-table">
         <thead>
             <tr>
@@ -39,7 +40,6 @@ session_start();
                 <th>Marque</th>
                 <th>Modèle</th>
                 <th>Numéro de série</th>
-                <th>Type</th>
                 <!-- <th>Date de soumission</th>
                 <th>Date de récupération</th> -->
             </tr>
@@ -48,10 +48,9 @@ session_start();
             <?php foreach ($devices as $device): ?>
             <tr onclick="window.location='openView/openDevice.php?id=<?= $device->getIdDevice() ?>'">
                 <td><?= $device->getIdDevice() ?></td>
-                <td><?= $device->getBrand() ?></td>
+             <td><?= $device->getType() ?></td>
                 <td><?= $device->getModel() ?></td>
                 <td><?= $device->getSerialNumber() ?></td>
-                <td><?= $device->getTypeId() ?></td>
                 <!-- <td><?= $device->getSubmissionDate() ?></td>
                 <td><?= $device->getRetrieveDate() ?></td> -->
             </tr>

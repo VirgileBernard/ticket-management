@@ -1,10 +1,17 @@
 <?php
+
+// var_dump($_POST);
+// exit;
 require_once '../Controllers/DeviceController.php';
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
 require_once __DIR__ . '/../Models/Device.php';
 
+
+
 session_start();
 $_SESSION['flash_success'] = "Les informations de l'appareil ont été mises à jour avec succès.";
+
+
 
 $device = new Device(
     $_POST['id_device'],

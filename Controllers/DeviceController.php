@@ -8,8 +8,8 @@ class DeviceController {
         return DeviceDAO::getDevices();
     }
 
-    public static function openDevice($id_device) {
-        return DeviceDAO::openDevice($id_device);
+    public static function getDevice($id_device) {
+        return DeviceDAO::getDevice($id_device);
     }
 
     public static function updateDevice($device) {

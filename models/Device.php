@@ -10,7 +10,7 @@ class Device{
     private $submission_date;
     private $retrieve_date;
 
-    function __construct($id_device=null, $model, $serial_number, $brand, $type_id, $client_id, $submission_date, $retrieve_date){
+    function __construct($id_device, $model, $serial_number, $brand, $type_id, $client_id, $submission_date, $retrieve_date){
         $this->id_device=$id_device;
         $this->model=$model;
         $this->serial_number=$serial_number;
@@ -35,7 +35,7 @@ class Device{
     public function getBrand(){
         return $this->brand;
     }
-    public function getTypeId(){
+    public function getType(){
         return $this->type_id;
     }
     public function getClientId(){

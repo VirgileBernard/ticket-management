@@ -19,5 +19,5 @@ $ticket = new Ticket(
 
 TicketController::updateTicket($ticket);
 
-header("Location: " . BASE_URL . "views/index.php");
+header("Location: " . BASE_URL . "views/tickets.php");
  exit;

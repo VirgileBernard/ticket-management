@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../../Controllers/TicketController.php';
 require_once __DIR__ . '/../../Controllers/UserController.php';
 require_once __DIR__ . '/../../Controllers/ClientController.php';
+require_once __DIR__ . '/../../Controllers/DeviceController.php';
+
 session_start();
 
 // Vérifier que l'ID est présent dans l'URL
@@ -16,6 +18,7 @@ $users = UserController::getUsers();
 
 $clients = ClientController::getClients();
 
+$devices = DeviceController::getDevices();
 
 // Vérifier que le ticket existe
 if (!$ticket) {
@@ -132,14 +135,19 @@ if (!$ticket) {
                                     <?php
                                     foreach ($clients as $client): ?>
                                     <option value=""><?= $client->getFname(); ?> <?= $client->getLname(); ?>
-                                                    </option>
-                                                    <?php endforeach; ?>
+                                    </option>
+                                    <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="deviceInformations">
                         <label for="device">Appareil :</label>
                         <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>" readonly>
-                            <option value="<?= htmlspecialchars($ticket->device_model) ?>" selected><?= htmlspecialchars($ticket->device_model) ?></option>
+                            <?php
+                            foreach ($devices as $device): ?>
+                            <option value="">
+                                <?= $device->getModel(); ?>
+                            </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
