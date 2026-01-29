@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../../Controllers/TicketController.php';
+require_once __DIR__ . '/../../Controllers/UserController.php';
+require_once __DIR__ . '/../../Controllers/ClientController.php';
 session_start();
 
 // Vérifier que l'ID est présent dans l'URL
@@ -9,6 +11,11 @@ if (!isset($_GET['id'])) {
 
 $ticket_id = intval($_GET['id']);
 $ticket = TicketController::openTicket($ticket_id);
+
+$users = UserController::getUsers();
+
+$clients = ClientController::getClients();
+
 
 // Vérifier que le ticket existe
 if (!$ticket) {
@@ -100,8 +107,8 @@ if (!$ticket) {
 
         </div>
 
-        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none;">
-            <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">
+        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none">
+            <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">  
             <div class="midTicket">
 
                 <div class="leftMidTicket">
@@ -111,14 +118,22 @@ if (!$ticket) {
                     <div class="technicienInformations">
                         <label for="technician">Technicien :</label>
                         <select type="text" id="technician" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>" readonly>
-                            <option value="<?= htmlspecialchars($ticket->creator_name) ?>" selected><?= htmlspecialchars($ticket->creator_name) ?></option>
+                            <?php
+                            foreach ($users as $user): ?>
+                            <option value=""><?= $user->getFname();?> <?= $user->getLname(); ?>
+                          </option>
+                        <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="clientInformations">
                         <label for="client">Client :</label>
                         <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>" readonly>
-                            <option value="<?= htmlspecialchars($ticket->client_name) ?>" selected><?= htmlspecialchars($ticket->client_name) ?></option>
+                                    <?php
+                                    foreach ($clients as $client): ?>
+                                    <option value=""><?= $client->getFname(); ?> <?= $client->getLname(); ?>
+                                                    </option>
+                                                    <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="deviceInformations">
