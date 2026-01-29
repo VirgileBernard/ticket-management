@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../Controllers/UserController.php';
 require_once __DIR__ . '/../../Controllers/ClientController.php';
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
 require_once __DIR__ . '/../../Controllers/StatusController.php';
+require_once __DIR__ . '/../../Controllers/PriorityController.php';
 
 session_start();
 
@@ -24,6 +25,8 @@ $clients = ClientController::getClients();
 $devices = DeviceController::getDevices();
 
 $statuss = StatusController::getStatus();
+
+$prioritys = PriorityController::getPrioritys();
 
 // Vérifier que le ticket existe
 if (!$ticket) {
@@ -115,7 +118,7 @@ if (!$ticket) {
 
         </div>
 
-        <form id="editForm" action="../../process/updateTicket.php" method="post" >
+        <form id="editForm" action="../../process/updateTicket.php" method="post" style="display:none" >
             <input type="hidden" name="id_ticket" value="<?= htmlspecialchars($ticket->getIdTicket()) ?>">  
             <div class="midTicket">
 
@@ -181,14 +184,12 @@ if (!$ticket) {
                     <div class="priorityTicket">
                         <label for="priority">Priorité :</label>
                         <select name="priority_id" id="priority">
-                            <?php foreach ($priorities as $priority): ?>
-                                <?php if ($priority['id'] == $ticket->priority_id): ?>
-                                    <?php $selected = 'selected'; ?>
-                                <?php else: ?>
-                                    <?php $selected = ''; ?>
-                                <?php endif; ?>
-                                <?= '<option value="' . $priority['id'] . '" ' . $selected . '>' . $priority['name'] . '</option>' ?>
-                            <?php endforeach; ?>
+                           <?php
+                           foreach ($prioritys as $priority): ?>
+                           <option value="<?= $priority->getIdPriority(); ?>">
+                            <?= $priority->getNom(); ?>
+                           </option>
+                           <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
