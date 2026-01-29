@@ -116,7 +116,7 @@ if (!$ticket) {
     <input type="hidden" name="id_ticket" value="<?= $ticket->getIdTicket() ?>">
     <button
         type="submit"
-        class="btn-danger"
+        id="dangerBtn"
         onclick="return confirm('Supprimer définitivement ce ticket ?');"
     >
         Supprimer

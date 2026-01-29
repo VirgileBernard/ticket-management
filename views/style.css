@@ -55,11 +55,21 @@ button{
     font-size: 1rem;
 }
 
+#dangerBtn{
+    border: 1px solid var(--redDelete);
+}
+
 button:hover{
     background-color: var(--actionBrown);
     color: var(--LM-text-light);
     cursor: pointer;
 }
+
+#dangerBtn:hover{
+    background-color: var(--redDelete);
+}
+
+
 
 input, select, textarea{
     padding: .3rem .5rem;
