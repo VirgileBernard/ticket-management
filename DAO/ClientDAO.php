@@ -95,4 +95,15 @@ class ClientDAO{
         $stmt->execute();
     }
 
+    //delete un client
+    public static function deleteClient($client_id){
+        $con = MONPDO::getPDO();
+        $stmt = $con->prepare("DELETE
+        FROM
+        clients
+        WHERE
+        id_client = :id_client");
+        $stmt->bindValue(":id_client", $client_id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

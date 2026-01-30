@@ -71,6 +71,15 @@ if (!$client) {
 
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
+               <form action="../../process/deleteClient.php" method="POST">
+    <input type="hidden" name="id_client" value="<?= $client->getId() ?>">
+    <button
+        type="submit"
+        id="dangerBtn"
+        onclick="return confirm('Supprimer définitivement ce client ?');"
+    >Supprimer
+    </button>
+</form>
         </div>
 
     </div>

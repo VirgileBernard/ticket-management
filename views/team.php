@@ -55,7 +55,7 @@ $users = UserController::getUsers();
                         <td><?= htmlspecialchars($user->getLname()); ?></td>
                         <td><?= htmlspecialchars($user->getFname()); ?></td>
                         <td><?= htmlspecialchars($user->getEmail()); ?></td>
-                        <td><?= htmlspecialchars($user->getPhone()); ?></td>
+                        <td><?= htmlspecialchars($user->getPhoneNumber()); ?></td>
                         <td><span class="badge"><?= htmlspecialchars($user->getRoleId()); ?></span></td>
                     </tr>
                 <?php endforeach; ?>

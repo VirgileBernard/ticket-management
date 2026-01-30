@@ -5,16 +5,16 @@ class User {
     private $fname;
     private $lname;
     private $email;
-    private $phone;
+    private $phone_number;
     private $password;
     private $role_id;
 
-    public function __construct($id, $fname, $lname, $email, $phone, $password=null, $role_id) {
+    public function __construct($id, $fname, $lname, $email, $phone_number, $password=null, $role_id) {
         $this->id = $id;
         $this->fname = $fname;   
         $this->lname = $lname;
         $this->email = $email;
-        $this->phone = $phone;
+        $this->phone_number = $phone_number;
         $this->password = $password;
         $this->role_id = $role_id;
     }
@@ -36,8 +36,8 @@ class User {
         return $this->email;
     }
 
-    public function getPhone() {
-        return $this->phone;
+    public function getPhoneNumber() {
+        return $this->phone_number;
     }
 
     public function getRoleId() {
@@ -48,12 +48,12 @@ class User {
     }
     public function __toString() {
         return sprintf(
-            "User [id=%s, fname=%s, lname=%s, email=%s, phone=%s, role_id=%s]",
+            "User [id=%s, fname=%s, lname=%s, email=%s, phone_number=%s, role_id=%s]",
             $this-> id,
             $this->fname,
             $this->lname,
             $this->email,
-            $this->phone,
+            $this->phone_number,
             $this->role_id
         );
     }

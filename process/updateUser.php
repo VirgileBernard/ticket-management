@@ -12,7 +12,7 @@ $user = new User(
     $_POST['fname'],
     $_POST['lname'],
     $_POST['email'],
-    $_POST['phone'],
+    $_POST['phone_number'],
     null,
     $_POST['role_id']
 );

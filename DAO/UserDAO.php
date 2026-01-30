@@ -76,7 +76,7 @@ public static function getUser($email){
         $stmt->bindValue(":fname",$user->getFname(),PDO::PARAM_STR);
         $stmt->bindValue(":lname",$user->getLname(),PDO::PARAM_STR);
         $stmt->bindValue(":email",$user->getEmail(),PDO::PARAM_STR);
-        $stmt->bindValue(":phone_number",$user->getPhone(),PDO::PARAM_STR);
+        $stmt->bindValue(":phone_number",$user->getPhoneNumber(),PDO::PARAM_STR);
         $stmt->bindValue(":role_id",$user->getRoleId(),PDO::PARAM_INT);
 
         $stmt->execute();

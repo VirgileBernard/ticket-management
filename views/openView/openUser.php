@@ -43,6 +43,8 @@ if(!$user) {
         <div class="topTicket">
             <div class="leftTopTicket">
                 <p>Informations du membre</p>
+
+                <?php var_dump($user); ?>
             </div>
             <div class="rightTopTicket">
                 <div class="userId">
@@ -70,6 +72,11 @@ if(!$user) {
                         <p class="txt-secondary">Rôle</p>
                         <p><?= htmlspecialchars($user->getRoleId()) ?></p>
                     </div>
+
+                    <div class="userPhone">
+                        <p class="txt-secondary">Telephone</p>
+                        <p><?= htmlspecialchars($user->getPhoneNumber()) ?></p>
+                    </div>
                 </div>
 
                 <div class="rightMidTicket">
@@ -95,6 +102,7 @@ if(!$user) {
         
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
+            
         </div>
 
         <!-- MODE ÉDITION (caché au départ) -->
@@ -114,6 +122,10 @@ if(!$user) {
                         <p class="txt-secondary">Email</p>
                         <input type="email" name="email" value="<?= htmlspecialchars($user->getEmail()) ?>">
                     </div>
+                       <div class="userPhone">
+                    <p class="txt-secondary">Téléphone</p>
+                    <input type="text" name="phone_number" value="<?= htmlspecialchars($user->getPhoneNumber()) ?>">
+                </div>
 
                     <div class="userRole">
                         <p class="txt-secondary">Rôle</p>
