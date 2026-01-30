@@ -36,9 +36,9 @@ public static function getDevices(){
             $row['id_device'],
             $row['model'],
             $row['serial_number'],
-            $row['client_id'],
             $row['brand'],
             $row['type_id'],
+            $row['client_id'],
             $row['submission_date'],
             $row['retrieve_date'],
         );
@@ -89,9 +89,11 @@ public static function getDevice($id_device){
             d.type_id,
             d.submission_date,
             d.retrieve_date,
+            t.nom AS type_nom,
             CONCAT(c.fname, ' ', c.lname) AS client_name
         FROM devices d
         JOIN clients c ON d.client_id = c.id_client
+        JOIN types t ON t.id_type = d.type_id
         WHERE d.id_device = :id_device
     ";
 
@@ -106,19 +108,21 @@ public static function getDevice($id_device){
         $row['id_device'],
         $row['model'],
         $row['serial_number'],
-        $row['client_id'],
         $row['brand'],
         $row['type_id'],
+        $row['client_id'],
         $row['submission_date'],
-        $row['retrieve_date']
+        $row['retrieve_date'],
     );
 
+    $device->type_nom = $row['type_nom'];
     $device->client_name = $row['client_name'];
+
 
     return $device;
 }
 
-
+// function pour update un device
     static function updateDevice($device){
         $con = MONPDO::getPDO();
         $stmt = $con->prepare("
@@ -136,7 +140,7 @@ public static function getDevice($id_device){
              $stmt->bindValue(":id_device",$device->getIdDevice(),PDO::PARAM_INT);
         $stmt->bindValue(":model",$device->getModel(),PDO::PARAM_STR);
         $stmt->bindValue(":serial_number",$device->getSerialNumber(),PDO::PARAM_STR);
-        $stmt->bindValue(":brand",$device->getBrand(),PDO::PARAM_STR);
+        $stmt->bindValue(":brand",$device->getBrandName(),PDO::PARAM_STR);
         $stmt->bindValue(":type_id",$device->getType(),PDO::PARAM_INT);
         $stmt->bindValue(":client_id",$device->getClientId(),PDO::PARAM_INT);
         $stmt->bindValue(":submission_date",$device->getSubmissionDate(),PDO::PARAM_STR);
@@ -144,6 +148,19 @@ public static function getDevice($id_device){
 
         $stmt->execute();
     }
+
+    // function pour delete un device
+    public static function deleteDevice($id_device){
+    $con = MONPDO::getPDO();
+    $stmt = $con->prepare("DELETE
+    FROM
+    devices
+    WHERE
+    id_device = :id_device");
+    $stmt->bindValue(":id_device", $id_device, PDO::PARAM_INT);
+    return $stmt->execute();
+    }
+
                                
     }
 

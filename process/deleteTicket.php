@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Controllers/TicketController.php';
 session_start();
 
-$_SESSION['flash-message delete'] = "Le ticket a été supprimé avec succès";
+$_SESSION['flash-message delete'] = "Le ticket a été supprimé";
 
 if (!isset($_POST['id_ticket'])) {
     die('ID ticket manquant');

@@ -35,12 +35,14 @@ session_start();
         <p class="strong">Matériel</p>
         <p>Voici l'ensemble de votre matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
+
+
 </div>
 
     <table class="user-table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Appareil</th>
                 <th>Marque</th>
                 <th>Modèle</th>
                 <th>Numéro de série</th>
@@ -51,14 +53,14 @@ session_start();
     
         <tbody>
             <?php foreach ($devices as $device): ?>
-                <?php var_dump($devices) ?>
+
+
+         
             <tr onclick="window.location='openView/openDevice.php?id=<?= $device->getIdDevice() ?>'">
              <td><?= $device->type_nom ?></td>
-             <td><?= $device->getType() ?></td>
+             <td><?= $device->getBrandName() ?></td>
                 <td><?= $device->getModel() ?></td>
                 <td><?= $device->getSerialNumber() ?></td>
-                <!-- <td><?= $device->getSubmissionDate() ?></td>
-                <td><?= $device->getRetrieveDate() ?></td> -->
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -73,5 +75,13 @@ session_start();
     </div>
     <?php unset($_SESSION['flash-message edit']); ?>
 <?php endif; ?>
+
+ <?php if (isset($_SESSION['flash-message delete'])): ?>
+    <div id="flash-message delete" class="flash-message delete">
+        <?= $_SESSION['flash-message delete'] ?>
+    </div>
+    <?php unset($_SESSION['flash-message delete']); ?>
+<?php endif; ?>
+
     </body>
 </html>

@@ -32,7 +32,7 @@ class Device{
     public function getSerialNumber(){
         return $this->serial_number;
     }
-    public function getBrand(){
+    public function getBrandName(){
         return $this->brand;
     }
     public function getType(){

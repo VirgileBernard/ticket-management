@@ -60,7 +60,7 @@ if(!$device) {
             <div class="leftMidTicket">
                 <div class="deviceType">
                     <p class="txt-secondary">Marque</p>
-                    <p><?= htmlspecialchars($device->getType()) ?></p>
+                    <p><?= htmlspecialchars($device->getBrandName()) ?></p>
                 </div>
     
                 <div class="deviceModel">
@@ -68,8 +68,8 @@ if(!$device) {
                     <p><?= htmlspecialchars($device->getModel()) ?></p>
                 </div>
                 <div class="deviceBrand">
-                    <p class="txt-secondary">Type</p>
-                    <p><?= htmlspecialchars($device->getBrand()) ?></p>
+                    <p class="txt-secondary">Type d'appareil</p>
+                    <p><?= htmlspecialchars($device->type_nom) ?></p>
                 </div>
                     <div class="deviceSerialNumber">
                     <p class="txt-secondary">Numéro de série</p>
@@ -95,6 +95,15 @@ if(!$device) {
 
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
+             <form action="../../process/deleteDevice.php" method="POST">
+    <input type="hidden" name="id_device" value="<?= $device->getIdDevice() ?>">
+    <button
+        type="submit"
+        id="dangerBtn"
+        onclick="return confirm('Supprimer définitivement ce matériel ?');"
+    >Supprimer
+    </button>
+</form>
         </div>
 
     </div>
@@ -111,9 +120,9 @@ if(!$device) {
                 <p class="txt-secondary">Marque</p>
                 <select name="brand" id="brand_id">
                     <?php foreach ($devices as $d): ?>
-                        <option value="<?= $d->getBrand(); ?>"
-                            <?= $d->getBrand() === $device->getBrand() ? 'selected' : '' ?>>
-                            <?= $d->getType(); ?>
+                        <option value="<?= $d->getBrandName(); ?>"
+                            <?= $d->getBrandName() === $device->getBrandName() ? 'selected' : '' ?>>
+                            <?= $d->getBrandName(); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -131,10 +140,6 @@ if(!$device) {
                 </select>
             </div>
 
-            <div class="deviceSerialNumber">
-                <p class="txt-secondary">Numéro de série</p>
-                <input type="text" name="serial_number" value="<?= htmlspecialchars($device->getSerialNumber()) ?>">
-            </div>
 
             <div class="deviceType">
                 <p class="txt-secondary">Type d'appareil</p>
@@ -145,6 +150,11 @@ if(!$device) {
                         </option>
                         <?php endforeach; ?>
                 </select>
+            </div>
+
+                <div class="deviceSerialNumber">
+                <p class="txt-secondary">Numéro de série</p>
+                <input type="text" name="serial_number" value="<?= htmlspecialchars($device->getSerialNumber()) ?>">
             </div>
 
         </div>
