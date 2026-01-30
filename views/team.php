@@ -71,5 +71,12 @@ $users = UserController::getUsers();
     </div>
     <?php unset($_SESSION['flash-message edit']); ?>
 <?php endif; ?>
+
+ <?php if (isset($_SESSION['flash-message delete'])): ?>
+    <div id="flash-message delete" class="flash-message delete">
+        <?= $_SESSION['flash-message delete'] ?>
+    </div>
+    <?php unset($_SESSION['flash-message delete']); ?>
+<?php endif; ?>
 </body>
 </html>

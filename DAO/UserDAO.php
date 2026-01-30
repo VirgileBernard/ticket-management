@@ -1,5 +1,6 @@
 <?php
 require_once "config/MonPDO.php";
+require_once __DIR__ . "/../Models/User.php";
 
 
 // Toutes  les opérations CRUD
@@ -82,18 +83,19 @@ public static function getUser($email){
         $stmt->execute();
     }
     
-    
-    public static function deleteUserDAO($id){
-    
-        $con=MONPDO::getPDO();
-        $requete = "DELETE FROM  users WHERE id_user=:id_user";
-        $stmt = $con->prepare($requete);
-    
-        $stmt->bindValue(":Id",$id,PDO::PARAM_INT);
-        
-        $stmt->execute();
-    
-    }
+    // delete un user
+  public static function deleteUser($id_user){
+    $con = MONPDO::getPDO();
+
+    $requete = "DELETE FROM users WHERE id_user = :id_user";
+    $stmt = $con->prepare($requete);
+
+    // Le nom doit correspondre EXACTEMENT à celui dans la requête
+    $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
+
     
 
     //ouvrir un user

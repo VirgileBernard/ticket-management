@@ -1,7 +1,7 @@
 <?php
 class User {
 
-    public $id;
+    public $id_user;
     private $fname;
     private $lname;
     private $email;
@@ -9,8 +9,8 @@ class User {
     private $password;
     private $role_id;
 
-    public function __construct($id, $fname, $lname, $email, $phone_number, $password=null, $role_id) {
-        $this->id = $id;
+    public function __construct($id_user, $fname, $lname, $email, $phone_number, $password=null, $role_id) {
+        $this->id_user = $id_user;
         $this->fname = $fname;   
         $this->lname = $lname;
         $this->email = $email;
@@ -21,7 +21,7 @@ class User {
 
     // Getters
     public function getIdUser() {
-        return $this->id;
+        return $this->id_user;
     }
 
     public function getFname() {
@@ -48,8 +48,8 @@ class User {
     }
     public function __toString() {
         return sprintf(
-            "User [id=%s, fname=%s, lname=%s, email=%s, phone_number=%s, role_id=%s]",
-            $this-> id,
+            "User [id_user=%s, fname=%s, lname=%s, email=%s, phone_number=%s, role_id=%s]",
+            $this-> id_user,
             $this->fname,
             $this->lname,
             $this->email,

@@ -10,6 +10,8 @@ if (!isset($_GET['id'])) {
 
 $user_id = intval($_GET['id']);
 $user = UserController::openUser($user_id);
+
+
 if(!$user) {
     die("Ce user n'existe pas.");
 }
@@ -102,6 +104,16 @@ if(!$user) {
         
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
+
+                 <form action="../../process/deleteUser.php" method="POST">
+    <input type="hidden" name="id_user" value="<?= $user->getIdUser() ?>">
+    <button
+        type="submit"
+        id="dangerBtn"
+        onclick="return confirm('Supprimer définitivement cet utilisateur ?');"
+    >Supprimer
+    </button>
+</form>
             
         </div>
 

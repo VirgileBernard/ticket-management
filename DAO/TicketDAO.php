@@ -204,6 +204,8 @@ public static function getTickets() {
     return $stmt->execute();
 }
 
+
+//delete un ticket
     public static function deleteTicket($ticket_id) {
         $con = MONPDO::getPDO();
         $stmt = $con->prepare("DELETE FROM tickets WHERE id_ticket = :id_ticket");

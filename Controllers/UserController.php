@@ -11,6 +11,10 @@ class UserController {
     public static function updateUser($user) {
         return UserDAO::updateUser($user);
     }
+
+    public static function deleteUser($id_user){
+        return UserDAO::deleteUser($id_user);
+    }
     
 
 
