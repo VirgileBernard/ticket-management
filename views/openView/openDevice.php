@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
 require_once __DIR__ . '/../../Controllers/ClientController.php';
+require_once __DIR__ . '/../../Controllers/TypeController.php';
 session_start();
 
 // Vérifier que l'ID est présent dans l'URL
@@ -14,6 +15,7 @@ $devices = DeviceController::getDevices();
 $device = DeviceController::getDevice($device_id);
 
 $clients = ClientController::getClients();
+$types = TypeController::getTypes();
 
 if(!$device) {
     die("Cet appareil n'existe pas.");
@@ -57,7 +59,7 @@ if(!$device) {
         <div class="midTicket">
             <div class="leftMidTicket">
                 <div class="deviceType">
-                    <p class="txt-secondary">Type d'appareil</p>
+                    <p class="txt-secondary">Marque</p>
                     <p><?= htmlspecialchars($device->getType()) ?></p>
                 </div>
     
@@ -66,7 +68,7 @@ if(!$device) {
                     <p><?= htmlspecialchars($device->getModel()) ?></p>
                 </div>
                 <div class="deviceBrand">
-                    <p class="txt-secondary">Marque</p>
+                    <p class="txt-secondary">Type</p>
                     <p><?= htmlspecialchars($device->getBrand()) ?></p>
                 </div>
                     <div class="deviceSerialNumber">
@@ -98,79 +100,88 @@ if(!$device) {
     </div>
 
 
-    <!-- MODE ÉDITION (caché au départ) -->
-    <form id="editForm" action="../../process/updateDevice.php" method="POST" style="display:none;">
+<form id="editForm" action="../../process/updateDevice.php" method="POST" style="display:none">
 
-        <input type="hidden" name="id_device" value="<?= $device->getIdDevice() ?>">
+    <input type="hidden" name="id_device" value="<?= $device->getIdDevice() ?>">
 
-        <div class="midTicket">
-            <div class="leftMidTicket">
+    <div class="midTicket">
+        <div class="leftMidTicket">
 
-                <div class="deviceType">
-                    <p class="txt-secondary">Marque</p>
-                    <select name="brand" id="brand_id" value="<?= htmlspecialchars($device->getBrand()) ?>">
-                        <?php foreach ($devices as $device): ?>
-                            <option value="<?= $device->getBrand(); ?>">
-                                <?= $device->getBrand(); ?>
-                            </option>
-                            <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="deviceBrand">
-                    <p class="txt-secondary">Modèle</p>
-                    <select type="text" name="model" id="model" value="<?= htmlspecialchars($device->getModel()) ?>">
-                        <?php
-                        foreach ($devices as $device): ?>
-                        <option value="<?= $device->getModel(); ?>">
-                            <?= $device->getModel(); ?>
+            <div class="deviceBrand">
+                <p class="txt-secondary">Marque</p>
+                <select name="brand" id="brand_id">
+                    <?php foreach ($devices as $d): ?>
+                        <option value="<?= $d->getBrand(); ?>"
+                            <?= $d->getBrand() === $device->getBrand() ? 'selected' : '' ?>>
+                            <?= $d->getType(); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="deviceModele">
+                <p class="txt-secondary">Modèle</p>
+                <select name="model" id="model">
+                    <?php foreach ($devices as $d): ?>
+                        <option value="<?= $d->getModel(); ?>"
+                            <?= $d->getModel() === $device->getModel() ? 'selected' : '' ?>>
+                            <?= $d->getModel(); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="deviceSerialNumber">
+                <p class="txt-secondary">Numéro de série</p>
+                <input type="text" name="serial_number" value="<?= htmlspecialchars($device->getSerialNumber()) ?>">
+            </div>
+
+            <div class="deviceType">
+                <p class="txt-secondary">Type d'appareil</p>
+                <select name="type_id" id="type">
+                    <?php foreach ($types as $type): ?>
+                        <option value="<?= $type->getIdType(); ?>">
+                        <?= $type->getNom(); ?>  
                         </option>
                         <?php endforeach; ?>
-                    </select>
-                </div>
-
-                  <div class="deviceSerialNumber">
-                    <p class="txt-secondary">Numéro de série</p>
-                    <input type="text" name="serial_number" value="<?= htmlspecialchars($device->getSerialNumber()) ?>">
-                </div>
-
-
+                </select>
             </div>
 
-            <div class="rightMidTicket">
+        </div>
 
-                <div class="deviceClientId">
-                    <p class="txt-secondary">Client</p>
-                  
-        <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($clients->fname) ?>">
-                                    <?php
-                                    foreach ($clients as $client): ?>
-                                    <option value="<?= $client->getId(); ?>">
-                                    </option>
-                                    <?php endforeach; ?>
-                        </select>
-                </div>
+        <div class="rightMidTicket">
 
-                <div class="submissionDate">
-                    <p class="txt-secondary">Date de dépôt</p>
-                    <input type="date" name="submission_date" value="<?= htmlspecialchars($device->getSubmissionDate()) ?>">
-                </div>
-
-                <div class="retrieveDate">
-                    <p class="txt-secondary">Date de récupération</p>
-                    <input type="date" name="retrieve_date" value="<?= htmlspecialchars($device->getRetrieveDate()) ?>">
-                </div>
-
+            <div class="deviceClientId">
+                <p class="txt-secondary">Client</p>
+                <select id="client" name="client_id">
+                    <?php foreach ($clients as $client): ?>
+                        <option value="<?= $client->getId(); ?>"
+                            <?= $client->getId() === $device->getClientId() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($client->getFname() . ' ' . $client->getLname()) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+
+            <div class="submissionDate">
+                <p class="txt-secondary">Date de dépôt</p>
+                <input type="date" name="submission_date" value="<?= htmlspecialchars($device->getSubmissionDate()) ?>">
+            </div>
+
+            <div class="retrieveDate">
+                <p class="txt-secondary">Date de récupération</p>
+                <input type="date" name="retrieve_date" value="<?= htmlspecialchars($device->getRetrieveDate()) ?>">
+            </div>
+
         </div>
+    </div>
 
-        <div class="bottomTicket">
-            <button type="submit" class="btn-primary">Enregistrer</button>
-            <button type="button" id="cancelBtn" class="btn-secondary">Annuler</button>
-        </div>
+    <div class="bottomTicket">
+        <button type="submit" class="btn-primary">Enregistrer</button>
+        <button type="button" id="cancelBtn" class="btn-secondary">Annuler</button>
+    </div>
 
-    </form>
-
-</div>
+</form>
 
 </div>
 

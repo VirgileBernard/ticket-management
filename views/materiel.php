@@ -8,9 +8,13 @@ session_start();
  }
 
  require_once ("../Controllers/DeviceController.php");
+ require_once ("../Controllers/TypeController.php");
  require_once ("../models/Device.php");
+ require_once ("../models/Type.php");
+
 
     $devices = DeviceController::getDevices();
+    $types= TypeController::getTypes();
 ?>
 
 <!DOCTYPE html>
@@ -44,10 +48,12 @@ session_start();
                 <th>Date de récupération</th> -->
             </tr>
         </thead>
+    
         <tbody>
             <?php foreach ($devices as $device): ?>
+                <?php var_dump($devices) ?>
             <tr onclick="window.location='openView/openDevice.php?id=<?= $device->getIdDevice() ?>'">
-                <td><?= $device->getIdDevice() ?></td>
+             <td><?= $device->type_nom ?></td>
              <td><?= $device->getType() ?></td>
                 <td><?= $device->getModel() ?></td>
                 <td><?= $device->getSerialNumber() ?></td>

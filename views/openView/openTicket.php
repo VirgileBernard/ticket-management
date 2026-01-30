@@ -118,8 +118,7 @@ if (!$ticket) {
         type="submit"
         id="dangerBtn"
         onclick="return confirm('Supprimer définitivement ce ticket ?');"
-    >
-        Supprimer
+    >Supprimer
     </button>
 </form>
 
@@ -153,7 +152,7 @@ if (!$ticket) {
 
                     <div class="clientInformations">
                         <label for="client">Client :</label>
-                        <select type="text" id="client" name="client_id" value="<?= htmlspecialchars($ticket->client_name) ?>">
+                        <select type="text" id="client" name="client_id" value="">
                                     <?php
                                     foreach ($clients as $client): ?>
                                     <option value="<?= $client->getId(); ?>">
@@ -209,6 +208,7 @@ if (!$ticket) {
 
         <div class="bottomTicket">
             <button type="submit" class="btn-primary">Enregistrer</button>  
+            <button type="button" onclick="window.history.back();">Annuler</button>
 <script>
 const editBtn = document.getElementById('editBtn');
 const editForm = document.getElementById('editForm');

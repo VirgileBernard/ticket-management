@@ -16,9 +16,11 @@ public static function getDevices(){
             d.type_id,
             d.submission_date,
             d.retrieve_date,
+            t.nom AS type_nom,
             CONCAT(c.fname, ' ', c.lname) AS client_name
         FROM devices d
         JOIN clients c ON d.client_id = c.id_client
+        JOIN types t ON t.id_type = d.type_id
     ";
 
     $stmt = $con->prepare($requete);    
@@ -38,11 +40,12 @@ public static function getDevices(){
             $row['brand'],
             $row['type_id'],
             $row['submission_date'],
-            $row['retrieve_date']
+            $row['retrieve_date'],
         );
 
         // On ajoute la propriété supplémentaire
         $device->client_name = $row['client_name'];
+        $device->type_nom = $row['type_nom'];
 
         // On push l'objet final dans le tableau
         $devices[] = $device;
