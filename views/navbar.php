@@ -1,16 +1,26 @@
 <?php
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
-
-
+require_once __DIR__ . '/../Controllers/UserController.php';
+require_once __DIR__ . '/../Controllers/RoleController.php';
 require_once __DIR__ . '/../Controllers/TicketController.php';
+// 1. Récupérer l'utilisateur connecté
+$userId = $_SESSION['id_user'] ?? null;
+if (!$userId) {
+    header("Location: " . BASE_URL . "views/login.php");
+    exit;
+}
 
+$user = UserController::getUserById($userId);
 
- $roles = [ 1 => 'Technicien', 2 => 'TeamLeader', 3 => 'Superviseur' ]; $roleCode = $_SESSION["user_role"]; $roleName = $roles[$roleCode] ?? 'Inconnu'; 
+// 2. Récupérer son rôle
+$role = RoleController::getRoleById($user->getRoleId());
+$roleName = $role ? $role->getName() : "Inconnu";
 
-// var_dump($_SESSION);
-$userId = $_SESSION['id_user'];
+// 3. Récupérer le compteur de tickets
 $done = TicketController::countDoneTicketsByUser($userId);
 ?>
+
+
 
 <link rel="stylesheet" href="views/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -107,56 +117,45 @@ font-size:.9rem
     text-decoration: none;
 }
 </style>
-
 <nav class="navbar">
 
+    <div class="nav-actions">
 
+        <p class="user-info appliName">BERNITICKETS</p>
 
-        <div class="nav-actions">
-
-            <p class="user-info appliName">BERNITICKETS</p>
-        
-
-            <div class="userProfil">
-                <i class="fa-solid fa-person"></i>
-                <div class="infoUser">
-            <span class="user-info">
-                <?= htmlspecialchars($_SESSION["user_fname"]) ?>
-                <?= htmlspecialchars($_SESSION["user_lname"]) ?>
-            </span>
-            <span class="user-role"><?= htmlspecialchars($roleName) ?></span>
+        <div class="userProfil">
+            <i class="fa-solid fa-person"></i>
+            <div class="infoUser">
+                <span class="user-info">
+                    <?= htmlspecialchars($user->getFname()) ?>
+                    <?= htmlspecialchars($user->getLname()) ?>
+                </span>
+                <span class="user-role"><?= htmlspecialchars($roleName) ?></span>
             </div>
-            </div>
-
-            <div class="compteurIntervention">
-        
-           <p class="infoCompteur"><?= $done ?> tickets cloturées /15 pour devenir teamLeader</p>
-         
-            </div>
-
-      
         </div>
 
-        <div class="nav-links">
-            <div class="topLinks">
-        <a href="<?= BASE_URL ?>views/index.php">Accueil</a>
-       <a href="<?= BASE_URL ?>views/tickets.php">Tickets</a>
-<a href="<?= BASE_URL ?>views/clients.php">Clients</a>
-<a href="<?= BASE_URL ?>views/materiel.php">Matériel</a>
-<a href="<?= BASE_URL ?>views/team.php">Team</a>
+        <div class="compteurIntervention">
+            <p class="infoCompteur">
+                <?= $done ?> tickets clôturés / 15 pour devenir TeamLeader
+            </p>
         </div>
-        <div class="bottomLinks">
 
-      <a href="<?= BASE_URL ?>process/processLogout.php" class="logout-btn">
-    Déconnexion
-</a>
-
-            </div>
     </div>
 
-    
+    <div class="nav-links">
+        <div class="topLinks">
+            <a href="<?= BASE_URL ?>views/index.php">Accueil</a>
+            <a href="<?= BASE_URL ?>views/tickets.php">Tickets</a>
+            <a href="<?= BASE_URL ?>views/clients.php">Clients</a>
+            <a href="<?= BASE_URL ?>views/materiel.php">Matériel</a>
+            <a href="<?= BASE_URL ?>views/team.php">Team</a>
+        </div>
 
-  
-
+        <div class="bottomLinks">
+            <a href="<?= BASE_URL ?>process/processLogout.php" class="logout-btn">
+                Déconnexion
+            </a>
+        </div>
+    </div>
 
 </nav>

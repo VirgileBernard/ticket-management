@@ -15,6 +15,15 @@ class UserController {
     public static function deleteUser($id_user){
         return UserDAO::deleteUser($id_user);
     }
+
+    public static function createUser($user){
+        return UserDAO::createUser($user);
+    }
+
+    public static function getUserById($id_user) {
+    return UserDAO::openUser($id_user);
+}
+
     
 
 

@@ -40,25 +40,32 @@ public static function getUser($email){
 }
 
 
+//créer un utilisateur
 
+public static function createUser($user) {
+    $con = MONPDO::getPDO();
 
-    
-    public static function addUserDAO($user){
-        $con=MONPDO::getPDO();
-        $requete = "INSERT INTO users  (fname, lname, email, phone_number, `password`, role_id )  values (:fname, :lname, :email, :phone_number, :`password`, :role_id )";
-        $stmt = $con->prepare($requete);
-        
-        $stmt->bindValue(":fname",$user->getFname(),PDO::PARAM_STR);
-        $stmt->bindValue(":lname",$user->getLname(),PDO::PARAM_STR);
-        $stmt->bindValue(":email",$user->getEmail(),PDO::PARAM_STR);
-        $stmt->bindValue(":phone_number",$user->getPhone(),PDO::PARAM_STR);
-        $stmt->bindValue(":password",$user->getPassword(),PDO::PARAM_STR);
-        $stmt->bindValue(":role_id",$user->getRoleId(),PDO::PARAM_INT);
- 
-    
-        $stmt->execute();
-    
-    }
+    $requete = "
+        INSERT INTO users 
+            (fname, lname, email, phone_number, password, role_id)
+        VALUES 
+            (:fname, :lname, :email, :phone_number, :password, :role_id)
+    ";
+
+    $stmt = $con->prepare($requete);
+
+    $stmt->bindValue(":fname", $user->getFname(), PDO::PARAM_STR);
+    $stmt->bindValue(":lname", $user->getLname(), PDO::PARAM_STR);
+    $stmt->bindValue(":email", $user->getEmail(), PDO::PARAM_STR);
+    $stmt->bindValue(":phone_number", $user->getPhoneNumber(), PDO::PARAM_STR);
+    $stmt->bindValue(":password", $user->getPassword(), PDO::PARAM_STR);
+    $stmt->bindValue(":role_id", $user->getRoleId(), PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    return $con->lastInsertId();
+}
+
     
     
     public static function updateUser($user){
