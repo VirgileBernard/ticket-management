@@ -39,4 +39,8 @@ class TicketController {
         return TicketDAO::deleteTicket($ticket_id);
     }
 
+    public static function createTicket($ticket){
+        return TicketDAO::createTicket($ticket);
+    }
+
 }

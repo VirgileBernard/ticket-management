@@ -56,9 +56,9 @@ $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
                 <div class="deviceModel">
                     <p class="txt-secondary">Modèle</p>
                <select name="model" required>
-    <?php foreach ($models as $model): ?>
-        <option value="<?= htmlspecialchars($model) ?>">
-            <?= htmlspecialchars($model) ?>
+                  <?php foreach ($models as $model): ?>
+                 <option value="<?= htmlspecialchars($model) ?>">
+                <?= htmlspecialchars($model) ?>
         </option>
     <?php endforeach; ?>
 </select>

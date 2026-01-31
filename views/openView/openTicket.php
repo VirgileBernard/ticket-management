@@ -182,7 +182,7 @@ if (!$ticket) {
 
                     <div class="statutTicket">
                         <label for="status">Statut :</label>
-                        <select name="status_id" id="status" name="status_id">
+                        <select name="status_id" id="status">
                                 <?php
                                 foreach ($statuss as $status): ?>
                                 <option value="<?= $status->getIdStatus(); ?>">

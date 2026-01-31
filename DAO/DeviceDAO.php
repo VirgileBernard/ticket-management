@@ -53,6 +53,8 @@ public static function getDevices(){
 
     return $devices;
 }
+
+// créer un device
 public static function createDevice($device){
     $con = MONPDO::getPDO();
 
