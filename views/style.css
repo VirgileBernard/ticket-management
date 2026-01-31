@@ -23,7 +23,7 @@
   --LM-bg-light: hsl(0, 0%, 100%);
 
   --actionBrown: hsl(30, 83%, 26%);
-  --greenValidation : hsl(134, 61%, 41%);
+  --greenSucces : hsl(134, 61%, 41%);
   --blueEdit : hsl(211, 80%, 45%);
   --redDelete : hsl(0, 80%, 45%);
 
@@ -231,6 +231,10 @@ margin-bottom: 1rem;
 
 .flash-message.delete{
     background-color: var(--redDelete);
+}
+
+.flash-message.success{
+    background-color: var(--greenSucces);
 }
 
 

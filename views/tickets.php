@@ -46,7 +46,7 @@ $tickets = TicketController::getTickets();
         </tr>
     </thead>
 
-    <tbody>
+    <tbody> 
         <?php foreach ($tickets as $ticket): ?>
            <tr onclick="window.location='openView/openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
                 <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>

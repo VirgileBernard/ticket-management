@@ -19,4 +19,8 @@ class DeviceController {
     public static function deleteDevice($id_device){
         return DeviceDAO::deleteDevice($id_device);
     }
+
+    public static function createDevice($device){
+        return DeviceDAO::createDevice($device);
+    }
 }

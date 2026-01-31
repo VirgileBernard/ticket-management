@@ -53,26 +53,31 @@ public static function getDevices(){
 
     return $devices;
 }
+public static function createDevice($device){
+    $con = MONPDO::getPDO();
 
+    $requete = "
+        INSERT INTO devices 
+            (model, serial_number, brand, type_id, client_id, submission_date, retrieve_date)
+        VALUES 
+            (:model, :serial_number, :brand, :type_id, :client_id, :submission_date, :retrieve_date)
+    ";
 
+    $stmt = $con->prepare($requete);
 
+    $stmt->bindValue(":model", $device->getModel(), PDO::PARAM_STR);
+    $stmt->bindValue(":serial_number", $device->getSerialNumber(), PDO::PARAM_STR);
+    $stmt->bindValue(":brand", $device->getBrandName(), PDO::PARAM_STR);
+    $stmt->bindValue(":type_id", $device->getType(), PDO::PARAM_INT);
+    $stmt->bindValue(":client_id", $device->getClientId(), PDO::PARAM_INT);
+    $stmt->bindValue(":submission_date", $device->getSubmissionDate(), PDO::PARAM_STR);
+    $stmt->bindValue(":retrieve_date", $device->getRetrieveDate(), PDO::PARAM_STR);
 
-    //créer un nouveau device
-    static function createDevice($device){
-        $con=MONPDO::getPDO();
-        $stmt = $con->prepare("INSERT INTO devices (model, serial_number, brand, type_id, client_id, submission_date, retrieve_date) 
-                              VALUES (:model, :serial_number, :brand, :type_id, :client_id, :submission_date, :retrieve_date)");
-        
-        $stmt->bindValue(":model",$device->getModel(),PDO::PARAM_STR);
-        $stmt->bindValue(":serial_number",$device->getSerialNumber(),PDO::PARAM_STR);
-        $stmt->bindValue(":brand",$device->getBrand(),PDO::PARAM_STR);
-        $stmt->bindValue(":type_id",$device->getTypeId(),PDO::PARAM_INT);
-        $stmt->bindValue(":client_id",$device->getClientId(),PDO::PARAM_INT);
-        $stmt->bindValue(":submission_date",$device->getSubmissionDate(),PDO::PARAM_STR);
-        $stmt->bindValue(":retrieve_date",$device->getRetrieveDate(),PDO::PARAM_STR);
-        
-        $stmt->execute();
-    }
+    $stmt->execute();
+
+    return $con->lastInsertId();
+}
+
 
 
     //ouvrir un device par son id

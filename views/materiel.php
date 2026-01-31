@@ -33,8 +33,10 @@ session_start();
         <div class="topContainer">
     <div class="infoView">
         <p class="strong">Matériel</p>
-        <p>Voici l'ensemble de votre matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
+        <p>Voici l'ensemble du matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
+
+    <button onclick="window.location='createView/createDevice.php'">Créer du matériel</button>
 
 
 </div>
@@ -68,7 +70,16 @@ session_start();
     </div>
     </div>
 
-    <?php include("footer.php"); ?>
+
+        
+<?php if (isset($_SESSION['flash_message_success'])): ?>
+    <div class="flash-message success">
+        <?= $_SESSION['flash_message_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_message_success']); ?>
+<?php endif; ?>
+
+
         <?php if (isset($_SESSION['flash-message edit'])): ?>
     <div id="flash-message edit" class="flash-message edit">
         <?= $_SESSION['flash-message edit'] ?>
@@ -82,6 +93,10 @@ session_start();
     </div>
     <?php unset($_SESSION['flash-message delete']); ?>
 <?php endif; ?>
+
+
+
+    <?php include("footer.php"); ?>
 
     </body>
 </html>
