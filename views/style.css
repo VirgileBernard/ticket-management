@@ -116,6 +116,34 @@ input, select, textarea{
         font-size: .8rem;
     }
 
+
+.floatBtn{
+  width: clamp(300px, 70vw, 1000px);
+    margin: 0 auto;
+}
+.floatBtn button {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    color: var(--LM-text);
+    background-color: var(--LM-bg);
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--LM-text);
+    cursor: pointer;
+    font-weight: 500;
+    transition : all .2s ease-out;
+}
+
+.floatBtn button:hover{
+    transform: scale(1.025);
+}
+
+.floatBtn button i {
+    font-size: .9rem;
+}
+
+
+
 .user-table {
     border-collapse: collapse;
     width: clamp(300px, 70vw, 1000px);

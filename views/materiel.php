@@ -23,6 +23,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Gestion du matériel</title>
 </head>
 <body>
@@ -35,12 +36,13 @@ session_start();
         <p class="strong">Matériel</p>
         <p>Voici l'ensemble du matériel, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
-
-    <button onclick="window.location='createView/createDevice.php'">Créer du matériel</button>
-
-
-</div>
-
+    </div>
+    <div class="floatBtn">
+        
+    <button onclick="window.location='createView/createDevice.php'">
+        <i class="fa-solid fa-plus"></i>
+        Créer du matériel</button>
+    </div>
     <table class="user-table">
         <thead>
             <tr>
