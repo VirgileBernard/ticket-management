@@ -38,6 +38,14 @@ $users = UserController::getUsers();
         <p>Voici l'ensemble de vos utilisateurs, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
 </div>
+
+
+<div class="floatBtn">
+        
+    <button onclick="window.location='createView/createUser.php'">
+        <i class="fa-solid fa-plus"></i>
+        Créer un membre</button>
+    </div>
         
         <table class="user-table">
             <thead>

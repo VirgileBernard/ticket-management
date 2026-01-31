@@ -11,7 +11,7 @@ session_start();
 
 
 
-$ticket_number = "TCK-" . date("Ymd") . "-" . rand(1, 100);
+$ticket_number = "TCK-" . "-" . rand(1, 100);
 
 $ticket = new Ticket(
     null,

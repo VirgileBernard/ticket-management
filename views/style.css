@@ -136,6 +136,8 @@ input, select, textarea{
 
 .floatBtn button:hover{
     transform: scale(1.025);
+    background-color: var(--LM-bg-light);
+    box-shadow: var(--LM-box-shadow);
 }
 
 .floatBtn button i {

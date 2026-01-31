@@ -35,6 +35,13 @@ $clients = ClientController::getClients();
         <p>Voici l'ensemble de vos clients, <?= htmlspecialchars($_SESSION['user_fname']) ?> <?= htmlspecialchars($_SESSION['user_lname']) ?></p>
     </div>
 </div>
+
+<div class="floatBtn">
+        
+    <button onclick="window.location='createView/createClient.php'">
+        <i class="fa-solid fa-plus"></i>
+        Créer un client</button>
+    </div>
     <table class="user-table">
         <thead>
             <tr>
@@ -62,8 +69,16 @@ $clients = ClientController::getClients();
 
 
     <?php include("footer.php"); ?>
+        
+<?php if (isset($_SESSION['flash_message_success'])): ?>
+    <div class="flash-message success">
+        <?= $_SESSION['flash_message_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_message_success']); ?>
+<?php endif; ?>
 
-    <?php if (isset($_SESSION['flash-message edit'])): ?>
+
+        <?php if (isset($_SESSION['flash-message edit'])): ?>
     <div id="flash-message edit" class="flash-message edit">
         <?= $_SESSION['flash-message edit'] ?>
     </div>

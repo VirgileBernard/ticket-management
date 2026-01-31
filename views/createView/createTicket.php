@@ -50,10 +50,6 @@ $prioritys = PriorityController::getPrioritys();
             <!-- COLONNE GAUCHE -->
             <div class="leftMidTicket">
 
-                <div class="ticketTitle">
-                    <p class="txt-secondary">Numéro de ticket</p>
-                    <input type="text" name="ticket-number" placeholder="TCK-0001" required>
-                </div>
 
 
                 <div class="ticketClient">

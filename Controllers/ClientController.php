@@ -19,5 +19,9 @@ class ClientController {
     public static function deleteClient($client_id){
         return ClientDAO::deleteClient($client_id);
     }
+
+    public static function createClient($client){
+        return ClientDAO::createCLient($client);
+    }
     
     }
