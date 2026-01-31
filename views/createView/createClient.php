@@ -55,7 +55,7 @@ $clients = ClientController::getClients();
                    <p class="txt-secondary">Nom du client</p>
                    <input type="text" name="fname" placeholder="Prénom">
             </div>
-                  <div class="clientMail">
+                  <div class="clientPhone">
                    <p class="txt-secondary">Numéro de téléphone</p>
                    <input type="text" name="phone" placeholder="0470102030">
             </div>

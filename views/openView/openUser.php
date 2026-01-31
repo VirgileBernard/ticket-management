@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../../Controllers/UserController.php';
+require_once __DIR__ . '/../../Controllers/RoleController.php';
+
 session_start();
 
 // Vérifier que l'ID est présent dans l'URL
@@ -10,6 +12,11 @@ if (!isset($_GET['id'])) {
 
 $user_id = intval($_GET['id']);
 $user = UserController::openUser($user_id);
+
+// 2. Récupérer son rôle
+$roles = RoleController::getRoles();
+$role = RoleController::getRoleById($user->getRoleId());
+$roleName = $role ? $role->getName() : "Inconnu";
 
 
 if(!$user) {
@@ -42,11 +49,13 @@ if(!$user) {
 
     <div class="ticketInfo">
 
+    <!-- <?php var_dump($roles) ?> -->
+
         <div class="topTicket">
             <div class="leftTopTicket">
                 <p>Informations du membre</p>
 
-                <?php var_dump($user); ?>
+                <!-- <?php var_dump($user); ?> -->
             </div>
             <div class="rightTopTicket">
                 <div class="userId">
@@ -72,7 +81,7 @@ if(!$user) {
 
                     <div class="userRole">
                         <p class="txt-secondary">Rôle</p>
-                        <p><?= htmlspecialchars($user->getRoleId()) ?></p>
+                        <p><?= htmlspecialchars($roleName) ?></p>
                     </div>
 
                     <div class="userPhone">
@@ -99,10 +108,7 @@ if(!$user) {
                 </div>
             </div>
 
-
-        </div>
-        
-        <div class="bottomTicket">
+                  <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
 
                  <form action="../../process/deleteUser.php" method="POST">
@@ -116,6 +122,10 @@ if(!$user) {
 </form>
             
         </div>
+
+        </div>
+        
+  
 
         <!-- MODE ÉDITION (caché au départ) -->
         <form id="editForm" action="../../process/updateUser.php" method="POST" style="display:none;">
@@ -141,7 +151,14 @@ if(!$user) {
 
                     <div class="userRole">
                         <p class="txt-secondary">Rôle</p>
-                        <input type="number" name="role_id" value="<?= htmlspecialchars($user->getRoleId()) ?>">
+                        <select name="role_id">
+                            <?php
+                            foreach ($roles as $role): ?>
+                            <option value="<?= $role->getId(); ?>">
+                                <?= $role->getName(); ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                 </div>

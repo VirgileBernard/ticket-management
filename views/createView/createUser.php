@@ -63,10 +63,40 @@ $roles = RoleController::getRoles();
                         <?php endforeach; ?>
                 </select>
             </div>
+
+            <div class="userPhone"> <p class="txt-secondary">Numéro du membre</p>
+                <input type="text" name="phone_number" placeholder="Numéro de tel.">
+            </div>
         </div>
+
+                   <div class="rightMidTicket">
+
+                    <div class="userPrenom">
+                        <p class="txt-secondary">Prénom</p>
+                        <input type="text" name="fname" placeholder="Prénom du membre">
+                    </div>
+
+                    <div class="userPass">
+                        <p class="txt-secondary">Mot de passe</p>
+                        <input type="text" name="password" value="<?= htmlspecialchars($user->getPassword()) ?>">
+                    </div>
+
+                    <div class="userTeam">
+                        <p class="txt-secondary">Équipe</p>
+                        <p>equipe a compléter</p>
+                    </div>
+
+                </div>
 
 
     </div>
+
+     <!-- BOUTONS -->
+        <div class="bottomTicket">
+            <button type="submit" class="btn-primary">Créer</button>
+            <button type="button" class="btn-secondary" onclick="window.location='../team.php'">Annuler</button>
+        </div>
+
 
 
     </form>

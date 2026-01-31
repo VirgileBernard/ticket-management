@@ -72,8 +72,16 @@ $users = UserController::getUsers();
     </div>
 
     </div>
-    <?php include("footer.php"); ?>
-         <?php if (isset($_SESSION['flash-message edit'])): ?>
+   
+<?php if (isset($_SESSION['flash_message_success'])): ?>
+    <div class="flash-message success">
+        <?= $_SESSION['flash_message_success'] ?>
+    </div>
+    <?php unset($_SESSION['flash_message_success']); ?>
+<?php endif; ?>
+
+
+        <?php if (isset($_SESSION['flash-message edit'])): ?>
     <div id="flash-message edit" class="flash-message edit">
         <?= $_SESSION['flash-message edit'] ?>
     </div>
@@ -86,5 +94,9 @@ $users = UserController::getUsers();
     </div>
     <?php unset($_SESSION['flash-message delete']); ?>
 <?php endif; ?>
+
+
+
+    <?php include("footer.php"); ?>
 </body>
 </html>
