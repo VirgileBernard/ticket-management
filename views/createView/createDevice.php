@@ -9,6 +9,13 @@ session_start();
 $types = TypeController::getTypes();
 $clients = ClientController::getClients();
 $devices = DeviceController::getDevices(); // Pour marques et modèles existants
+
+
+// pour supprimer les doublons dans les select
+$brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
+$models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+
+
 ?>
 
 <!DOCTYPE html>
@@ -43,24 +50,19 @@ $devices = DeviceController::getDevices(); // Pour marques et modèles existants
 
                 <div class="deviceBrand">
                     <p class="txt-secondary">Marque</p>
-                    <select name="brand" required>
-                        <?php foreach ($devices as $d): ?>
-                            <option value="<?= htmlspecialchars($d->getBrandName()) ?>">
-                                <?= htmlspecialchars($d->getBrandName()) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                   <select name="brand" required> <?php foreach ($brands as $brand): ?> <option value="<?= htmlspecialchars($brand) ?>"> <?= htmlspecialchars($brand) ?> </option> <?php endforeach; ?> </select>
                 </div>
 
                 <div class="deviceModel">
                     <p class="txt-secondary">Modèle</p>
-                    <select name="model" required>
-                        <?php foreach ($devices as $d): ?>
-                            <option value="<?= htmlspecialchars($d->getModel()) ?>">
-                                <?= htmlspecialchars($d->getModel()) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+               <select name="model" required>
+    <?php foreach ($models as $model): ?>
+        <option value="<?= htmlspecialchars($model) ?>">
+            <?= htmlspecialchars($model) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
                 </div>
 
                 <div class="deviceType">
