@@ -70,7 +70,7 @@ button{
 
 button:hover{
     background-color: var(--actionBrown);
-    color: var(--text-light);
+    color: var(--text-contrast);
     cursor: pointer;
 }
 
@@ -85,14 +85,23 @@ input, select, textarea{
     border : 1px solid var(--border);
     border-radius: var(--borderRadius);
     background-color: var(--bg-light);
-    color: var(--LM-text);
+    color: var(--text-primary);
     font-size: 1rem;
     width: 100%;
+    transition : all .3s ease-out
+}
+
+/* Effet focus */ input:focus, select:focus, textarea:focus { 
+    border-color: var(--actionBrown); 
+    outline: none; 
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--actionBrown) 40%, transparent); 
 }
 
 p{
     color:var(--text-primary);
 }
+
+
 .txt-secondary{
     color: var(--text-secondary);
 }

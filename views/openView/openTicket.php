@@ -53,14 +53,14 @@ if (!$ticket) {
 
 
            <div class="ticketNumber">
-                <?= htmlspecialchars($ticket->getTicketNumber()) ?>
+             <p>   <?= htmlspecialchars($ticket->getTicketNumber()) ?></p>
             </div>
        
    
 
         <div class="rightTopTicket">
              <div class="ticketId">
-                  ID: #<?= htmlspecialchars($ticket->getIdTicket()) ?>
+              <p>    ID: #<?= htmlspecialchars($ticket->getIdTicket()) ?></p>
               </div>
             <div class="creationDate">
             <p><?= date('d/m/Y', strtotime($ticket->intervention_start)) ?></p>
@@ -75,7 +75,7 @@ if (!$ticket) {
         <div class="topColonne">
             <p>Informations</p>
         </div>
-        <div class="technicienInformations">
+        <div class="userInformations">
             <p class="txt-secondary">Technicien</p>  <!-- TODO : afficher dynamiquement le role du technicien assigné -->
             <p><?= htmlspecialchars($ticket->creator_name) ?></p>
         </div>
@@ -138,7 +138,7 @@ if (!$ticket) {
                         <p>Informations</p>
                     </div>
                     <div class="technicienInformations">
-                        <label for="technician">Technicien :</label>
+                        <label for="technician" class="txt-secondary">Technicien :</label>
                       
                         <select type="text" id="user" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
                             <?php
@@ -151,7 +151,7 @@ if (!$ticket) {
                     </div>
 
                     <div class="clientInformations">
-                        <label for="client">Client :</label>
+                        <label for="client" class="txt-secondary">Client :</label>
                         <select type="text" id="client" name="client_id" value="">
                                     <?php
                                     foreach ($clients as $client): ?>
@@ -162,7 +162,7 @@ if (!$ticket) {
                         </select>
                     </div>
                     <div class="deviceInformations">
-                        <label for="device">Appareil :</label>
+                        <label for="device" class="txt-secondary">Appareil :</label>
                         <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>">
                             <?php
                             foreach ($devices as $device): ?>
@@ -181,7 +181,7 @@ if (!$ticket) {
                     </div>
 
                     <div class="statutTicket">
-                        <label for="status">Statut :</label>
+                        <label for="status" class="txt-secondary">Statut :</label>
                         <select name="status_id" id="status">
                                 <?php
                                 foreach ($statuss as $status): ?>
@@ -193,8 +193,8 @@ if (!$ticket) {
                     </div>
 
                     <div class="priorityTicket">
-                        <label for="priority">Priorité :</label>
-                        <select name="priority_id" id="priority">
+                        <label for="priority" class="txt-secondary">Priorité :</label>
+                        <select name="priority_id" id="priority" >
                            <?php
                            foreach ($prioritys as $priority): ?>
                            <option value="<?= $priority->getIdPriority(); ?>">

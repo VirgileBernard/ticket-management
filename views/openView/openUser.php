@@ -59,7 +59,7 @@ if(!$user) {
             </div>
             <div class="rightTopTicket">
                 <div class="userId">
-                    ID: #<?= htmlspecialchars($user->getIdUser()) ?>
+               <p>     ID: #<?= htmlspecialchars($user->getIdUser()) ?></p>
                 </div>
             </div>
         </div>

@@ -175,12 +175,12 @@ if(!$device) {
 
             <div class="submissionDate">
                 <p class="txt-secondary">Date de dépôt</p>
-                <input type="date" name="submission_date" value="<?= htmlspecialchars($device->getSubmissionDate()) ?>">
+                <input type="date" name="submission_date" id="date" value="<?= htmlspecialchars($device->getSubmissionDate()) ?>">
             </div>
 
             <div class="retrieveDate">
                 <p class="txt-secondary">Date de récupération</p>
-                <input type="date" name="retrieve_date" value="<?= htmlspecialchars($device->getRetrieveDate()) ?>">
+                <input type="date" name="retrieve_date" id="date" value="<?= htmlspecialchars($device->getRetrieveDate()) ?>">
             </div>
 
         </div>
