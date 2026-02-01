@@ -54,6 +54,8 @@ function isActive($section, $currentPage, $active) {
     height: 100%;
     background-color: var(--bg-dark);
     overflow: hidden; /* évite les débordements */
+    min-width: 200px;
+    z-index: 10;
 }
 
 
@@ -152,7 +154,14 @@ font-size:.9rem
     background-color: var(--redDelete);
 }
 
-/* ⭐ NEW TOGGLE BUTTON (clean, modern, centered) */ 
+.burgerBtn{
+    color: var(--text-primary);
+}
+
+.burgerBtn:hover{
+    color: var(--text-secondary);
+}
+
 .themeToggle { 
     display: flex;
      justify-content: center;
@@ -168,7 +177,7 @@ font-size:.9rem
               justify-content: center;
                align-items: center;
                 cursor: pointer;
-                 transition: all .25s ease;
+                 transition: all .3s ease;
                   color: var(--text-secondary);
                  }
                   .toggle-btn i { 
@@ -180,8 +189,64 @@ font-size:.9rem
                             color: var(--text-primary);
                     }
 
+    #open-sidebar-button, #close-sidebar-button{
+        background: none;
+        border : none;
+        padding: 1em;
+        display: none;
+    }
+
+@media screen and (max-width: 900px){
+    #open-sidebar-button{
+        display: block;
+        position:fixed;
+        top: 0%;
+        right: 0%;
+    }
+
+    #overlay{
+        background-color: rgba(0, 0, 0, 0.8);
+        position : fixed;
+        inset: 0;
+        z-index: 9; 
+        display:none;
+    }
+    .navbar{
+        position: fixed;
+        top : 0;
+        right : -100%;
+        height: 100%;
+        width: min(15em, 100%);
+        z-index: 10;
+        border-left : 1px solid var(--border);
+        transition : all .4s ease-in-out;
+    }
+
+    .navbar.show {
+        right : 0;
+    }
+    .navbar.show ~ #overlay{
+        display: block;
+    }
+
+    .navbar ul {
+        width: 100%;
+        flex-direction : column;
+    }
+
+    .navbar a {
+        width: 100%
+        padding-left: 2.5em;
+    }
+
+    .bottomLinks{
+        border-top : 1px solid var(--border);
+    }
+}
+
 </style>
-<nav class="navbar">
+
+<nav class="navbar" id="navbar">
 
     <div class="nav-actions">
 
@@ -205,6 +270,10 @@ font-size:.9rem
 </div>
         </div>
 
+        <button id="open-sidebar-button" class="burgerBtn" onclick="openSidebar()">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
         <div class="compteurIntervention">
             <p class="infoCompteur">
                 <?= $done ?> tickets clôturés / 15 pour devenir TeamLeader
@@ -215,6 +284,8 @@ font-size:.9rem
 
     <div class="nav-links">
         <div class="topLinks">
+
+
 <a href="<?= BASE_URL ?>views/index.php"
    class="<?= isActive('home', $currentPage, $active) ?>">
    Accueil
@@ -255,6 +326,22 @@ font-size:.9rem
 const root = document.documentElement;
 const btn = document.getElementById("themeToggleBtn");
 
+const navbar = document.getElementById('navbar');
+
+
+
+
+function openSidebar(){
+    navbar.classList.add('show');
+    document.getElementById("open-sidebar-button").style.display = "none";
+}
+
+function closeSidebar(){
+    navbar.classList.remove('show');
+    document.getElementById("open-sidebar-button").style.display = "block";
+}
+
+
 // 1. Charger le thème stocké ou détecter le thème système
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
@@ -287,3 +374,8 @@ function updateIcon(theme) {
 </script>
 
 </nav>
+
+
+<div id="overlay" onclick="closeSidebar()">
+
+</div>

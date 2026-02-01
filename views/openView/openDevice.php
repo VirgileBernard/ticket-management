@@ -47,7 +47,7 @@ if(!$device) {
         </div>
         <div class="rightTopTicket">
             <div class="deviceId">
-                ID: #<?= htmlspecialchars($device->getIdDevice()) ?>
+             <p>   ID: #<?= htmlspecialchars($device->getIdDevice()) ?></p>
             </div>
         </div>
     </div>

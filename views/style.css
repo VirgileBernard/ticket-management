@@ -58,8 +58,9 @@
 
 button{
     padding: .5rem 1rem;
+    background-color: var(--bg-light);
     border : 1px solid var(--actionBrown);
-    color: var(--LM-text);
+    color: var(--text-secondary);
     transition: all 0.3s ease-in-out;
     border-radius: var(--borderRadius);
     font-size: 1rem;
@@ -77,6 +78,7 @@ button:hover{
 
 #dangerBtn:hover{
     background-color: var(--redDelete);
+    /* color: var(--text-contrast); */
 }
 
 .logout-btn:hover{

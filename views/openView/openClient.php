@@ -37,7 +37,7 @@ if (!$client) {
         </div>
         <div class="rightTopTicket">
             <div class="clientId">
-                ID: #<?= htmlspecialchars($client->getId()) ?>
+           <p>     ID: #<?= htmlspecialchars($client->getId()) ?></p>
             </div>
         </div>
     </div>
