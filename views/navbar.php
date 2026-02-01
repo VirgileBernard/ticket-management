@@ -29,15 +29,15 @@ $done = TicketController::countDoneTicketsByUser($userId);
 
 <style>
 .navbar {
-    background-color: var(--LM-bg-dark);
+    background-color: var(--bg-dark);
     justify-content: space-between;
     align-items: center;
     width: 15%;
-    border-right: 1px solid var(--LM-border);
+    border-right: 1px solid var(--border);
 }
 .nav-actions {
 height: 25vh;
-border-bottom: 1px solid var(--LM-border);
+border-bottom: 1px solid var(--border);
 display: grid;
 grid-template-rows: repeat(3, auto);
 }
@@ -50,27 +50,27 @@ grid-template-rows: repeat(3, auto);
 }
 .nav-links a {
     height: 6vh;
-    color: var(--LM-text-secondary);
+    color: var(--text-secondary);
     display: block;
     padding: 0.7rem 1.2rem;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
-    border-bottom: 1px solid var(--LM-border);
+    border-bottom: 1px solid var(--border);
     transition : all 0.3s ease-out;
 }
 
 .nav-links a:hover {
-    background-color: var(--LM-bg-light);
-     color: var(--LM-text-secondary);
+    background-color: var(--bg-light);
+     color: var(--text-secondary);
 }
 .bottomLinks{
-    border-top: 1px solid var(--LM-border);
+    border-top: 1px solid var(--border);
 }
 
 
 .user-info {
-    color: var(--LM-text);
+    color: var(--text);
     font-size: 14px;
     font-weight: bold;
 }
@@ -111,17 +111,39 @@ font-size:.9rem
 
 .logout-btn {
     /* background-color: #e74c3c; */
-    color: var(--LM-text);
+    color: var(--text);
     padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
 }
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 1.6rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.toggle-btn:hover {
+    color: var(--actionYellow);
+}
+
 </style>
 <nav class="navbar">
 
     <div class="nav-actions">
 
         <p class="user-info appliName">BERNITICKETS</p>
+
+        <div class="themeToggle">
+    <button id="themeToggleBtn" class="toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</div>
+
 
         <div class="userProfil">
             <i class="fa-solid fa-person"></i>
@@ -157,5 +179,41 @@ font-size:.9rem
             </a>
         </div>
     </div>
+
+
+    <script>
+const root = document.documentElement;
+const btn = document.getElementById("themeToggleBtn");
+
+// 1. Charger le thème stocké ou détecter le thème système
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    root.setAttribute("data-theme", savedTheme);
+    updateIcon(savedTheme);
+} else {
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const defaultTheme = prefersLight ? "light" : "dark";
+    root.setAttribute("data-theme", defaultTheme);
+    updateIcon(defaultTheme);
+}
+
+// 2. Toggle au clic
+btn.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme");
+    const next = current === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    updateIcon(next);
+});
+
+// 3. Changer l’icône selon le thème
+function updateIcon(theme) {
+    if (theme === "light") {
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+}
+</script>
 
 </nav>

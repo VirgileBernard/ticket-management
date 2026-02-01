@@ -1,43 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 
-/* Hue (teinte) , saturation , lightness  */
-:root {
-  --text-font: "Montserrat", sans-serif;
+:root{
+    --text-font: "Montserrat", sans-serif;
+    --borderRadius : 8px;
+}
+
+:root[data-theme="dark"] {
   --bg-dark: hsl(0 0% 0%);
   --bg: hsl(0 0% 5%);
   --bg-light: hsl(0 0% 10%);
 
-  --actionYellow: hsl(59, 90%, 60%);
-  --actionPink: hsl(323, 90%, 60%);
-
   --text: hsl(0 0% 95%);
   --text-secondary: hsl(0 0% 85%);
   --text-muted: hsl(0 0% 70%);
+  --text-light: hsl(0 0% 100%);
 
-  --borderRadius : 8px;
+  --border: hsl(0 0% 30%);
+  --shadow: hsl(0 0% 0% / 0.4);
 
-  /* //colors light mode */
-  --LM-bg-dark: hsl(0 0% 85%);
-  --LM-bg: hsl(0 0% 90%);
-  --LM-bg-light: hsl(0, 0%, 100%);
+  --actionBrown: hsl(59, 90%, 60%);
+  --greenSucces: hsl(134, 61%, 41%);
+  --blueEdit: hsl(211, 80%, 45%);
+  --redDelete: hsl(0, 80%, 45%);
+}
+
+:root[data-theme="light"] {
+  --bg-dark: hsl(0 0% 85%);
+  --bg: hsl(0 0% 90%);
+  --bg-light: hsl(0 0% 100%);
+
+  --text: hsl(0 0% 5%);
+  --text-secondary: hsl(0 0% 25%);
+  --text-muted: hsl(0 0% 45%);
+  --text-light: hsl(0 0% 0%);
+
+  --border: hsl(0 0% 45%);
+  --shadow: hsl(0 0% 50% / 0.4);
 
   --actionBrown: hsl(30, 83%, 26%);
-  --greenSucces : hsl(134, 61%, 41%);
-  --blueEdit : hsl(211, 80%, 45%);
-  --redDelete : hsl(0, 80%, 45%);
-
-
-
-    --LM-text: hsl(0 0% 5%);
-    --LM-text-secondary: hsl(0 0% 25%);
-    --LM-text-light: hsl(0, 0%, 100%);
-    --LM-border:hsl(0 0% 45%);
-
-    --LM-shadow: hsl(0 0% 50%);
-    --LM-box-shadow : 0 2px 4px var(--LM-shadow);
-
+  --greenSucces: hsl(134, 61%, 41%);
+  --blueEdit: hsl(211, 80%, 45%);
+  --redDelete: hsl(0, 80%, 45%);
 }
+
 
 * {
   box-sizing: border-box;
@@ -61,7 +67,7 @@ button{
 
 button:hover{
     background-color: var(--actionBrown);
-    color: var(--LM-text-light);
+    color: var(--text-light);
     cursor: pointer;
 }
 
@@ -73,9 +79,9 @@ button:hover{
 
 input, select, textarea{
     padding: .3rem .5rem;
-    border : 1px solid var(--LM-border);
+    border : 1px solid var(--border);
     border-radius: var(--borderRadius);
-    background-color: var(--LM-bg-light);
+    background-color: var(--bg-light);
     color: var(--LM-text);
     font-size: 1rem;
     width: 100%;
@@ -84,7 +90,7 @@ input, select, textarea{
 .main{
     min-height: 100vh;
     display: flex;
-    background-color: var(--LM-bg-dark);
+    background-color: var(--bg-dark);
     /* margin-bottom: 10vh; */
 }
 
@@ -125,10 +131,10 @@ input, select, textarea{
     width: 250px;
     display: flex;
     align-items: center;
-    color: var(--LM-text);
-    background-color: var(--LM-bg);
+    color: var(--text);
+    background-color: var(--bg);
     border-radius: var(--borderRadius);
-    border: 1px solid var(--LM-text);
+    border: 1px solid var(--text);
     cursor: pointer;
     font-weight: 500;
     transition : all .2s ease-out;
@@ -136,8 +142,8 @@ input, select, textarea{
 
 .floatBtn button:hover{
     transform: scale(1.025);
-    background-color: var(--LM-bg-light);
-    box-shadow: var(--LM-box-shadow);
+    background-color: var(--bg-light);
+    box-shadow: var(--box-shadow);
 }
 
 .floatBtn button i {
@@ -150,32 +156,38 @@ input, select, textarea{
     border-collapse: collapse;
     width: clamp(300px, 70vw, 1000px);
     margin: 0 auto;
-    background-color: var(--LM-bg);
-    box-shadow: var(--LM-box-shadow);
+    background-color: var(--bg);
+    box-shadow: var(--box-shadow);
     border-radius: var(--borderRadius);
     overflow: hidden; /* Pour que les arrondis s'appliquent aux cellules */
 }
 
 .user-table thead tr {
     background-color: var(--actionBrown);
-    color: var(--LM-text-light);
     text-align: left;
+    border: 1px solid var(--border);
 }
 
 .user-table th,
 .user-table td {
     padding: clamp(8px, 1.5vw, 20px) clamp(10px, 2vw, 25px);
-    border-bottom: 1px solid var(--LM-border);
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+.user-table td {
+    color: var(--text-secondary);
+}
+tbody{
+    border: 1px solid var(--border);
 }
 
-
 .user-table tbody tr:nth-child(even) {
-    background-color: var(--LM-bg-dark);
+    background-color: var(--bg-dark);
     transition : all 0.3s ease-in;
 }
 
 .user-table tbody tr:hover{
-    background-color: var(--LM-bg-light);
+    background-color: var(--bg-light);
     cursor: pointer;
 }
 /* Optionnel : Le badge pour le rôle */
@@ -189,10 +201,10 @@ input, select, textarea{
 }
 
 .ticketInfo{
-    border: 1px solid var(--LM-border);
+    border: 1px solid var(--border);
     border-radius: var(--borderRadius);
-    background-color: var(--LM-bg);
-    box-shadow: var(--LM-box-shadow);
+    background-color: var(--bg);
+    box-shadow: var(--box-shadow);
     width: clamp(300px, 70vw, 1000px);
     height: 80%;
     margin: 10vh auto;
@@ -202,7 +214,7 @@ input, select, textarea{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    border-bottom: 1px solid var(--LM-border);
+    border-bottom: 1px solid var(--border);
     padding: 1rem 1rem;
 }
 
@@ -224,7 +236,7 @@ input, select, textarea{
 }
 
 .txt-secondary{
-    color: var(--LM-text-secondary);
+    color: var(--text-secondary);
 }
 
 .midTicket div{
@@ -251,7 +263,7 @@ margin-bottom: 1rem;
     opacity: 0;
     pointer-events: none;
     animation: flashFade 4s ease forwards;
-    box-shadow: var(--LM-box-shadow);
+    box-shadow: var(--box-shadow);
 }
 
 

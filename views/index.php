@@ -42,7 +42,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         height: 25vh;
         margin-bottom: 10px;  /* à modif !!  */
         /* height: 25%; */
-        border-bottom: 1px solid var(--LM-border);
+        border-bottom: 1px solid var(--border);
     }
     .infoView{
         padding: 2rem 1rem;
@@ -62,9 +62,10 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         }
 
         .counterCard{
-        background-color: var(--LM-bg);
-        border: 1px solid var(--LM-border);
+        background-color: var(--bg);
+        border: 1px solid var(--border);
         border-radius: var(--borderRadius);
+        color : var(--text-secondary);
         padding: 15px 10px;
         height: 100px;
         width: 100px;
@@ -74,8 +75,8 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         }
 
         .counterCard:hover{
-            background-color: var(--LM-bg-light);
-            box-shadow: var(--LM-box-shadow);
+            background-color: var(--bg-light);
+            box-shadow: var(--box-shadow);
             /* cursor: pointer; */
         }
 
@@ -93,7 +94,7 @@ $openTickets = TicketController::countOpenTicketsByUser($userId);
         .border-bottom{
             height: 1px;
             width: 100%;
-            border-bottom: 1px solid var(--LM-border);
+            border-bottom: 1px solid var(--border);
             margin-bottom: 3rem;
         }
     </style>
