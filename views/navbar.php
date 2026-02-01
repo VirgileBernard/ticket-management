@@ -18,6 +18,24 @@ $roleName = $role ? $role->getName() : "Inconnu";
 
 // 3. Récupérer le compteur de tickets
 $done = TicketController::countDoneTicketsByUser($userId);
+
+
+// pour afficher dans la nav bar la page ouverte
+$currentPage = basename($_SERVER['PHP_SELF']);
+
+$active = [
+    'home'     => ['index.php'],
+    'tickets'  => ['tickets.php', 'openTicket.php', 'createTicket.php'],
+    'clients'  => ['clients.php', 'openClient.php', 'createClient.php'],
+    'materiel' => ['materiel.php', 'openDevice.php', 'createDevice.php'],
+    'team'     => ['team.php', 'openUser.php', 'createUser.php'],
+];
+
+function isActive($section, $currentPage, $active) {
+    return in_array($currentPage, $active[$section]) ? 'active' : '';
+}
+
+
 ?>
 
 
@@ -64,6 +82,11 @@ grid-template-rows: repeat(3, auto);
     background-color: var(--bg-light);
      color: var(--text-secondary);
 }
+.nav-links a.active {
+    background-color: var(--bg-light);
+    color: var(--text-secondary);
+}
+
 .bottomLinks{
     border-top: 1px solid var(--border);
 }
@@ -172,11 +195,32 @@ font-size:.9rem
 
     <div class="nav-links">
         <div class="topLinks">
-            <a href="<?= BASE_URL ?>views/index.php">Accueil</a>
-            <a href="<?= BASE_URL ?>views/tickets.php">Tickets</a>
-            <a href="<?= BASE_URL ?>views/clients.php">Clients</a>
-            <a href="<?= BASE_URL ?>views/materiel.php">Matériel</a>
-            <a href="<?= BASE_URL ?>views/team.php">Team</a>
+<a href="<?= BASE_URL ?>views/index.php"
+   class="<?= isActive('home', $currentPage, $active) ?>">
+   Accueil
+</a>
+
+<a href="<?= BASE_URL ?>views/tickets.php"
+   class="<?= isActive('tickets', $currentPage, $active) ?>">
+   Tickets
+</a>
+
+<a href="<?= BASE_URL ?>views/clients.php"
+   class="<?= isActive('clients', $currentPage, $active) ?>">
+   Clients
+</a>
+
+<a href="<?= BASE_URL ?>views/materiel.php"
+   class="<?= isActive('materiel', $currentPage, $active) ?>">
+   Matériel
+</a>
+
+<a href="<?= BASE_URL ?>views/team.php"
+   class="<?= isActive('team', $currentPage, $active) ?>">
+   Team
+</a>
+
+
         </div>
 
         <div class="bottomLinks">
