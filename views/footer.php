@@ -10,7 +10,8 @@
     height: 5vh;
     border-top: 1px solid var(--border);
     font-size: 0.8em;
-    padding: 0 1rem;
+    padding: 5vh 1rem;
+    
     
 }
 

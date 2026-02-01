@@ -79,6 +79,9 @@ button:hover{
     background-color: var(--redDelete);
 }
 
+.logout-btn:hover{
+    background-color: var(--redDelete);
+}
 
 
 input, select, textarea{
@@ -122,8 +125,8 @@ p{
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    
-
+    border-left: 1px solid var(--border);
+    padding-bottom: 5vh;
 }
 
   .topContainer{
@@ -149,17 +152,20 @@ p{
   width: clamp(300px, 70vw, 1000px);
     margin: 0 auto;
 }
+
 .floatBtn button {
-    width: 250px;
-    display: flex;
+    display: inline-flex; /* important */
     align-items: center;
+    gap: .5rem; /* espace entre icône et texte */
+    padding: .6rem 1rem; /* le bouton respire */
+    white-space: nowrap; /* empêche le texte de sauter à la ligne */
     color: var(--text);
     background-color: var(--bg);
     border-radius: var(--borderRadius);
     border: 1px solid var(--border);
     cursor: pointer;
     font-weight: 500;
-    transition : all .2s ease-out;
+    transition: all .2s ease-out;
 }
 
 .floatBtn button:hover{

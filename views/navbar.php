@@ -47,12 +47,16 @@ function isActive($section, $currentPage, $active) {
 
 <style>
 .navbar {
-    background-color: var(--bg-dark);
-    justify-content: space-between;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* haut / bas */
     width: 15%;
-    border-right: 1px solid var(--border);
+    height: 100%;
+    background-color: var(--bg-dark);
+    overflow: hidden; /* évite les débordements */
 }
+
+
 .nav-actions {
 height: 25vh;
 border-bottom: 1px solid var(--border);
@@ -60,12 +64,13 @@ display: grid;
 grid-template-rows: repeat(3, auto);
 }
 
-.nav-links{
-    height: 75%;
+.nav-links {
+    flex: 1; /* prend tout l’espace restant */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .nav-links a {
     height: 6vh;
     color: var(--text-secondary);
@@ -81,16 +86,13 @@ grid-template-rows: repeat(3, auto);
 .nav-links a:hover {
     background-color: var(--bg-light);
      color: var(--text-secondary);
+     color:var(--text-primary);
 }
 .nav-links a.active {
     background-color: var(--bg-light);
     color: var(--text-secondary);
+         color:var(--text-primary);
 }
-
-.bottomLinks{
-    border-top: 1px solid var(--border);
-}
-
 
 
 .userProfil {
@@ -138,12 +140,14 @@ font-size:.9rem
 }
 
 
-.logout-btn {
-    /* background-color: #e74c3c; */
-    color: var(--text);
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
+#logout-btn {
+    color: var(--text-secondary);
+    transition : all .3s ease;
+}
+
+#logout-btn:hover{
+    color: var(--text-primary);
+    background-color: var(--redDelete);
 }
 
 .toggle-btn {
@@ -224,7 +228,7 @@ font-size:.9rem
         </div>
 
         <div class="bottomLinks">
-            <a href="<?= BASE_URL ?>process/processLogout.php" class="logout-btn">
+            <a href="<?= BASE_URL ?>process/processLogout.php" class="logout-btn" id="logout-btn">
                 Déconnexion
             </a>
         </div>
