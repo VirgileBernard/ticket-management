@@ -8,13 +8,15 @@
 
 :root[data-theme="dark"] {
   --bg-dark: hsl(0 0% 0%);
-  --bg: hsl(0 0% 5%);
-  --bg-light: hsl(0 0% 10%);
+  --bg: hsl(0 0% 10%);
+  --bg-light: hsl(0 0% 15%);
 
-  --text: hsl(0 0% 95%);
+  --text: hsl(0, 100%, 99%);
+  --text-primary : hsl(0 0 95%);
   --text-secondary: hsl(0 0% 85%);
   --text-muted: hsl(0 0% 70%);
-  --text-light: hsl(0 0% 100%);
+  --text-contrast: hsl(0, 0%, 10%);
+
 
   --border: hsl(0 0% 30%);
   --shadow: hsl(0 0% 0% / 0.4);
@@ -34,6 +36,7 @@
   --text-secondary: hsl(0 0% 25%);
   --text-muted: hsl(0 0% 45%);
   --text-light: hsl(0 0% 0%);
+  --text-contrast: hsl(0 0 90%);
 
   --border: hsl(0 0% 45%);
   --shadow: hsl(0 0% 50% / 0.4);
@@ -87,6 +90,13 @@ input, select, textarea{
     width: 100%;
 }
 
+p{
+    color:var(--text-primary);
+}
+.txt-secondary{
+    color: var(--text-secondary);
+}
+
 .main{
     min-height: 100vh;
     display: flex;
@@ -115,6 +125,7 @@ input, select, textarea{
     }
     .infoView{
         padding: 2rem 1rem;
+        color: var(--text-secondary);
     }
 
     .strong{
@@ -172,7 +183,7 @@ input, select, textarea{
 .user-table td {
     padding: clamp(8px, 1.5vw, 20px) clamp(10px, 2vw, 25px);
     border-bottom: 1px solid var(--border);
-    color: var(--text);
+    color: var(--text-contrast);
 }
 .user-table td {
     color: var(--text-secondary);

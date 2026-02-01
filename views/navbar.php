@@ -69,14 +69,16 @@ grid-template-rows: repeat(3, auto);
 }
 
 
-.user-info {
-    color: var(--text);
-    font-size: 14px;
-    font-weight: bold;
-}
 
 .userProfil {
     display: flex;
+    color: var(--text-seondary);
+}
+
+.user-info {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: bold;
 }
 .fa-solid{
     width: 20%;
@@ -97,10 +99,12 @@ grid-template-rows: repeat(3, auto);
     display: flex;
     justify-content: center;
     flex-direction: column;
+    color: var(--text-secondary);
 }
 
 .compteurIntervention{
     display: flex;
+     color: var(--text-secondary);
 }
 .infoCompteur{
 width: 90%;
