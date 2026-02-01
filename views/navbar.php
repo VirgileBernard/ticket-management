@@ -74,7 +74,9 @@ grid-template-rows: repeat(3, auto);
     display: flex;
     color: var(--text-seondary);
 }
-
+.fa-person{
+    color: var(--text);
+}
 .user-info {
     color: var(--text-primary);
     font-size: 14px;

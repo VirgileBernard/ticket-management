@@ -4,6 +4,7 @@
 :root{
     --text-font: "Montserrat", sans-serif;
     --borderRadius : 8px;
+    /* --bg-dark : red; */
 }
 
 :root[data-theme="dark"] {
@@ -102,6 +103,7 @@ p{
 }
 
 
+
 .txt-secondary{
     color: var(--text-secondary);
 }
@@ -154,7 +156,7 @@ p{
     color: var(--text);
     background-color: var(--bg);
     border-radius: var(--borderRadius);
-    border: 1px solid var(--text);
+    border: 1px solid var(--border);
     cursor: pointer;
     font-weight: 500;
     transition : all .2s ease-out;
