@@ -97,7 +97,9 @@ grid-template-rows: repeat(3, auto);
 
 .userProfil {
     display: flex;
+    margin: 0 auto;
     color: var(--text-seondary);
+    gap: 5px;
 }
 .fa-person{
     color: var(--text);
@@ -132,9 +134,9 @@ grid-template-rows: repeat(3, auto);
 .compteurIntervention{
     display: flex;
      color: var(--text-secondary);
+     padding: .5rem 1rem;
 }
 .infoCompteur{
-width: 90%;
 margin: 0 auto;
 font-size:.9rem
 }
@@ -150,19 +152,33 @@ font-size:.9rem
     background-color: var(--redDelete);
 }
 
-.toggle-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text);
-    font-size: 1.6rem;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
-}
-
-.toggle-btn:hover {
-    color: var(--actionYellow);
-}
+/* ⭐ NEW TOGGLE BUTTON (clean, modern, centered) */ 
+.themeToggle { 
+    display: flex;
+     justify-content: center;
+      align-items: center;
+     }
+      .toggle-btn {
+         width: 42px;
+          height: 42px;
+           border-radius: 50%; 
+           border: 1px solid var(--border);
+            background-color: var(--bg);
+             display: flex;
+              justify-content: center;
+               align-items: center;
+                cursor: pointer;
+                 transition: all .25s ease;
+                  color: var(--text-secondary);
+                 }
+                  .toggle-btn i { 
+                    font-size: 1.2rem;
+                 } 
+                 .toggle-btn:hover { 
+                    background-color: var(--bg-light); 
+                     box-shadow: var(--box-shadow); 
+                            color: var(--text-primary);
+                    }
 
 </style>
 <nav class="navbar">
@@ -170,13 +186,6 @@ font-size:.9rem
     <div class="nav-actions">
 
         <p class="user-info appliName">BERNITICKETS</p>
-
-        <div class="themeToggle">
-    <button id="themeToggleBtn" class="toggle-btn">
-        <i class="fa-solid fa-moon"></i>
-    </button>
-</div>
-
 
         <div class="userProfil">
             <i class="fa-solid fa-person"></i>
@@ -187,6 +196,13 @@ font-size:.9rem
                 </span>
                 <span class="user-role"><?= htmlspecialchars($roleName) ?></span>
             </div>
+
+            
+        <div class="themeToggle">
+    <button id="themeToggleBtn" class="toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</div>
         </div>
 
         <div class="compteurIntervention">
