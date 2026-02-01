@@ -234,7 +234,7 @@ tbody{
     background-color: var(--bg);
     box-shadow: var(--box-shadow);
     width: clamp(300px, 70vw, 1000px);
-    height: 80%;
+    height: auto;
     margin: 10vh auto;
 }
 

@@ -28,10 +28,14 @@ $statuss = StatusController::getStatus();
 
 $prioritys = PriorityController::getPrioritys();
 
+
+$models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+
 // Vérifier que le ticket existe
 if (!$ticket) {
     die("Ce ticket n'existe pas.");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +51,7 @@ if (!$ticket) {
     <?php include __DIR__ . '/../navbar.php'; ?>
 
    
-
+    <div class="container">
     <div class="ticketInfo" >
     <div class="topTicket">
 
@@ -163,13 +167,12 @@ if (!$ticket) {
                     </div>
                     <div class="deviceInformations">
                         <label for="device" class="txt-secondary">Appareil :</label>
+                        <?php 
+                        //  var_dump ($models); ?>
                         <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>">
                             <?php
-                            foreach ($devices as $device): ?>
-                            <option value="<?= $device->getIdDevice(); ?>">
-                                <?= $device->getModel(); ?>
-                            </option>
-                            <?php endforeach; ?>
+                            foreach ($models as $model): ?>
+                            <option value="<?= htmlspecialchars($model) ?>"> <?= htmlspecialchars($model) ?> </option> <?php endforeach; ?> </select>
                         </select>
                     </div>
 
@@ -204,8 +207,8 @@ if (!$ticket) {
                         </select>
                     </div>
                 </div>
+                
             </div>
-
         <div class="bottomTicket">
             <button type="submit" class="btn-primary">Enregistrer</button>  
             <button type="button" onclick="window.history.back();">Annuler</button>

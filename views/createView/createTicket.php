@@ -18,6 +18,8 @@ $users = UserController::getUsers();
 $statuss = StatusController::getStatus();
 $prioritys = PriorityController::getPrioritys();
 
+$models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +34,7 @@ $prioritys = PriorityController::getPrioritys();
 <div class="main">
 
 <?php include __DIR__ . '/../navbar.php'; ?>
+    <div class="container">
 
 <div class="ticketInfo">
 
@@ -66,12 +69,10 @@ $prioritys = PriorityController::getPrioritys();
                 <div class="ticketDevice">
                     <p class="txt-secondary">Matériel concerné</p>
                     <select name="device_id" required>
-                        <?php foreach ($devices as $device): ?>
-                            <option value="<?= $device->getIdDevice() ?>">
-                                <?= htmlspecialchars($device->getBrandName() . ' ' . $device->getModel()) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                     <?php
+                            foreach ($models as $model): ?>
+                            <option value="<?= htmlspecialchars($model) ?>"> <?= htmlspecialchars($model) ?> </option> <?php endforeach; ?> </select>
+                        </select>
                 </div>
 
                 <div class="ticketPriority">
@@ -148,8 +149,9 @@ $prioritys = PriorityController::getPrioritys();
     </form>
 
 </div>
-
 </div>
 
+
+</div>
 </body>
 </html>

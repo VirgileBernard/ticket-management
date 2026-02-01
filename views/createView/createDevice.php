@@ -30,6 +30,7 @@ $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
 <div class="main">
 
 <?php include __DIR__ . '/../navbar.php'; ?>
+    <div class="container">
 
 <div class="ticketInfo">
 
