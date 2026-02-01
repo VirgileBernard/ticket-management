@@ -84,17 +84,19 @@
     padding: 12px;
     background-color: var(--actionBrown);
     color: var(--text-contrast);
-    border: none;
+    border: 1px solid var(--actionBrown);
     border-radius: var(--borderRadius);
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    transition: background-color .2s ease, transform .1s ease;
+    transition: all .2s ease;
 }
 
 /* Hover */
 .btn-submit:hover {
-    background-color: color-mix(in srgb, var(--actionBrown) 80%, black);
+    background-color: var(--bg-light);
+    color : var(--actionBrown);
+    border : 1px solid var(--actionBrown);
 }
 
 /* Petit effet de clic */
