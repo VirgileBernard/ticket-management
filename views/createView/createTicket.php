@@ -19,6 +19,7 @@ $statuss = StatusController::getStatus();
 $prioritys = PriorityController::getPrioritys();
 
 $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+$brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
 
 ?>
 
@@ -66,15 +67,53 @@ $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
                     </select>
                 </div>
 
-                <div class="ticketDevice">
-                    <p class="txt-secondary">Matériel concerné</p>
-                    <select name="device_id" required>
+                <div class="ticketBrand">
+                    <p class="txt-secondary">Marque</p>
+   <select name="brand" required>
                      <?php
-                            foreach ($models as $model): ?>
-                            <option value="<?= htmlspecialchars($model) ?>"> <?= htmlspecialchars($model) ?> </option> <?php endforeach; ?> </select>
+                            foreach ($brands as $brand): ?>
+                            <option value="<?= htmlspecialchars($brand) ?>"> <?= htmlspecialchars($brand) ?> </option> <?php endforeach; ?> </select>
                         </select>
                 </div>
 
+
+                   <div class="ticketType">
+                    <p class="txt-secondary">Type d'appareil</p>
+                    <select name="type_id" required>
+                        <?php foreach ($types as $type): ?>
+                            <option value="<?= $type->getIdType() ?>">
+                                <?= htmlspecialchars($type->getNom()) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+
+                        <div class="ticketDevice">
+                    <p class="txt-secondary">Matériel concerné</p>
+                    <select name="device_id" required>
+                     <?php
+                            foreach ($devices as $device): ?>
+                            <option value="<?= $device->getIdDevice() ?>"> <?= htmlspecialchars($device->getModel()) ?> </option> <?php endforeach; ?> </select>
+                        </select>
+                </div>
+
+            </div>
+
+            <!-- COLONNE DROITE -->
+            <div class="rightMidTicket">
+
+              <div class="ticketTechnician">
+                    <p class="txt-secondary">Technicien assigné</p>
+                    <select name="assigned_to" required>
+                        <?php foreach ($users as $user): ?>
+                            <option value="<?= $user->getIdUser() ?>">
+                                <?= htmlspecialchars($user->getFname() . ' ' . $user->getLname()) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
                 <div class="ticketPriority">
                     <p class="txt-secondary">Priorité</p>
                     <select name="priority_id" required>
@@ -86,32 +125,7 @@ $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
                     </select>
                 </div>
 
-            </div>
-
-            <!-- COLONNE DROITE -->
-            <div class="rightMidTicket">
-
-                <div class="ticketType">
-                    <p class="txt-secondary">Type d'appareil</p>
-                    <select name="type_id" required>
-                        <?php foreach ($types as $type): ?>
-                            <option value="<?= $type->getIdType() ?>">
-                                <?= htmlspecialchars($type->getNom()) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="ticketTechnician">
-                    <p class="txt-secondary">Technicien assigné</p>
-                    <select name="created_by" required>
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?= $user->getIdUser() ?>">
-                                <?= htmlspecialchars($user->getFname() . ' ' . $user->getLname()) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+              
 
                 <div class="ticketStatus">
                     <p class="txt-secondary">Statut</p>

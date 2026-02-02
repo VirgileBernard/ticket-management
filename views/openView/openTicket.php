@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../Controllers/ClientController.php';
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
 require_once __DIR__ . '/../../Controllers/StatusController.php';
 require_once __DIR__ . '/../../Controllers/PriorityController.php';
+require_once __DIR__ . '/../../Controllers/InterventionController.php';
 
 session_start();
 
@@ -28,6 +29,7 @@ $statuss = StatusController::getStatus();
 
 $prioritys = PriorityController::getPrioritys();
 
+$interventions = InterventionController::getInterventionsByTicket($ticket_id);
 
 $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
 
@@ -114,6 +116,25 @@ if (!$ticket) {
     </div>
     </div>
 
+        <div class="interventionSection">
+            <div class="topColonne">
+                <p>Détails de l'intervention</p>
+            </div>
+            <?php if (!empty($interventions)): ?>
+                <div class="interventionHistory">
+                    <?php foreach ($interventions as $intervention): ?>
+                        <div class="interventionItem">
+                            <p class="txt-secondary"><?= htmlspecialchars($intervention['user_name']) ?></p>
+                            <p class="txt-secondary"><?= date('d/m/Y H:i', strtotime($intervention['start_at'])) ?></p>
+                            <p><?= htmlspecialchars($intervention['intervention_detail']) ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="txt-secondary">Pas encore d'intervention</p>
+            <?php endif; ?>
+        </div>
+
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
             <form action="../../process/deleteTicket.php" method="POST">
@@ -144,10 +165,10 @@ if (!$ticket) {
                     <div class="technicienInformations">
                         <label for="technician" class="txt-secondary">Technicien :</label>
                       
-                        <select type="text" id="user" name="created_by" value="<?= htmlspecialchars($ticket->creator_name) ?>">
+                        <select type="text" id="user" name="assigned_to" value="<?= htmlspecialchars($ticket->creator_name) ?>">
                             <?php
                             foreach ($users as $user): ?>
-                            <option value="<?= $ticket->getCreatedBy(); ?>">
+                            <option value="<?= $user->getIdUser(); ?>">
                                 <?= $user->getFname();?> <?= $user->getLname(); ?>
                           </option>
                         <?php endforeach; ?>
@@ -167,12 +188,13 @@ if (!$ticket) {
                     </div>
                     <div class="deviceInformations">
                         <label for="device" class="txt-secondary">Appareil :</label>
-                        <?php 
-                        //  var_dump ($models); ?>
-                        <select type="text" id="device" name="device_id" value="<?= htmlspecialchars($ticket->device_model) ?>">
+                        <select type="text" id="device" name="device_id">
                             <?php
-                            foreach ($models as $model): ?>
-                            <option value="<?= htmlspecialchars($model) ?>"> <?= htmlspecialchars($model) ?> </option> <?php endforeach; ?> </select>
+                            foreach ($devices as $device): ?>
+                            <option value="<?= $device->getIdDevice() ?>">
+                                <?= htmlspecialchars($device->getModel()) ?>
+                            </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -208,6 +230,22 @@ if (!$ticket) {
                     </div>
                 </div>
                 
+            </div>
+
+            <div class="interventionEditSection">
+                <div class="topColonne">
+                    <p>Ajouter une intervention</p>
+                </div>
+                <input type="hidden" name="ticket_id" value="<?= $ticket->getIdTicket() ?>">
+                <input type="hidden" name="user_id" value="<?= $_SESSION['id_user'] ?>">
+                <label for="intervention_detail" class="txt-secondary">Détails de l'intervention :</label>
+                <textarea 
+                    name="intervention_detail" 
+                    id="intervention_detail"
+                    placeholder="Entrez les détails de l'intervention..." 
+                    rows="4"
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-top: 10px;"
+                ></textarea>
             </div>
         <div class="bottomTicket">
             <button type="submit" class="btn-primary">Enregistrer</button>  

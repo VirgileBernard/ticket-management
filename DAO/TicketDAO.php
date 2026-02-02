@@ -19,9 +19,10 @@ public static function getTickets() {
             t.device_id,
             t.status_id,
             t.priority_id,
+            t.assigned_to,
             t.created_by,
             CONCAT(c.fname, ' ', c.lname) AS client_name,
-            CONCAT(u.fname, ' ', u.lname) AS creator_name,
+            CONCAT(u.fname, ' ', u.lname) AS assigned_to_name,
             d.model AS device_model,
             s.nom AS status_name,
             p.nom AS priority_name
@@ -30,7 +31,7 @@ public static function getTickets() {
         JOIN devices d ON t.device_id = d.id_device
         JOIN status s ON t.status_id = s.id_status
         JOIN priorities p ON t.priority_id = p.id_priority
-        JOIN users u ON t.created_by = u.id_user
+        JOIN users u ON t.assigned_to = u.id_user
     ";
 
     $stmt = $con->prepare($requete); 
@@ -47,6 +48,7 @@ public static function getTickets() {
             $row['device_id'],
             $row['status_id'],
             $row['priority_id'],
+            $row['assigned_to'],
             $row['created_by']
         );
 
@@ -55,7 +57,7 @@ public static function getTickets() {
         $ticket->device_model  = $row['device_model'];
         $ticket->status_name   = $row['status_name'];
         $ticket->priority_name = $row['priority_name'];
-        $ticket->creator_name  = $row['creator_name'];
+        $ticket->assigned_to_name = $row['assigned_to_name'];
 
         $tickets[] = $ticket;
     }
@@ -76,14 +78,15 @@ public static function getTickets() {
 // créer un nouveau ticket
     static function createTicket($ticket){
          $con=MONPDO::getPDO();
-        $stmt = $con->prepare("INSERT INTO tickets (ticket_number, client_id, device_id, status_id, priority_id, created_by) 
-                              VALUES (:ticket_number, :client_id, :device_id, :status_id, :priority_id, :created_by)");
+        $stmt = $con->prepare("INSERT INTO tickets (ticket_number, client_id, device_id, status_id, priority_id, assigned_to, created_by) 
+                              VALUES (:ticket_number, :client_id, :device_id, :status_id, :priority_id, :assigned_to, :created_by)");
         
         $stmt->bindValue(":ticket_number",$ticket->getTicketNumber(),PDO::PARAM_STR);
         $stmt->bindValue(":client_id",$ticket->getClientId(),PDO::PARAM_INT);
         $stmt->bindValue(":device_id",$ticket->getDeviceId(),PDO::PARAM_INT);
         $stmt->bindValue(":status_id",$ticket->getStatusId(),PDO::PARAM_INT);
         $stmt->bindValue(":priority_id",$ticket->getPriorityId(),PDO::PARAM_INT);
+        $stmt->bindValue(":assigned_to",$ticket->getAssignedTo(),PDO::PARAM_INT);
         $stmt->bindValue(":created_by",$ticket->getCreatedBy(),PDO::PARAM_INT);
         
         $stmt->execute();
@@ -100,6 +103,7 @@ public static function getTickets() {
             t.device_id,
             t.status_id,
             t.priority_id,
+            t.assigned_to,
             t.created_by,
             CONCAT(c.fname, ' ', c.lname) AS client_name,
             CONCAT(u.fname, ' ', u.lname) AS creator_name,
@@ -112,7 +116,7 @@ public static function getTickets() {
         JOIN devices d ON t.device_id = d.id_device
         JOIN status s ON t.status_id = s.id_status
         JOIN priorities p ON t.priority_id = p.id_priority
-        JOIN users u ON t.created_by = u.id_user
+        JOIN users u ON t.assigned_to = u.id_user
         LEFT JOIN intervention i ON i.ticket_id = t.id_ticket
         WHERE t.id_ticket = :ticket_id
     ";
@@ -128,6 +132,7 @@ public static function getTickets() {
             $rows['device_id'],
             $rows['status_id'],
             $rows['priority_id'],
+            $rows['assigned_to'],
             $rows['created_by']
         );
 
@@ -146,7 +151,7 @@ public static function getTickets() {
     //counter le nombre de tickets en cours par utilisateur
     static function countTicketsByUser($user_id){
         $con=MONPDO::getPDO();
-        $stmt = $con->prepare("SELECT COUNT(*) as ticket_count FROM tickets WHERE created_by = :user_id");
+        $stmt = $con->prepare("SELECT COUNT(*) as ticket_count FROM tickets WHERE assigned_to = :user_id");
         $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -156,7 +161,7 @@ public static function getTickets() {
     //coubter le nombre de ticket terminé par utilisateur (COMPTEUR DANS LA NAVBAR)
     static function countDoneTicketsByUser($user_id){
         $con=MONPDO::getPDO();
-        $stmt = $con->prepare("SELECT COUNT(*) as done_ticket_count FROM tickets WHERE created_by = :user_id AND status_id = 3");
+        $stmt = $con->prepare("SELECT COUNT(*) as done_ticket_count FROM tickets WHERE assigned_to = :user_id AND status_id = 3");
         $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -166,7 +171,7 @@ public static function getTickets() {
     //couter le nombre de ticket urgents par utilisateur
     static function countUrgentTicketsByUser($user_id){
         $con=MONPDO::getPDO();
-        $stmt = $con->prepare("SELECT COUNT(*) as urgent_ticket_count FROM tickets WHERE created_by = :user_id AND priority_id = 4");
+        $stmt = $con->prepare("SELECT COUNT(*) as urgent_ticket_count FROM tickets WHERE assigned_to = :user_id AND priority_id = 4");
         $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -175,7 +180,7 @@ public static function getTickets() {
 
     static function countOpenTicketsByUser($user_id){
         $con=MONPDO::getPDO();
-        $stmt = $con->prepare("SELECT COUNT(*) as open_ticket_count FROM tickets WHERE created_by = :user_id AND status_id = 1");
+        $stmt = $con->prepare("SELECT COUNT(*) as open_ticket_count FROM tickets WHERE assigned_to = :user_id AND status_id = 1");
         $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -192,13 +197,15 @@ public static function getTickets() {
             client_id = :client_id,
             device_id = :device_id,
             status_id = :status_id,
-            priority_id = :priority_id
+            priority_id = :priority_id,
+            assigned_to = :assigned_to
         WHERE id_ticket = :id_ticket");
 
     $stmt->bindValue(":client_id", $ticket->getClientId(), PDO::PARAM_INT);
     $stmt->bindValue(":device_id", $ticket->getDeviceId(), PDO::PARAM_INT);
     $stmt->bindValue(":status_id", $ticket->getStatusId(), PDO::PARAM_INT);
     $stmt->bindValue(":priority_id", $ticket->getPriorityId(), PDO::PARAM_INT);
+    $stmt->bindValue(":assigned_to", $ticket->getCreatedBy(), PDO::PARAM_INT);
     $stmt->bindValue(":id_ticket", $ticket->getIdTicket(), PDO::PARAM_INT);
 
     return $stmt->execute();

@@ -7,15 +7,17 @@ class Ticket {
     private $device_id;
     private $status_id;
     private $priority_id;
+    private $assigned_to;
     private $created_by;
 
-    public function __construct($id_ticket=null, $ticket_number, $client_id, $device_id, $status_id, $priority_id, $created_by) {
+    public function __construct($id_ticket=null, $ticket_number, $client_id, $device_id, $status_id, $priority_id, $assigned_to, $created_by=null) {
         $this->id_ticket = $id_ticket;
         $this->ticket_number = $ticket_number;   
         $this->client_id = $client_id;
         $this->device_id = $device_id;
         $this->status_id = $status_id;
         $this->priority_id = $priority_id;
+        $this->assigned_to = $assigned_to;
         $this->created_by = $created_by;
     }
 
@@ -41,15 +43,20 @@ class Ticket {
     public function getCreatedBy() {
         return $this->created_by;
     }
+    
+    public function getAssignedTo() {
+        return $this->assigned_to;
+    }
     public function __toString() {
         return sprintf(
-            "Ticket [id_ticket=%s, ticket_number=%s, client_id=%s, device_id=%s, status_id=%s, priority_id=%s, created_by=%s]",
+            "Ticket [id_ticket=%s, ticket_number=%s, client_id=%s, device_id=%s, status_id=%s, priority_id=%s, assigned_to=%s, created_by=%s]",
             $this->id_ticket ?? 'null',
             $this->ticket_number,
             $this->client_id,
             $this->device_id,
             $this->status_id,
             $this->priority_id,
+            $this->assigned_to,
             $this->created_by
         );
     }

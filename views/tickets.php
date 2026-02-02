@@ -37,35 +37,35 @@ $tickets = TicketController::getTickets();
 </div>
 
 <div class="floatBtn">
-        
-    <button onclick="window.location='createView/createTicket.php'">
-        <i class="fa-solid fa-plus"></i>
-        Créer un ticket</button>
-    </div>
-  <table class="user-table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Client</th>
-            <th>Appareil</th>
-            <th>Statut</th>
-            <th>Priorité</th>
-            <th>Créé par</th>
-        </tr>
-    </thead>
+        <button onclick="window.location='createView/createTicket.php'">
+            <i class="fa-solid fa-plus"></i>
+            Créer un ticket</button>
+        </div>
 
-    <tbody> 
-        <?php foreach ($tickets as $ticket): ?>
-           <tr onclick="window.location='openView/openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
-                <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
-                <td><?= htmlspecialchars($ticket->client_name) ?></td>
-                <td><?= htmlspecialchars($ticket->device_model) ?></td>
-                <td><?= htmlspecialchars($ticket->status_name) ?></td>
-                <td><?= htmlspecialchars($ticket->priority_name) ?></td>
-                <td><?= htmlspecialchars($ticket->creator_name) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Client</th>
+                    <th>Appareil</th>
+                    <th>Statut</th>
+                    <th>Priorité</th>
+                    <th>Technicien</th>
+                </tr>
+            </thead>
+
+            <tbody> 
+                <?php foreach ($tickets as $ticket): ?>
+                   <tr onclick="window.location='openView/openTicket.php?id=<?= $ticket->getIdTicket() ?>'">
+                        <td><?= htmlspecialchars($ticket->getTicketNumber()) ?></td>
+                        <td><?= htmlspecialchars($ticket->client_name) ?></td>
+                        <td><?= htmlspecialchars($ticket->device_model) ?></td>
+                        <td><?= htmlspecialchars($ticket->status_name) ?></td>
+                        <td><?= htmlspecialchars($ticket->priority_name) ?></td>
+                        <td><?= htmlspecialchars($ticket->assigned_to_name) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
 </table>
     </div>
 </div>
