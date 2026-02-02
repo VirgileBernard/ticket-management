@@ -13,25 +13,15 @@ session_start();
 // var_dump($_POST);
 // exit;
 
-// Ensure we have the ticket_number; if not provided, fetch existing ticket
-$ticket_number = isset($_POST['ticket_number']) ? $_POST['ticket_number'] : null;
-if (empty($ticket_number) && isset($_POST['id_ticket'])) {
-    $existing = TicketController::openTicket(intval($_POST['id_ticket']));
-    $ticket_number = $existing ? $existing->getTicketNumber() : null;
-}
-
-// Get the existing ticket to preserve created_by
-$existing_ticket = TicketController::openTicket(intval($_POST['id_ticket']));
-$created_by = $existing_ticket ? $existing_ticket->getCreatedBy() : null;
 
 $ticket = new Ticket(
     $_POST['id_ticket'],
     $ticket_number,
-    $_POST['client_id'],
-    $_POST['device_id'],
-    $_POST['status_id'],
-    $_POST['priority_id'],
-    $_POST['assigned_to'],
+    intval($_POST['client_id']),
+    intval($_POST['device_id']),
+    intval($_POST['status_id']),
+    intval($_POST['priority_id']),
+    intval($_POST['assigned_to']),
     $created_by
 );
 

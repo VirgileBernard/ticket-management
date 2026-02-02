@@ -11,12 +11,12 @@ $ticket_number = "TCK-" . "-" . rand(1, 100);
 $ticket = new Ticket(
     null,
     $ticket_number,
-    $_POST['client_id'],
-    $_POST['device_id'],
-    $_POST['status_id'],
-    $_POST['priority_id'],
-    $_POST['assigned_to'],
-    $_SESSION['id_user']
+    ($_POST['client_id']),
+    ($_POST['device_id']),
+    ($_POST['status_id']),
+    ($_POST['priority_id']),
+    ($_POST['assigned_to']),
+    ($_SESSION['id_user'])
 );
 
 $newId = TicketController::createTicket($ticket);

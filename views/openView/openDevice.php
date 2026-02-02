@@ -17,6 +17,10 @@ $device = DeviceController::getDevice($device_id);
 $clients = ClientController::getClients();
 $types = TypeController::getTypes();
 
+// listes dédupliquées pour affichage unique
+$brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
+$models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+
 if(!$device) {
     die("Cet appareil n'existe pas.");
 }
@@ -120,10 +124,9 @@ if(!$device) {
             <div class="deviceBrand">
                 <p class="txt-secondary">Marque</p>
                 <select name="brand" id="brand_id">
-                    <?php foreach ($devices as $d): ?>
-                        <option value="<?= $d->getBrandName(); ?>"
-                            <?= $d->getBrandName() === $device->getBrandName() ? 'selected' : '' ?>>
-                            <?= $d->getBrandName(); ?>
+                    <?php foreach ($brands as $b): ?>
+                        <option value="<?= htmlspecialchars($b); ?>" <?= $b === $device->getBrandName() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($b); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -132,10 +135,9 @@ if(!$device) {
             <div class="deviceModele">
                 <p class="txt-secondary">Modèle</p>
                 <select name="model" id="model">
-                    <?php foreach ($devices as $d): ?>
-                        <option value="<?= $d->getModel(); ?>"
-                            <?= $d->getModel() === $device->getModel() ? 'selected' : '' ?>>
-                            <?= $d->getModel(); ?>
+                    <?php foreach ($models as $m): ?>
+                        <option value="<?= htmlspecialchars($m); ?>" <?= $m === $device->getModel() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($m); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -146,10 +148,10 @@ if(!$device) {
                 <p class="txt-secondary">Type d'appareil</p>
                 <select name="type_id" id="type">
                     <?php foreach ($types as $type): ?>
-                        <option value="<?= $type->getIdType(); ?>">
-                        <?= $type->getNom(); ?>  
+                        <option value="<?= $type->getIdType(); ?>" <?= $type->getIdType() == $device->getType() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($type->getNom()); ?>  
                         </option>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

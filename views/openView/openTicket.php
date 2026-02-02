@@ -37,6 +37,17 @@ $interventions = InterventionController::getInterventionsByTicket($ticket_id);
 // Créer arrays sans doublons pour Brand et Type
 $brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
 $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
+$materiels = [];
+foreach ($devices as $device) {
+    $model = $device->getModel();
+    if (!isset($materiels[$model])) {
+        // on garde le premier id_device rencontré pour ce modèle
+        $materiels[$model] = $device->getIdDevice();
+    }
+}
+
+
+
 
 // Vérifier que le ticket existe
 if (!$ticket) {
@@ -206,13 +217,17 @@ if ($current_device) {
 
                     <div class="ticketClient">
                         <p class="txt-secondary">Client</p>
-                        <select name="client_id" required>
-                            <?php foreach ($clients as $client): ?>
-                                <option value="<?= $client->getId(); ?>">
-                                    <?= htmlspecialchars($client->getFname() . ' ' . $client->getLname()); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                   <select name="client_id" required>
+    <?php foreach ($clients as $client): ?>
+        <option 
+            value="<?= $client->getId(); ?>"
+            <?= $client->getId() == $ticket->getClientId() ? 'selected' : '' ?>
+        >
+            <?= htmlspecialchars($client->getFname() . ' ' . $client->getLname()); ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
                     </div>
 
                     <div class="ticketBrand">
@@ -237,13 +252,18 @@ if ($current_device) {
 
                     <div class="ticketDevice">
                         <p class="txt-secondary">Matériel concerné</p>
-                        <select name="device_id" required>
-                            <?php foreach ($devices as $device): ?>
-                                <option value="<?= $device->getIdDevice() ?>">
-                                    <?= htmlspecialchars($device->getModel()) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                      <select name="device_id" required>
+    <?php foreach ($materiels as $model => $id_device): ?>
+     <option 
+    value="<?= $id_device ?>"
+    <?= $id_device == $ticket->getDeviceId() ? 'selected' : '' ?>
+>
+    <?= htmlspecialchars($model) ?>
+</option>
+
+    <?php endforeach; ?>
+</select>
+      
                     </div>
 
                 </div>

@@ -20,6 +20,14 @@ $prioritys = PriorityController::getPrioritys();
 
 $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
 $brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
+// construire une liste de matériels unique (modèle => id_device)
+$materiels = [];
+foreach ($devices as $device) {
+    $model = $device->getModel();
+    if (!isset($materiels[$model])) {
+        $materiels[$model] = $device->getIdDevice();
+    }
+}
 
 ?>
 
@@ -69,11 +77,11 @@ $brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
 
                 <div class="ticketBrand">
                     <p class="txt-secondary">Marque</p>
-   <select name="brand" required>
-                     <?php
-                            foreach ($brands as $brand): ?>
-                            <option value="<?= htmlspecialchars($brand) ?>"> <?= htmlspecialchars($brand) ?> </option> <?php endforeach; ?> </select>
-                        </select>
+                    <select name="brand" required>
+                        <?php foreach ($brands as $brand): ?>
+                            <option value="<?= htmlspecialchars($brand) ?>"><?= htmlspecialchars($brand) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
 
@@ -89,13 +97,13 @@ $brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
                 </div>
 
 
-                        <div class="ticketDevice">
+                <div class="ticketDevice">
                     <p class="txt-secondary">Matériel concerné</p>
                     <select name="device_id" required>
-                     <?php
-                            foreach ($devices as $device): ?>
-                            <option value="<?= $device->getIdDevice() ?>"> <?= htmlspecialchars($device->getModel()) ?> </option> <?php endforeach; ?> </select>
-                        </select>
+                        <?php foreach ($materiels as $model => $id_device): ?>
+                            <option value="<?= $id_device ?>"><?= htmlspecialchars($model) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
             </div>
