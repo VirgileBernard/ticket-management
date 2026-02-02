@@ -16,7 +16,7 @@ require_once '../Controllers/TicketController.php';
 $users = UserController::getUsers();
 $userId = $_SESSION['id_user'];
 // var_dump($_SESSION);
-$tickets = TicketController::getTickets();
+$tickets = TicketController::getTicketByUser($userId);
 
 
 $totalTickets = TicketController::countTicketsByUser($userId);

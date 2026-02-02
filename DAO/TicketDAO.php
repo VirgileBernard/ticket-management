@@ -147,6 +147,65 @@ public static function getTickets() {
         return $ticket;
     }
     
+// obtenir tous les tickets attribués à un user spécifique
+    public static function getTicketByUser($user_id) {
+        $con = MONPDO::getPDO();
+
+        $requete = "
+            SELECT 
+                t.id_ticket,
+                t.ticket_number,
+                t.client_id, 
+                t.device_id,
+                t.status_id,
+                t.priority_id,
+                t.assigned_to,
+                t.created_by,
+                CONCAT(c.fname, ' ', c.lname) AS client_name,
+                CONCAT(u.fname, ' ', u.lname) AS assigned_to_name,
+                d.model AS device_model,
+                s.nom AS status_name,
+                p.nom AS priority_name
+            FROM tickets t
+            JOIN clients c ON t.client_id = c.id_client
+            JOIN devices d ON t.device_id = d.id_device
+            JOIN status s ON t.status_id = s.id_status
+            JOIN priorities p ON t.priority_id = p.id_priority
+            JOIN users u ON t.assigned_to = u.id_user
+            WHERE t.assigned_to = :user_id
+            ORDER BY t.id_ticket DESC
+        ";
+
+        $stmt = $con->prepare($requete);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $tickets = [];
+
+        foreach ($rows as $row) {
+            $ticket = new Ticket(
+                $row['id_ticket'],
+                $row['ticket_number'],
+                $row['client_id'],
+                $row['device_id'],
+                $row['status_id'],
+                $row['priority_id'],
+                $row['assigned_to'],
+                $row['created_by']
+            );
+
+            $ticket->client_name   = $row['client_name'];
+            $ticket->device_model  = $row['device_model'];
+            $ticket->status_name   = $row['status_name'];
+            $ticket->priority_name = $row['priority_name'];
+            $ticket->assigned_to_name = $row['assigned_to_name'];
+
+            $tickets[] = $ticket;
+        }
+
+        return $tickets;
+    }
 
     //counter le nombre de tickets en cours par utilisateur
     static function countTicketsByUser($user_id){

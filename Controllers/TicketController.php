@@ -7,6 +7,11 @@ class TicketController {
         return TicketDAO::getTickets();
     }
 
+    // get all tickets assigned to a specific user
+    public static function getTicketByUser($user_id) {
+        return TicketDAO::getTicketByUser($user_id);
+    }
+
     // function to count done tickets by user
     public static function countDoneTicketsByUser($id){
         return TicketDAO::countDoneTicketsByUser($id);

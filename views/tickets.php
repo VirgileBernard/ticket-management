@@ -13,7 +13,7 @@ require_once("../Controllers/TicketController.php");
 require_once("../models/Ticket.php");
 
 
-$tickets = TicketController::getTickets();
+$tickets = TicketController::getTicketByUser($_SESSION['id_user']);
 
 ?>
 <!DOCTYPE html>
