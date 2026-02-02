@@ -10,6 +10,11 @@ session_start();
 
 require_once ("../Controllers/userController.php");
 require_once("../models/User.php");
+require_once("../helpers/AccessControl.php");
+
+// Only supervisors can access this page
+AccessControl::requireSupervisor();
+
 $users = UserController::getUsers();
 
 

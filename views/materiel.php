@@ -11,7 +11,10 @@ session_start();
  require_once ("../Controllers/TypeController.php");
  require_once ("../models/Device.php");
  require_once ("../models/Type.php");
+ require_once ("../helpers/AccessControl.php");
 
+// Only supervisors can access this page
+AccessControl::requireSupervisor();
 
     $devices = DeviceController::getDevices();
     $types= TypeController::getTypes();

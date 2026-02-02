@@ -11,6 +11,7 @@
 
 require_once("../Controllers/TicketController.php");
 require_once("../models/Ticket.php");
+require_once("../helpers/AccessControl.php");
 
 
 $tickets = TicketController::getTicketByUser($_SESSION['id_user']);
@@ -37,9 +38,11 @@ $tickets = TicketController::getTicketByUser($_SESSION['id_user']);
 </div>
 
 <div class="floatBtn">
-        <button onclick="window.location='createView/createTicket.php'">
-            <i class="fa-solid fa-plus"></i>
-            Créer un ticket</button>
+        <?php if (AccessControl::isSupervisor()): ?>
+            <button onclick="window.location='createView/createTicket.php'">
+                <i class="fa-solid fa-plus"></i>
+                Créer un ticket</button>
+        <?php endif; ?>
         </div>
 
         <table class="user-table">

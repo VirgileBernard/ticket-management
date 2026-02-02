@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../../Controllers/ClientController.php';
+require_once __DIR__ . '/../../helpers/AccessControl.php';
+
 session_start();
+
+// Only supervisors can access this page
+AccessControl::requireSupervisor();
 
 // Vérifier que l'ID est présent dans l'URL
 if (!isset($_GET['id'])) {

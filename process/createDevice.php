@@ -2,8 +2,12 @@
 require_once __DIR__ . '/../Controllers/DeviceController.php';
 require_once __DIR__ . '/../Models/Device.php';
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
+require_once __DIR__ . '/../helpers/AccessControl.php';
 
 session_start();
+
+// Only supervisors can create devices
+AccessControl::requireSupervisor();
 
 if (
     !isset($_POST['model']) ||

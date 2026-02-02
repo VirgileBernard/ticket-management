@@ -8,8 +8,12 @@ require_once(__DIR__ . "/../models/Intervention.php");
 require_once(__DIR__ . "/../DAO/config/Baseurl.php");
 require_once(__DIR__ . "/../Controllers/TicketController.php");
 require_once(__DIR__ . "/../Controllers/InterventionController.php");
+require_once(__DIR__ . "/../helpers/AccessControl.php");
 
 session_start();
+
+// All roles can modify tickets (for adding interventions)
+AccessControl::requireTicketModifyAccess();
 // var_dump($_POST);
 // exit;
 

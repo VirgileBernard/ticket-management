@@ -3,7 +3,11 @@
 require_once __DIR__ . '/../Controllers/UserController.php';
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
+require_once __DIR__ . '/../helpers/AccessControl.php';
 session_start();
+
+// Only supervisors can create users
+AccessControl::requireSupervisor();
 
 
 if(

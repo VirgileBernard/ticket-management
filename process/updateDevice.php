@@ -5,10 +5,12 @@
 require_once '../Controllers/DeviceController.php';
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
 require_once __DIR__ . '/../Models/Device.php';
-
-
+require_once __DIR__ . '/../helpers/AccessControl.php';
 
 session_start();
+
+// Only supervisors can update devices
+AccessControl::requireSupervisor();
 $_SESSION['flash-message edit'] = "Les informations de l'appareil ont été mises à jour avec succès.";
 
 

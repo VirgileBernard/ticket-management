@@ -3,8 +3,12 @@
 require_once(__DIR__ . "/../models/User.php");
 require_once(__DIR__ . "/../DAO/config/Baseurl.php");
 require_once(__DIR__ . "/../Controllers/UserController.php");
+require_once(__DIR__ . "/../helpers/AccessControl.php");
 
 session_start();
+
+// Only supervisors can update users
+AccessControl::requireSupervisor();
 $_SESSION['flash-message edit'] = "Les informations du membre ont été mises à jour avec succès.";
 
 $user = new User(

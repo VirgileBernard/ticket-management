@@ -2,8 +2,12 @@
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
 require_once __DIR__ . '/../../Controllers/TypeController.php';
 require_once __DIR__ . '/../../Controllers/ClientController.php';
+require_once __DIR__ . '/../../helpers/AccessControl.php';
 
 session_start();
+
+// Only supervisors can create devices
+AccessControl::requireSupervisor();
 
 // Charger les types, clients et devices pour les selects
 $types = TypeController::getTypes();

@@ -7,6 +7,7 @@ require_once __DIR__ . '/../../Controllers/StatusController.php';
 require_once __DIR__ . '/../../Controllers/PriorityController.php';
 require_once __DIR__ . '/../../Controllers/TypeController.php';
 require_once __DIR__ . '/../../Controllers/InterventionController.php';
+require_once __DIR__ . '/../../helpers/AccessControl.php';
 
 session_start();
 
@@ -189,15 +190,17 @@ if ($current_device) {
 
         <div class="bottomTicket">
             <button id="editBtn" class="btn-primary">Modifier</button>
-            <form action="../../process/deleteTicket.php" method="POST">
-    <input type="hidden" name="id_ticket" value="<?= $ticket->getIdTicket() ?>">
-    <button
-        type="submit"
-        id="dangerBtn"
-        onclick="return confirm('Supprimer définitivement ce ticket ?');"
-    >Supprimer
-    </button>
-</form>
+            <?php if (AccessControl::isSupervisor()): ?>
+                <form action="../../process/deleteTicket.php" method="POST">
+                    <input type="hidden" name="id_ticket" value="<?= $ticket->getIdTicket() ?>">
+                    <button
+                        type="submit"
+                        id="dangerBtn"
+                        onclick="return confirm('Supprimer définitivement ce ticket ?');"
+                    >Supprimer
+                    </button>
+                </form>
+            <?php endif; ?>
 
             
         </div>

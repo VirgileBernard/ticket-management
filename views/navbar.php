@@ -3,6 +3,7 @@ require_once __DIR__ . '/../DAO/config/Baseurl.php';
 require_once __DIR__ . '/../Controllers/UserController.php';
 require_once __DIR__ . '/../Controllers/RoleController.php';
 require_once __DIR__ . '/../Controllers/TicketController.php';
+require_once __DIR__ . '/../helpers/AccessControl.php';
 // 1. Récupérer l'utilisateur connecté
 $userId = $_SESSION['id_user'] ?? null;
 if (!$userId) {
@@ -296,6 +297,7 @@ font-size:.9rem
    Tickets
 </a>
 
+<?php if (AccessControl::isSupervisor()): ?>
 <a href="<?= BASE_URL ?>views/clients.php"
    class="<?= isActive('clients', $currentPage, $active) ?>">
    Clients
@@ -310,6 +312,7 @@ font-size:.9rem
    class="<?= isActive('team', $currentPage, $active) ?>">
    Team
 </a>
+<?php endif; ?>
 
 
         </div>

@@ -9,6 +9,10 @@ session_start();
 
 require_once("../Controllers/ClientController.php");
 require_once("../models/Client.php");
+require_once("../helpers/AccessControl.php");
+
+// Only supervisors can access this page
+AccessControl::requireSupervisor();
 
 $clients = ClientController::getClients();
 

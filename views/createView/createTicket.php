@@ -6,9 +6,13 @@ require_once __DIR__ . '/../../Controllers/TypeController.php';
 require_once __DIR__ . '/../../Controllers/UserController.php';
 require_once __DIR__ . '/../../Controllers/StatusController.php';
 require_once __DIR__ . '/../../Controllers/PriorityController.php';
+require_once __DIR__ . '/../../helpers/AccessControl.php';
 
 
 session_start();
+
+// Only supervisors can create tickets
+AccessControl::requireSupervisor();
 
 // Charger les données nécessaires
 $clients = ClientController::getClients();

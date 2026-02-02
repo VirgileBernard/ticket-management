@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../Controllers/TicketController.php';
+require_once __DIR__ . '/../DAO/config/Baseurl.php';
+require_once __DIR__ . '/../helpers/AccessControl.php';
+
 session_start();
+
+// Only supervisors can delete tickets
+AccessControl::requireSupervisor();
 
 $_SESSION['flash-message delete'] = "Le ticket a été supprimé";
 

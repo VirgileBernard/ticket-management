@@ -3,8 +3,12 @@
 require_once __DIR__ . '/../Controllers/TicketController.php';
 require_once __DIR__ . '/../Models/Ticket.php';
 require_once __DIR__ . '/../DAO/config/Baseurl.php';
+require_once __DIR__ . '/../helpers/AccessControl.php';
 
 session_start();
+
+// Only supervisors can create tickets
+AccessControl::requireSupervisor();
 
 $ticket_number = "TCK-" . "-" . rand(1, 100);
 
