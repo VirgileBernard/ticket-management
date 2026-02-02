@@ -198,14 +198,16 @@ public static function getTickets() {
             device_id = :device_id,
             status_id = :status_id,
             priority_id = :priority_id,
-            assigned_to = :assigned_to
+            assigned_to = :assigned_to,
+            created_by = :created_by
         WHERE id_ticket = :id_ticket");
 
     $stmt->bindValue(":client_id", $ticket->getClientId(), PDO::PARAM_INT);
     $stmt->bindValue(":device_id", $ticket->getDeviceId(), PDO::PARAM_INT);
     $stmt->bindValue(":status_id", $ticket->getStatusId(), PDO::PARAM_INT);
     $stmt->bindValue(":priority_id", $ticket->getPriorityId(), PDO::PARAM_INT);
-    $stmt->bindValue(":assigned_to", $ticket->getCreatedBy(), PDO::PARAM_INT);
+    $stmt->bindValue(":assigned_to", $ticket->getAssignedTo(), PDO::PARAM_INT);
+    $stmt->bindValue(":created_by", $ticket->getCreatedBy(), PDO::PARAM_INT);
     $stmt->bindValue(":id_ticket", $ticket->getIdTicket(), PDO::PARAM_INT);
 
     return $stmt->execute();

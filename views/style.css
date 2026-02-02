@@ -317,3 +317,85 @@ margin-bottom: 1rem;
     90% { opacity: 1; transform: translateX(-50%) translateY(0); }
     100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
 }
+
+
+/* SECTION LISTE DES INTERVENTIONS */
+.interventionSection,
+.interventionEditSection {
+    /* border: 1px solid var(--border); */
+    /* border-radius: var(--borderRadius); */
+    /* background-color: var(--bg); */
+    padding: 1.5rem;
+    margin-top: 2rem;
+    /* box-shadow: var(--box-shadow); */
+    resize: none;
+}
+
+/* TITRE DE SECTION */
+.topColonne p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* LISTE DES INTERVENTIONS */
+.interventionHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* UNE INTERVENTION */
+.interventionItem {
+    border: 1px solid var(--border);
+    border-radius: var(--borderRadius);
+    padding: 1rem;
+    background-color: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+/* META (nom + date) */
+.interventionMeta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: .9rem;
+}
+
+.interventionMeta .author {
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.interventionMeta .date {
+    opacity: .8;
+}
+
+/* TEXTE DE L’INTERVENTION */
+.interventionItem .detail {
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* TEXTAREA AJOUT INTERVENTION */
+#intervention_detail {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--borderRadius);
+    /* background-color: var(--bg); */
+    color: var(--text-primary);
+    margin-top: 10px;
+    resize: vertical;
+    font-size: 1rem;
+     resize: none;
+}
+
+#intervention_detail:focus {
+    outline: none;
+    border-color: var(--text-primary);
+    box-shadow: var(--box-shadow);
+}

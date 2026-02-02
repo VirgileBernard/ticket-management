@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../Controllers/ClientController.php';
 require_once __DIR__ . '/../../Controllers/DeviceController.php';
 require_once __DIR__ . '/../../Controllers/StatusController.php';
 require_once __DIR__ . '/../../Controllers/PriorityController.php';
+require_once __DIR__ . '/../../Controllers/TypeController.php';
 require_once __DIR__ . '/../../Controllers/InterventionController.php';
 
 session_start();
@@ -29,8 +30,12 @@ $statuss = StatusController::getStatus();
 
 $prioritys = PriorityController::getPrioritys();
 
+$types = TypeController::getTypes();
+
 $interventions = InterventionController::getInterventionsByTicket($ticket_id);
 
+// Créer arrays sans doublons pour Brand et Type
+$brands = array_unique(array_map(fn($d) => $d->getBrandName(), $devices));
 $models = array_unique(array_map(fn($d) => $d->getModel(), $devices));
 
 // Vérifier que le ticket existe
@@ -57,7 +62,6 @@ if (!$ticket) {
     <div class="ticketInfo" >
     <div class="topTicket">
 
-
            <div class="ticketNumber">
              <p>   <?= htmlspecialchars($ticket->getTicketNumber()) ?></p>
             </div>
@@ -74,6 +78,26 @@ if (!$ticket) {
         </div>
 
     </div>
+<?php
+// Obtenir le device actuel pour afficher ses infos
+$current_device = null;
+foreach ($devices as $device) {
+    if ($device->getIdDevice() == $ticket->getDeviceId()) {
+        $current_device = $device;
+        break;
+    }
+}
+// Obtenir le type d'appareil
+$current_type = null;
+if ($current_device) {
+    foreach ($types as $type) {
+        if ($type->getIdType() == $current_device->getType()) {
+            $current_type = $type;
+            break;
+        }
+    }
+}
+?>
 <div id="ticketView">
     <div class="midTicket">
 
@@ -81,37 +105,54 @@ if (!$ticket) {
         <div class="topColonne">
             <p>Informations</p>
         </div>
-        <div class="userInformations">
-            <p class="txt-secondary">Technicien</p>  <!-- TODO : afficher dynamiquement le role du technicien assigné -->
-            <p><?= htmlspecialchars($ticket->creator_name) ?></p>
-        </div>
-        <div class="clientInformations">
+
+                <div class="clientInformations">
             <p class="txt-secondary">Client</p>
             <p><?= htmlspecialchars($ticket->client_name) ?></p>
         </div>
+        
+
+        <div class="deviceBrand">
+            <p class="txt-secondary">Marque</p>
+            <p><?= $current_device ? htmlspecialchars($current_device->getBrandName()) : 'N/A' ?></p>
+        </div>
+
+        <div class="deviceType">
+            <p class="txt-secondary">Type d'appareil</p>
+            <p><?= $current_type ? htmlspecialchars($current_type->getNom()) : 'N/A' ?></p>
+        </div>
+
         <div class="deviceInformations">
-           <p class="txt-secondary">Appareil</p>
+           <p class="txt-secondary">Matériel concerné</p>
             <p><?= htmlspecialchars($ticket->device_model) ?></p>
         </div>
-      
-        <div class="descriptionTicket">
-            <p>Description</p>
-            <!-- TODO : ajouter la description du ticket -->
-        </div>
+    
     </div>
 
     <div class="rightMidTicket">
         <div class="topColonne">
             <p>Suivi de l'intervention</p>
         </div>
+
+                <div class="userInformations">
+            <p class="txt-secondary">Technicien</p>  <!-- TODO : afficher dynamiquement le role du technicien assigné -->
+            <p><?= htmlspecialchars($ticket->creator_name) ?></p>
+        </div>
+
+             <div class="priorityTicket">
+            <p>Priorité</p>
+            <p><?= htmlspecialchars($ticket->priority_name) ?></p>
+        </div>
         <div class="statutTicket">
             <p class="txt-secondary">Statut</p>
             <p><?= htmlspecialchars($ticket->status_name) ?></p>
         </div>
-          <div class="priorityTicket">
-            <p>Priorité</p>
-            <p><?= htmlspecialchars($ticket->priority_name) ?></p>
-        </div>
+
+                        <div class="ticketDate">
+                    <p class="txt-secondary">Date de création</p>
+                     <p><?= date('d/m/Y', strtotime($ticket->intervention_start)) ?></p>
+                </div>
+     
 
     </div>
     </div>
@@ -162,38 +203,45 @@ if (!$ticket) {
                     <div class="topColonne">
                         <p>Informations</p>
                     </div>
-                    <div class="technicienInformations">
-                        <label for="technician" class="txt-secondary">Technicien :</label>
-                      
-                        <select type="text" id="user" name="assigned_to" value="<?= htmlspecialchars($ticket->creator_name) ?>">
-                            <?php
-                            foreach ($users as $user): ?>
-                            <option value="<?= $user->getIdUser(); ?>">
-                                <?= $user->getFname();?> <?= $user->getLname(); ?>
-                          </option>
-                        <?php endforeach; ?>
+
+                    <div class="ticketClient">
+                        <p class="txt-secondary">Client</p>
+                        <select name="client_id" required>
+                            <?php foreach ($clients as $client): ?>
+                                <option value="<?= $client->getId(); ?>">
+                                    <?= htmlspecialchars($client->getFname() . ' ' . $client->getLname()); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
-                    <div class="clientInformations">
-                        <label for="client" class="txt-secondary">Client :</label>
-                        <select type="text" id="client" name="client_id" value="">
-                                    <?php
-                                    foreach ($clients as $client): ?>
-                                    <option value="<?= $client->getId(); ?>">
-                                        <?= $client->getFname(); ?> <?= $client->getLname(); ?>
-                                    </option>
-                                    <?php endforeach; ?>
+                    <div class="ticketBrand">
+                        <p class="txt-secondary">Marque</p>
+                        <select name="brand" required>
+                            <?php foreach ($brands as $brand): ?>
+                                <option value="<?= htmlspecialchars($brand) ?>"> <?= htmlspecialchars($brand) ?> </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="deviceInformations">
-                        <label for="device" class="txt-secondary">Appareil :</label>
-                        <select type="text" id="device" name="device_id">
-                            <?php
-                            foreach ($devices as $device): ?>
-                            <option value="<?= $device->getIdDevice() ?>">
-                                <?= htmlspecialchars($device->getModel()) ?>
-                            </option>
+
+                    <div class="ticketType">
+                        <p class="txt-secondary">Type d'appareil</p>
+                        <select name="type_id" required>
+                            <?php foreach ($types as $type): ?>
+                                <option value="<?= $type->getIdType() ?>">
+                                    <?= htmlspecialchars($type->getNom()) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="ticketDevice">
+                        <p class="txt-secondary">Matériel concerné</p>
+                        <select name="device_id" required>
+                            <?php foreach ($devices as $device): ?>
+                                <option value="<?= $device->getIdDevice() ?>">
+                                    <?= htmlspecialchars($device->getModel()) ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -205,29 +253,39 @@ if (!$ticket) {
                         <p>Suivi de l'intervention</p>
                     </div>
 
-                    <div class="statutTicket">
-                        <label for="status" class="txt-secondary">Statut :</label>
-                        <select name="status_id" id="status">
-                                <?php
-                                foreach ($statuss as $status): ?>
-                                <option value="<?= $status->getIdStatus(); ?>">
-                                    <?= $status->getNom(); ?>
+                    <div class="ticketTechnician">
+                        <p class="txt-secondary">Technicien assigné</p>
+                        <select name="assigned_to" required>
+                            <?php foreach ($users as $user): ?>
+                                <option value="<?= $user->getIdUser(); ?>">
+                                    <?= htmlspecialchars($user->getFname() . ' ' . $user->getLname()); ?>
                                 </option>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
-                    <div class="priorityTicket">
-                        <label for="priority" class="txt-secondary">Priorité :</label>
-                        <select name="priority_id" id="priority" >
-                           <?php
-                           foreach ($prioritys as $priority): ?>
-                           <option value="<?= $priority->getIdPriority(); ?>">
-                            <?= $priority->getNom(); ?>
-                           </option>
-                           <?php endforeach; ?>
+                    <div class="ticketPriority">
+                        <p class="txt-secondary">Priorité</p>
+                        <select name="priority_id" required>
+                            <?php foreach ($prioritys as $priority): ?>
+                                <option value="<?= $priority->getIdPriority(); ?>">
+                                    <?= htmlspecialchars($priority->getNom()); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <div class="ticketStatus">
+                        <p class="txt-secondary">Statut</p>
+                        <select name="status_id" required>
+                            <?php foreach ($statuss as $status): ?>
+                                <option value="<?= $status->getIdStatus(); ?>">
+                                    <?= htmlspecialchars($status->getNom()); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                 </div>
                 
             </div>
@@ -244,29 +302,32 @@ if (!$ticket) {
                     id="intervention_detail"
                     placeholder="Entrez les détails de l'intervention..." 
                     rows="4"
-                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-top: 10px;"
                 ></textarea>
             </div>
-        <div class="bottomTicket">
-            <button type="submit" class="btn-primary">Enregistrer</button>  
-            <button type="button" onclick="window.history.back();">Annuler</button>
+
+            <div class="bottomTicket">
+                <button type="submit" class="btn-primary">Enregistrer</button>  
+                <button type="button" class="btn-secondary" onclick="cancelEdit();">Annuler</button>
+            </div>
+        </form>
+
 <script>
 const editBtn = document.getElementById('editBtn');
 const editForm = document.getElementById('editForm');
 const ticketView = document.getElementById('ticketView');
-const cancelBtn = document.getElementById('cancelBtn');
 
-editBtn.addEventListener('click', () => {
+function editTicket() {
     ticketView.style.display = 'none';
     editForm.style.display = 'block';
-});
+}
 
-cancelBtn.addEventListener('click', () => {
+function cancelEdit() {
     editForm.style.display = 'none';
     ticketView.style.display = 'block';
-});
-</script>
+}
 
+editBtn.addEventListener('click', editTicket);
+</script>
 
 </body>
 </html>
