@@ -11,12 +11,19 @@ session_start();
 require_once ("../Controllers/userController.php");
 require_once("../models/User.php");
 require_once '../Controllers/TicketController.php';
+require_once '../helpers/AccessControl.php';
 
 
 $users = UserController::getUsers();
 $userId = $_SESSION['id_user'];
 // var_dump($_SESSION);
-$tickets = TicketController::getTicketByUser($userId);
+
+// Supervisors see all tickets, others see only their tickets
+if (AccessControl::isSupervisor()) {
+    $tickets = TicketController::getTickets();
+} else {
+    $tickets = TicketController::getTicketByUser($userId);
+}
 
 
 $totalTickets = TicketController::countTicketsByUser($userId);
