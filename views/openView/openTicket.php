@@ -177,10 +177,25 @@ if ($current_device) {
                 <div class="interventionHistory">
                     <?php foreach ($interventions as $intervention): ?>
                         <div class="interventionItem">
-                            <p class="txt-secondary"><?= htmlspecialchars($intervention['user_name']) ?></p>
+                            <p class="txt-primary"><?= htmlspecialchars($intervention['user_name']) ?></p>
                             <p class="txt-secondary"><?= date('d/m/Y H:i', strtotime($intervention['start_at'])) ?></p>
-                            <p><?= htmlspecialchars($intervention['intervention_detail']) ?></p>
+                   <div class="interventionDetail">
+    <?php 
+        // On découpe par retour à la ligne
+        $lignes = preg_split('/\r\n|\r|\n/', $intervention['intervention_detail']);
+
+        foreach ($lignes as $ligne):
+            if (trim($ligne) !== ''): // éviter les lignes vides
+    ?>
+                <p><?= htmlspecialchars($ligne) ?></p>
+    <?php 
+            endif;
+        endforeach;
+    ?>
+</div>
+
                         </div>
+                        
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
@@ -327,6 +342,7 @@ if ($current_device) {
                     rows="4"
                 ></textarea>
             </div>
+
 
             <div class="bottomTicket">
                 <button type="submit" class="btn-primary">Enregistrer</button>  

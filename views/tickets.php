@@ -14,7 +14,12 @@ require_once("../models/Ticket.php");
 require_once("../helpers/AccessControl.php");
 
 
-$tickets = TicketController::getTicketByUser($_SESSION['id_user']);
+// Supervisors see all tickets, others see only their tickets
+if (AccessControl::isSupervisor()) {
+    $tickets = TicketController::getTickets();
+} else {
+    $tickets = TicketController::getTicketByUser($_SESSION['id_user']);
+}
 
 ?>
 <!DOCTYPE html>
