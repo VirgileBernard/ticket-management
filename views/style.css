@@ -240,6 +240,8 @@ tbody{
     margin: 10vh auto;
 }
 
+
+
 .topTicket{
     display: flex;
     width: 100%;
@@ -326,9 +328,11 @@ margin-bottom: 1rem;
     /* border-radius: var(--borderRadius); */
     /* background-color: var(--bg); */
     padding: 1.5rem;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     /* box-shadow: var(--box-shadow); */
     resize: none;
+    width: 90%;
+    margin: 0 auto;
 }
 
 /* TITRE DE SECTION */
@@ -398,4 +402,21 @@ margin-bottom: 1rem;
     outline: none;
     border-color: var(--text-primary);
     box-shadow: var(--box-shadow);
+}
+
+@media (max-width: 650px) {
+    #ticketView,
+    #editForm,
+    .midTicket {
+        display: flex;
+        flex-direction: column;
+        margin: 1vh auto;
+        width: 80%;
+        gap: 20px; /* optionnel mais rend tout plus lisible */
+    }
+
+    #ticketView > *,
+    #editForm > * {
+        width: 100%;
+    }
 }
