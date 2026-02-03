@@ -36,7 +36,7 @@ $roles = RoleController::getRoles();
     <div class="topTicket">
         <div class="leftTopTicket">
             <p>Créer un nouvel utilisateur</p>
-            <?php var_dump($roles)?>
+            <!-- <?php var_dump($roles)?> -->
         </div>
     </div>
 

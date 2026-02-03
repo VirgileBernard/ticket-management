@@ -277,7 +277,16 @@ font-size:.9rem
 
         <div class="compteurIntervention">
             <p class="infoCompteur">
-                <?= $done ?> tickets clôturés / 15 pour devenir TeamLeader
+                <?php
+                    $nextMilestone = '';
+                    if (strtolower($roleName) === 'technicien') {
+                        $nextMilestone = '15 pour devenir TeamLeader';
+                        echo $done . ' tickets clôturés / ' . $nextMilestone;
+                    } elseif (strtolower($roleName) === 'teamleader') {
+                        $nextMilestone = '25 pour devenir Superviseur';
+                        echo $done . ' tickets clôturés / ' . $nextMilestone;
+                    }  else { echo '+ 25 interventions clôturées';}
+                ?>
             </p>
         </div>
 

@@ -82,20 +82,20 @@
 .btn-submit {
     width: 100%;
     padding: 12px;
-    background-color: var(--actionBrown);
-    color: var(--text-contrast);
+    background-color: var(--bg-light);
+    color: var(--actionBrown);
     border: 1px solid var(--actionBrown);
     border-radius: var(--borderRadius);
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    transition: all .2s ease;
+    transition: all .4s ease;
 }
 
 /* Hover */
 .btn-submit:hover {
-    background-color: var(--bg-light);
-    color : var(--actionBrown);
+    background-color: var(--actionBrown);
+    color : var(--text-contrast);
     border : 1px solid var(--actionBrown);
 }
 
